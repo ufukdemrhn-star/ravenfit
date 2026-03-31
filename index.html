@@ -4,15 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>RavenFit</title>
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="RavenFit">
-<link rel="apple-touch-icon" href="icon-192.png">
-  
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=0eWDj3hu9m7x3cLlG1x-5CYw2QP2ob-Zk8HLvhuE0l8aMr0OAWMd07zJYphvOv1PRdM76vlHQvRqjHi-Xd9MLcaL3p3aMKGPMFQOQJ6g5WMkCavjzbORPL1YsGxI1G7TjjklQPHH5m7zqisxTbLpxi7kkkbfuRU0q9cSQz1EFgJl-wGs_CUXiR4BBFmCTooM0ts3szKMeUS0HFtBC1ec1qsroVbZKEiAKc1H-AOqhmWBeptB76llUsQnmP5eJn9VOmwUns3GsCCxjSaU8Zh4Uw" charset="UTF-8"></script><style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 /* ── 6 THEMES ──────────────────────────────────────────────── */
@@ -307,7 +301,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 <div class="screen" id="wizard">
   <div class="wiz-prog">
     <div class="prog-steps">
-      <div class="ps act" id="ps0"></div><div class="ps" id="ps1"></div><div class="ps" id="ps2"></div><div class="ps" id="ps3"></div><div class="ps" id="ps4"></div>
+      <div class="ps act" id="ps0"></div><div class="ps" id="ps1"></div><div class="ps" id="ps2"></div><div class="ps" id="ps3"></div><div class="ps" id="ps4"></div><div class="ps" id="ps5"></div>
     </div>
     <div class="prog-lbl" id="prog-lbl">Adım 1 / 5</div>
   </div>
@@ -441,7 +435,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
       </div>
 
       <div class="fg"><label class="fl">6. Spora birkaç hafta ara verdiğinde...</label>
-        <div class="opts3" id="o-bt6">
+        <div class="opts" id="o-bt6">
           <div class="oc compact" data-g="bt6" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt6')"><div class="oi">⬆️</div><div class="ot"><div class="on">Kilo alıyorum</div></div><div class="orad"></div></div>
           <div class="oc compact" data-g="bt6" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt6')"><div class="oi">⬇️</div><div class="ot"><div class="on">Kilo kaybediyorum</div></div><div class="orad"></div></div>
           <div class="oc compact" data-g="bt6" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt6')"><div class="oi">➡️</div><div class="ot"><div class="on">Pek değişmiyor</div></div><div class="orad"></div></div>
@@ -449,7 +443,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
       </div>
 
       <div class="fg"><label class="fl">7. Slim fit giysi denediğinde...</label>
-        <div class="opts3" id="o-bt7">
+        <div class="opts" id="o-bt7">
           <div class="oc compact" data-g="bt7" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt7')"><div class="oi">✅</div><div class="ot"><div class="on">Rahatça içine girebiliyorum</div></div><div class="orad"></div></div>
           <div class="oc compact" data-g="bt7" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt7')"><div class="oi">❌</div><div class="ot"><div class="on">Slim fit sevmiyorum</div></div><div class="orad"></div></div>
           <div class="oc compact" data-g="bt7" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt7')"><div class="oi">😅</div><div class="ot"><div class="on">Zorlasam giyebiliyorum</div></div><div class="orad"></div></div>
@@ -486,7 +480,26 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
       <div class="alert" id="al4">⚠️ Lütfen spor türü ve kalori hedefinizi seçin.</div>
     </div>
 
-  </div><div class="wiz-nav">
+    <!-- S5: İlk Hafta Vücut Ölçüleri -->
+    <div class="step" id="s5">
+      <div class="step-hdr"><h2>İLK HAFTA ÖLÇÜLERİ</h2><p>Başlangıç verilerin kaydediliyor — ilerlemeyi buradan takip edeceksin</p></div>
+      <div class="ib" style="margin-bottom:4px"><span>📌</span><span>Bu ölçüler isteğe bağlıdır. Boş bıraktıklarını daha sonra İlerleme sekmesinden girebilirsin.</span></div>
+      <div class="fg"><label class="fl">Vücut Ağırlığı (kg)</label><div class="iw"><input class="fi" id="s5-wt" type="number" inputmode="decimal" step="0.1"><span class="iu">kg</span></div></div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Göğüs (cm)</label><input class="fi" id="s5-ch" type="number" inputmode="decimal" step="0.5"></div>
+        <div class="fg"><label class="fl">Kol (cm)</label><input class="fi" id="s5-arm" type="number" inputmode="decimal" step="0.5"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Ön Kol (cm)</label><input class="fi" id="s5-farm" type="number" inputmode="decimal" step="0.5"></div>
+        <div class="fg"><label class="fl">Bacak (cm)</label><input class="fi" id="s5-leg" type="number" inputmode="decimal" step="0.5"></div>
+      </div>
+      <div class="fg"><label class="fl">Kalf (cm)</label><div class="iw"><input class="fi" id="s5-calf" type="number" inputmode="decimal" step="0.5"><span class="iu">cm</span></div></div>
+      <div style="background:rgba(46,196,182,.07);border:1px solid rgba(46,196,182,.2);border-radius:11px;padding:10px 13px;font-size:11px;color:var(--text2)">
+        ✅ Boy, kilo, boyun, bel ve <span id="s5-ratio-hint">omuz/kalça</span> ölçülerin zaten alındı. Bu adımda sadece kalan ölçüleri giriyorsun.
+      </div>
+    </div>
+
+    </div><div class="wiz-nav">
     <button class="btn btn-s" id="btn-back" onclick="prevStep()" style="display:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Geri</button>
     <button class="btn btn-p btn-full" id="btn-next" onclick="nextStep()">Devam Et <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
   </div>
@@ -733,6 +746,9 @@ function restoreWiz(){
   if(!U.age)return;
   sv('i-name',U.name||'');if(U.gender)selGender(U.gender);sv('i-age',U.age);sv('i-ht',U.height);sv('i-wt',U.weight);
   sv('i-nk',U.neck);sv('i-wst',U.waist);sv('i-spe',U.shoulder||'');sv('i-hip',U.hip||'');
+  // Step 5 prefill
+  sv('s5-wt',U.weight||'');sv('s5-ch',U.chest||'');sv('s5-arm',U.arm||'');
+  sv('s5-farm',U.forearm||'');sv('s5-leg',U.leg||'');sv('s5-calf',U.calf||'');
   Object.keys(A).forEach(function(g){var el=document.querySelector('[data-g="'+g+'"][data-v="'+A[g]+'"]');if(el)markSel(g,el);});
   if(A.sd!==undefined){
     var shEls=document.querySelectorAll('[data-g="sh"]');
@@ -757,20 +773,29 @@ function sv(id,v){var el=document.getElementById(id);if(el&&v!=null&&v!==undefin
 function prevStep(){if(step>0){step--;updWizStep();}}
 function nextStep(){
   if(!validate(step))return;
-  if(step===4){
-    if(!selST||!selGL){document.getElementById('al4').classList.add('v');return;}
-    A.st=selST;A.gl=selGL;calcAll();saveData();showResults();return;
+  if(step===5){
+    // Son adım: ilk hafta ölçülerini kaydet + analizi bitir
+    saveFirstWeekMeasurements();
+    showResults();
+    return;
   }
   step++;updWizStep();
   if(step===4){collectPartial();calcAll();renderGoalStep();}
+  if(step===5){
+    // Step 5'e geçince s5-wt'yi mevcut kilo ile prefill et
+    var wtEl=document.getElementById('s5-wt');
+    if(wtEl&&!wtEl.value&&U.weight)wtEl.value=U.weight;
+    var hintEl=document.getElementById('s5-ratio-hint');
+    if(hintEl)hintEl.textContent=U.gender==='male'?'omuz':'kalça';
+  }
 }
 function updWizStep(){
   document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
   document.getElementById('s'+step).classList.add('active');
-  for(var i=0;i<5;i++){var ps=document.getElementById('ps'+i);ps.className='ps';if(i<step)ps.classList.add('done');else if(i===step)ps.classList.add('act');}
-  document.getElementById('prog-lbl').textContent='Adım '+(step+1)+' / 5';
+  for(var i=0;i<6;i++){var ps=document.getElementById('ps'+i);ps.className='ps';if(i<step)ps.classList.add('done');else if(i===step)ps.classList.add('act');}
+  document.getElementById('prog-lbl').textContent='Adım '+(step+1)+' / 6';
   document.getElementById('btn-back').style.display=step>0?'flex':'none';
-  document.getElementById('btn-next').innerHTML=step===4
+  document.getElementById('btn-next').innerHTML=step===5
     ?'🚀 Analizi Tamamla'
     :'Devam Et <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
 }
@@ -801,6 +826,11 @@ function validate(s){
     for(var i=1;i<=8;i++){if(!BT['bt'+i]){document.getElementById('al3').classList.add('v');return false;}}
     return true;
   }
+  if(s===4){
+    if(!selST||!selGL){document.getElementById('al4').classList.add('v');return false;}
+    A.st=selST;A.gl=selGL;calcAll();saveData();return true;
+  }
+  // Step 5 (ölçüler) tamamen isteğe bağlı — her zaman geç
   return true;
 }
 function gv(id){var el=document.getElementById(id);return el?el.value.trim():'';}
@@ -918,71 +948,143 @@ function recGoal(){
 /* Vücut Profili Algoritması - cinsiyet bazlı ve daha dengeli sürüm */
 function determineBodyProfile(bf, ffmi, bmi) {
   var male = U.gender === 'male';
-  var whtr = U.height ? (U.waist / U.height) : 0; // waist-to-height ratio
-  var swr = male && U.waist ? (U.shoulder / U.waist) : 0; // shoulder-to-waist ratio
-  var whr = !male && U.hip ? (U.waist / U.hip) : 0; // waist-to-hip ratio
+  var swr = (male && U.shoulder && U.waist) ? (U.shoulder / U.waist) : 0;
+  var whr = (!male && U.hip && U.waist) ? (U.waist / U.hip) : 0;
 
+  /* ── ERKEK ──────────────────────────────────────────────────── */
   if (male) {
-    // Erkek eşikleri
-    if (bf >= 30 || bmi >= 30.5) {
-      return {n:"Obese (Obez)", d:"Ciddi yüksek yağ oranı. Öncelik yağ kaybı ve günlük hareketi artırmak olmalı.", c:"var(--accent)"};
-    }
-    if (bf >= 25 || bmi >= 27.5) {
-      return {n:"Overweight (Kilolu)", d:"Yağ oranı yüksek. Hedefler bölümünde 'Yağ Kaybetme' seçimi daha uygun olur.", c:"var(--accent)"};
-    }
-    if (bf < 10 && ffmi < 17) {
-      return {n:"Skinny (Zayıf)", d:"Kas ve kilo düşük. Hedefler bölümünde 'Kütle Kazanma' seçmelisin.", c:"var(--info)"};
-    }
-    if (bf >= 18 && ffmi < 18.5) {
-      return {n:"Skinny-fat", d:"Kas kütlen düşük ama yağ oranın beklenenden yüksek. Öncelik yağ yakarken kası korumak olmalı. Hedefler bölümünde 'Yağ Kaybetme' ya da 'İdare-i Maslahat' seçmelisin.", c:"var(--warn)"};
-    }
-    if (bf <= 15 && ffmi >= 20.5 && whtr <= 0.50 && swr >= 1.55) {
-      return {n:"Athletic (Atletik)", d:"Belirgin kas kütlesi ve düşük yağ oranıyla atletik bir yapıdasın. Hedefler bölümünde 'İdare-i Maslahat' veya hafif hacim seçebilirsin.", c:"var(--success)"};
-    }
-    if (ffmi >= 23 && bf < 18) {
-      return {n:"Muscular (Kaslı)", d:"Yüksek kas kütlesine sahipsin. Definasyonla çizgileri daha belirgin hale getirebilirsin.", c:"var(--purple)"};
-    }
-    if (ffmi >= 19 && bf >= 16 && bf < 24) {
-      return {n:"Fit", d:"Dengeli kas ve yağ oranıyla fit bir yapın var. Hedefler bölümünde 'İdare-i Maslahat' en dengeli seçenek olur.", c:"var(--success)"};
-    }
-    if (bf <= 16 && ffmi >= 18.5) {
-      return {n:"Lean (Yağsız/Fit)", d:"Düşük yağ ve orta kas seviyesi. Temiz ve fit görünüm. Hedefler bölümünde 'İdare-i Maslahat' ya da kontrollü hacim seçebilirsin.", c:"var(--info)"};
-    }
-    if (ffmi >= 20 && bf >= 18) {
-      return {n:"Bulky (Hacimli)", d:"Kas kütlen yüksek ama biraz yağ taşıyorsun. Bir cut dönemi ile çizgilenme artar.", c:"var(--warn)"};
-    }
-    return {n:"Fit", d:"Dengeli bir kompozisyon. Hedefler bölümünde 'İdare-i Maslahat' ile koruma ya da hafif gelişim seçebilirsin.", c:"var(--success)"};
+    // 1. Obez — yüksek BF + yüksek BMI
+    if (bf >= 30 || bmi >= 30.5)
+      return {n:"Obese (Obez)",
+        d:"Ciddi yüksek yağ oranı. Öncelik yağ kaybı ve günlük hareketi artırmak olmalı.",
+        c:"var(--accent)"};
+
+    // 2. Kilolu
+    if (bf >= 25 || bmi >= 27.5)
+      return {n:"Overweight (Kilolu)",
+        d:"Yağ oranı yüksek. Hedefler bölümünde 'Yağ Kaybetme' seçimi daha uygun olur.",
+        c:"var(--accent)"};
+
+    // 3. Skinny — düşük yağ + düşük kas
+    if (bf < 14 && ffmi < 17)
+      return {n:"Skinny (Zayıf)",
+        d:"Hem yağ oranın hem kas kütlen düşük. 'Kütle Kazanma' hedefiyle kalori fazlası ve protein odaklı antrenman başlat.",
+        c:"var(--info)"};
+
+    // 4. Athletic — ÖNCE kontrol edilmeli (bf 15-18 arası atletik insanlar skinny-fat'a düşmesin)
+    //    Düşük yağ + iyi FFMI + iyi V-taper
+    if (bf <= 15 && ffmi >= 20 && swr >= 1.45)
+      return {n:"Athletic (Atletik)",
+        d:"Düşük yağ, güçlü kas kütlesi ve iyi vücut oranlarıyla atletik bir yapıdasın. 'İdare-i Maslahat' ya da hafif hacim seçebilirsin.",
+        c:"var(--success)"};
+
+    // 5. Muscular — Athletic'ten SONRA kontrol edilmeli
+    //    BF düşük + FFMI çok yüksek → Athletic (keskin görünüm)
+    //    BF orta  + FFMI çok yüksek → Muscular (hacimli görünüm)
+    if (ffmi >= 22 && bf < 20)
+      return {n:"Muscular (Kaslı)",
+        d:"Yüksek kas kütlesi ve kontrollü yağ oranı. Definasyon dönemiyle çizgileri daha belirgin hale getirebilirsin.",
+        c:"var(--purple)"};
+
+    // 6. Skinny-fat — daraltılmış eşik (FFMI<21 çok genişti, gerçek olmayan SF üretiyordu)
+    //    Saf SF: bf≥20 + ffmi<19 (yüksek yağ, düşük kas)
+    //    V-taper zayıf SF: bf≥18 + ffmi<19 + swr<1.48 (ince görünümlü ama yağlı)
+    //    FFMI 19+ olan biri bu tanıma girmez (ortalama üstü kaslı demektir)
+    if ((bf >= 20 && ffmi < 19) || (bf >= 18 && ffmi < 19 && swr < 1.48))
+      return {n:"Skinny-fat",
+        d:"Yağ oranın beklenenden yüksek, kas kütlen ise düşük — en yaygın durum bu. Direnç antrenmanı yaparken kalori açığı ya da idame tercih et. 'Yağ Kaybetme' ya da 'İdare-i Maslahat' seçmelisin.",
+        c:"var(--warn)"};
+
+    // 7. Bulky — yüksek FFMI + yüksek yağ
+    //    FFMI≥22 şartı Muscular'dan ayrışmasını sağlar
+    if (ffmi >= 22 && bf >= 20)
+      return {n:"Bulky (Hacimli)",
+        d:"Kas kütlen güçlü ama biraz fazla yağ taşıyorsun. Yavaş bir kalori açığıyla cut dönemi başlatmak çizgileri belirginleştirir.",
+        c:"var(--warn)"};
+
+    // 8. Lean — düşük yağ + orta-iyi kas
+    //    Lean, Fit'ten ÖNCE kontrol edilmeli (bf aralıkları örtüşüyor)
+    if (bf <= 17 && ffmi >= 18)
+      return {n:"Lean (Yağsız/Fit)",
+        d:"Düşük yağ oranı ve yeterli kas kütlesiyle temiz, fit bir görünümdesin. Kas kazanmaya odaklanırsan Athletic/Muscular kategorisine geçebilirsin.",
+        c:"var(--info)"};
+
+    // 9. Fit — dengeli yağ + yeterli kas
+    if (bf >= 14 && bf < 22 && ffmi >= 18)
+      return {n:"Fit",
+        d:"Dengeli kas ve yağ oranıyla fit bir yapın var. 'İdare-i Maslahat' ile bu kompozisyonu koruyabilir ya da hedefe göre yönlenebilirsin.",
+        c:"var(--success)"};
+
+    // 10. Average — fallback (dürüst, nötr)
+    return {n:"Average (Ortalama)",
+      d:"Vücut kompozisyonun ortalama sınırda. Tutarlı antrenman ve beslenmeyle net bir profile geçmek mümkün.",
+      c:"var(--text2)"};
   }
 
-  // Kadın eşikleri
-  if (bf >= 38 || bmi >= 33) {
-    return {n:"Obese (Obez)", d:"Ciddi yüksek yağ oranı. Öncelik yağ kaybı ve sürdürülebilir hareket olmalı.", c:"var(--accent)"};
-  }
-  if (bf >= 30 || bmi >= 28.5) {
-    return {n:"Overweight (Kilolu)", d:"Yağ oranı yüksek. Hedefler bölümünde 'Yağ Kaybetme' seçimi daha doğru olur.", c:"var(--accent)"};
-  }
-  if (bf < 18 && ffmi < 14.5) {
-    return {n:"Skinny (Zayıf)", d:"Kas ve kilo düşük. Hedefler bölümünde 'Kütle Kazanma' senin için daha uygun.", c:"var(--info)"};
-  }
-  if (bf >= 24 && ffmi < 16) {
-    return {n:"Skinny-fat", d:"Kilo normal görünebilir ama kas düşük, yağ oranı beklenenden yüksek. Hedefler bölümünde 'Yağ Kaybetme' ya da 'İdare-i Maslahat' seçmelisin.", c:"var(--warn)"};
-  }
-  if (bf <= 26 && ffmi >= 17.8 && whtr <= 0.46 && whr <= 0.75) {
-    return {n:"Athletic (Atletik)", d:"Belirgin kas ve düşük yağ oranıyla atletik bir yapın var. Hedefler bölümünde 'İdare-i Maslahat' en güvenli seçenek olur.", c:"var(--success)"};
-  }
-  if (ffmi >= 19 && bf < 27) {
-    return {n:"Muscular (Kaslı)", d:"Kas kütlen çok güçlü. İdame ya da kontrollü bir definasyon ile görünüm daha da netleşir.", c:"var(--purple)"};
-  }
-  if (bf <= 24 && ffmi >= 15.8 && whtr <= 0.47 && whr <= 0.74) {
-    return {n:"Lean (Yağsız/Fit)", d:"Düşük yağ ve orta kas seviyesiyle fit görünüyorsun. Hedefler bölümünde 'İdare-i Maslahat' iyi bir seçenek olur.", c:"var(--info)"};
-  }
-  if (bf <= 30 && ffmi >= 16.2 && whtr <= 0.49 && whr <= 0.76) {
-    return {n:"Fit", d:"Dengeli kas + düşük/orta yağ oranı. Hedefler bölümünde 'İdare-i Maslahat' seçimi en mantıklı seçenek olur.", c:"var(--success)"};
-  }
-  if (ffmi >= 17 && bf >= 27) {
-    return {n:"Bulky (Hacimli)", d:"Kas kütlesi iyi ama biraz yağ taşınıyor. Küçük bir yağ kaybı dönemi ile daha keskin görünüm elde edebilirsin.", c:"var(--warn)"};
-  }
-  return {n:"Fit", d:"Dengeli bir kompozisyon. Hedefler bölümünde 'İdare-i Maslahat' ile koruma/gelişim iyi bir seçim olur.", c:"var(--success)"};
+  /* ── KADIN ──────────────────────────────────────────────────── */
+
+  // 1. Obez
+  if (bf >= 38 || bmi >= 33)
+    return {n:"Obese (Obez)",
+      d:"Ciddi yüksek yağ oranı. Sürdürülebilir kalori açığı ve düzenli hareket önceliğin olmalı.",
+      c:"var(--accent)"};
+
+  // 2. Kilolu
+  if (bf >= 30 || bmi >= 28.5)
+    return {n:"Overweight (Kilolu)",
+      d:"Yağ oranı yüksek. Hedefler bölümünde 'Yağ Kaybetme' seçimi daha doğru olur.",
+      c:"var(--accent)"};
+
+  // 3. Skinny — düşük yağ + düşük kas
+  if (bf < 19 && ffmi < 14.5)
+    return {n:"Skinny (Zayıf)",
+      d:"Hem yağ oranın hem kas kütlen düşük. 'Kütle Kazanma' hedefiyle kalori fazlası ve protein odaklı antrenman başlat.",
+      c:"var(--info)"};
+
+  // 4. Skinny-fat — yüksek yağ (≥25%) + düşük kas (FFMI<16)
+  //    Kadın için 24% BF ortalama sınırda, 25% dan itibaren SF bölgesi
+  if (bf >= 25 && ffmi < 16)
+    return {n:"Skinny-fat",
+      d:"Kilo normal görünse de kas kütlen düşük ve yağ oranın beklenenden yüksek. Direnç antrenmanı yaparken kalori açığı ya da idame tercih et. 'Yağ Kaybetme' ya da 'İdare-i Maslahat' seçmelisin.",
+      c:"var(--warn)"};
+
+  // 5. Muscular — yüksek FFMI + kontrollü yağ
+  if (ffmi >= 19 && bf < 24)
+    return {n:"Muscular (Kaslı)",
+      d:"Kas kütlen çok güçlü. İdame ya da kontrollü definasyon ile görünüm daha da netleşir.",
+      c:"var(--purple)"};
+
+  // 6. Athletic — düşük yağ + iyi kas + iyi bel/kalça oranı
+  //    whr≤0.80 daha gerçekçi (eski 0.75 çok kısıtlayıcıydı)
+  if (bf <= 23 && ffmi >= 16.5 && whr <= 0.80)
+    return {n:"Athletic (Atletik)",
+      d:"Düşük yağ, iyi kas kütlesi ve dengeli vücut oranlarıyla atletik bir yapıdasın. 'İdare-i Maslahat' en güvenli seçenek olur.",
+      c:"var(--success)"};
+
+  // 7. Bulky — iyi FFMI + yüksek yağ
+  //    bf≥25 (eski 27 çok yüksekti; BF 26 FFMI 17.5 olan kadın Fit değil, Bulky)
+  if (ffmi >= 17 && bf >= 25)
+    return {n:"Bulky (Hacimli)",
+      d:"Kas kütlesi iyi ama biraz yağ taşınıyor. Küçük bir yağ kaybı dönemi ile daha keskin bir görünüm elde edebilirsin.",
+      c:"var(--warn)"};
+
+  // 8. Lean — düşük/orta yağ + yeterli kas
+  if (bf <= 22 && ffmi >= 15)
+    return {n:"Lean (Yağsız/Fit)",
+      d:"Düşük yağ oranı ve yeterli kas kütlesiyle fit görünüyorsun. Kas kazanmaya odaklanırsan Athletic kategorisine geçebilirsin.",
+      c:"var(--info)"};
+
+  // 9. Fit — orta yağ + orta kas
+  //    bf≤25 (eski 28 çok gevşekti; 28% yağ Overweight'e yakın, Fit değil)
+  if (bf <= 25 && ffmi >= 15.5)
+    return {n:"Fit",
+      d:"Dengeli kas + orta yağ oranı. 'İdare-i Maslahat' ile bu kompozisyonu koruyabilir ya da hedefe göre yönlenebilirsin.",
+      c:"var(--success)"};
+
+  // 10. Average — fallback
+  return {n:"Average (Ortalama)",
+    d:"Vücut kompozisyonun ortalama sınırda. Tutarlı antrenman ve beslenmeyle net bir profile geçmek mümkün.",
+    c:"var(--text2)"};
 }
 
 /* Akıllı Egzersiz Önerisi */
@@ -1240,6 +1342,60 @@ function renderOlculerim(){
     male?['Omuz',(U.shoulder||0)+' cm']:['Kalça',(U.hip||0)+' cm'],['Yaş',U.age+' yaş'],
     ['VKİ',R.bmi],['Yağ Oranı',R.bf.toFixed(2)+'%'],['Yağsız Kütle',R.lm.toFixed(2)+' kg'],['FFMI',R.ffmi.toFixed(2)]];
   document.getElementById('mlist').innerHTML=rows.map(function(r){return'<div class="mlist-row"><div class="mlist-lbl">'+r[0]+'</div><div class="mlist-val">'+r[1]+'</div></div>';}).join('');
+}
+
+/* ── İLK HAFTA ÖLÇÜMLERINI KAYDET (wizard step 5) ──────── */
+function saveFirstWeekMeasurements() {
+  // Ağırlık step 5'ten güncellendi mi? (isteğe bağlı)
+  var wt5 = parseFloat(document.getElementById('s5-wt').value);
+  if (wt5 && wt5 !== U.weight) { U.weight = wt5; }
+
+  // Kalan ölçüler — sadece girilmişse al
+  var ch    = parseFloat(document.getElementById('s5-ch').value)   || U.chest    || null;
+  var arm   = parseFloat(document.getElementById('s5-arm').value)  || U.arm      || null;
+  var farm  = parseFloat(document.getElementById('s5-farm').value) || U.forearm  || null;
+  var leg   = parseFloat(document.getElementById('s5-leg').value)  || U.leg      || null;
+  var calf  = parseFloat(document.getElementById('s5-calf').value) || U.calf     || null;
+
+  if (ch)   U.chest   = ch;
+  if (arm)  U.arm     = arm;
+  if (farm) U.forearm = farm;
+  if (leg)  U.leg     = leg;
+  if (calf) U.calf    = calf;
+
+  // Hesaplamaları güncelle ve kaydet
+  calcAll();
+  saveData();
+
+  // İlk hafta kaydını entries'e ekle
+  var now = new Date();
+  var entry = {
+    date: now.toLocaleDateString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'}),
+    timestamp: now.getTime(),
+    weight: U.weight,
+    neck: U.neck, waist: U.waist,
+    shoulder: U.shoulder || null,
+    chest: U.chest || null,
+    arm: U.arm || null,
+    forearm: U.forearm || null,
+    hip: U.hip || null,
+    leg: U.leg || null,
+    calf: U.calf || null,
+    bf: R.bf.toFixed(2), lm: R.lm.toFixed(2),
+    ffmi: R.ffmi.toFixed(2), bmi: R.bmi,
+    ratio: (U.gender === 'male' ? R.swr : R.whr)
+  };
+
+  // Zaten bugün kayıt var mı? Varsa güncelle, yoksa ekle
+  var entries = getEntries();
+  var today = entry.date;
+  var todayIdx = entries.findIndex(function(e){ return e.date === today; });
+  if (todayIdx >= 0) {
+    entries[todayIdx] = entry; // bugünkü kaydı güncelle
+  } else {
+    entries.push(entry);
+  }
+  localStorage.setItem('rf_entries', JSON.stringify(entries));
 }
 
 /* ── YENİ MODAL & HAFTALIK KAYIT İŞLEMLERİ ─────────────── */
