@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>RavenFit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=0eWDj3hu9m7x3cLlG1x-5CYw2QP2ob-Zk8HLvhuE0l8aMr0OAWMd07zJYphvOv1PRdM76vlHQvRqjHi-Xd9MLcaL3p3aMKGPMFQOQJ6g5WMkCavjzbORPL1YsGxI1G7TjjklQPHH5m7zqisxTbLpxi7kkkbfuRU0q9cSQz1EFgJl-wGs_CUXiR4BBFmCTooM0ts3szKMeUS0HFtBC1ec1qsroVbZKEiAKc1H-AOqhmWBeptB76llUsQnmP5eJn9VOmwUns3GsCCxjSaU8Zh4Uw" charset="UTF-8"></script><style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── 6 THEMES ──────────────────────────────────────────────── */
+:root,[data-theme="dark"]{
+  --bg:#080809;--bg2:#0F0F11;--card:#161618;--card2:#1E1E21;
+  --border:#2A2A2F;--text:#F2F2F4;--text2:#9090A0;--text3:#44444F;
+  --accent:#E63946;--ag:rgba(230,57,70,0.18);--hbg:rgba(8,8,9,0.92);
+  --success:#2EC4B6;--warn:#FF9F1C;--info:#4895EF;--purple:#9B72FF;
+}
+[data-theme="light"]{
+  --bg:#F2EFE8;--bg2:#E8E5DE;--card:#FFFFFF;--card2:#EDE9E2;
+  --border:#CDC9C1;--text:#17171A;--text2:#50505C;--text3:#AAAAB8;
+  --accent:#CC2633;--ag:rgba(204,38,51,0.12);--hbg:rgba(242,239,232,0.94);
+  --success:#0D9E90;--warn:#C97800;--info:#2470CC;--purple:#6B42D0;
+}
+[data-theme="violet"]{
+  --bg:#09070F;--bg2:#0F0C18;--card:#171320;--card2:#1F1829;
+  --border:#2E2840;--text:#EEEAFF;--text2:#8A84B8;--text3:#3E3850;
+  --accent:#9B72FF;--ag:rgba(155,114,255,0.18);--hbg:rgba(9,7,15,0.92);
+  --success:#2EC4B6;--warn:#FF9F1C;--info:#4895EF;--purple:#9B72FF;
+}
+[data-theme="forest"]{
+  --bg:#060D08;--bg2:#0B1410;--card:#111C14;--card2:#182419;
+  --border:#233028;--text:#E4F5EA;--text2:#74A87C;--text3:#364840;
+  --accent:#4ADE80;--ag:rgba(74,222,128,0.16);--hbg:rgba(6,13,8,0.92);
+  --success:#4ADE80;--warn:#FF9F1C;--info:#4895EF;--purple:#9B72FF;
+}
+[data-theme="rose"]{
+  --bg:#0F090D;--bg2:#170D12;--card:#1E1118;--card2:#261520;
+  --border:#382030;--text:#FFECF4;--text2:#B07898;--text3:#4C3044;
+  --accent:#F472B6;--ag:rgba(244,114,182,0.18);--hbg:rgba(15,9,13,0.92);
+  --success:#2EC4B6;--warn:#FF9F1C;--info:#4895EF;--purple:#B472FF;
+}
+[data-theme="crimson"]{
+  --bg:#060304;--bg2:#0D0807;--card:#140C0A;--card2:#1C1210;
+  --border:#301816;--text:#FFF0EE;--text2:#B08880;--text3:#503830;
+  --accent:#FF3022;--ag:rgba(255,48,34,0.2);--hbg:rgba(6,3,4,0.92);
+  --success:#2EC4B6;--warn:#FF9F1C;--info:#4895EF;--purple:#9B72FF;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+
+/* ── HEADER ──────────────────────────────────────────────────  */
+.hdr{position:fixed;top:0;left:0;right:0;height:56px;background:var(--hbg);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:200;transition:background .3s,border-color .3s}
+.logo{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
+.logo-txt{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:3px;color:var(--text);line-height:1}
+.logo-txt span{color:var(--accent)}
+
+/* ── SCREENS ─────────────────────────────────────────────────  */
+.main{padding-top:56px;min-height:100vh;position:relative;}
+.screen{display:none;min-height:calc(100vh - 56px)}
+.screen.active{display:flex;flex-direction:column}
+
+/* ── SPLASH ──────────────────────────────────────────────────  */
+#splash{align-items:center;justify-content:center;text-align:center;padding:30px 22px;position:relative;overflow:hidden}
+#splash .splash-title,#splash .splash-sub,#splash .pills,#splash .btn,#splash-cont{position:relative;z-index:3}
+.s-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,var(--ag),transparent 70%);pointer-events:none}
+.splash-icon{width:90px;height:90px;margin:0 auto 20px;animation:float 3.5s ease-in-out infinite;filter:drop-shadow(0 6px 22px var(--ag))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.splash-title{font-family:'Bebas Neue',cursive;font-size:clamp(52px,13vw,88px);letter-spacing:7px;line-height:1;margin-bottom:3px}
+.splash-title span{color:var(--accent)}
+.splash-tag{font-size:10px;color:var(--text2);letter-spacing:3px;text-transform:uppercase;margin-bottom:3px}
+.splash-sub{font-size:13px;color:var(--text2);margin-bottom:34px;font-style:italic}
+.pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:34px;max-width:420px}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:5px 11px;font-size:11px;color:var(--text2);display:flex;align-items:center;gap:5px}
+.pill-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* ── BUTTONS ─────────────────────────────────────────────────  */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:13px 24px;border-radius:11px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;transition:all .25s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;z-index:2}
+.btn-p{background:var(--accent);color:#fff;box-shadow:0 4px 16px var(--ag)}
+.btn-p:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-p:active{transform:none}
+.icon-btn,.oc,.gbtn,.tb,.logo{touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:relative;z-index:2}
+.btn-s{background:var(--card);color:var(--text);border:1.5px solid var(--border)}
+.btn-s:hover{border-color:var(--accent);color:var(--accent)}
+.btn-lg{padding:15px 34px;font-size:15px;border-radius:13px}
+.btn-full{width:100%}
+
+/* ── WIZARD ──────────────────────────────────────────────────  */
+.wiz-prog{padding:13px 16px 0;max-width:540px;width:100%;margin:0 auto}
+.prog-steps{display:flex;gap:4px;margin-bottom:4px}
+.ps{flex:1;height:3px;background:var(--border);border-radius:2px;transition:background .35s}
+.ps.done{background:var(--accent)}
+.ps.act{background:var(--accent);opacity:.45}
+.prog-lbl{font-size:11px;color:var(--text2);text-align:center}
+.wiz-body{flex:1;padding:13px 16px 0;max-width:540px;width:100%;margin:0 auto;display:flex;flex-direction:column}
+.step{display:none;flex-direction:column;gap:13px;animation:si .24s ease;padding-bottom:10px}
+.step.active{display:flex}
+@keyframes si{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.step-hdr h2{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:2px;margin-bottom:1px}
+.step-hdr p{color:var(--text2);font-size:12px}
+.wiz-nav{padding:11px 16px 28px;max-width:540px;width:100%;margin:0 auto;display:flex;gap:8px}
+
+/* ── FORM ────────────────────────────────────────────────────  */
+.fg{display:flex;flex-direction:column;gap:5px}
+.fl{font-size:12px;font-weight:500;color:var(--text2)}
+.fhint{font-size:11px;color:var(--text3);line-height:1.4}
+.iw{position:relative}
+.iu{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text2);pointer-events:none}
+.fi{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:11px 38px 11px 13px;color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;transition:all .25s;outline:none;width:100%;-webkit-appearance:none}
+.fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--ag)}
+.fi::placeholder{color:var(--text3)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.gender-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.gbtn{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;text-align:center;transition:all .25s;color:var(--text);user-select:none}
+.gbtn.sel{border-color:var(--accent);background:var(--ag)}
+.gbtn .gi{font-size:24px;margin-bottom:3px}
+.gbtn .gl{font-size:13px;font-weight:600}
+
+/* ── OPTION CARDS ────────────────────────────────────────────  */
+.opts{display:grid;gap:6px}
+.opts2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.opts3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.oc{background:var(--card);border:2px solid var(--border);border-radius:11px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:all .25s;color:var(--text);user-select:none;-webkit-tap-highlight-color:transparent}
+.oc:hover{border-color:var(--text3)}
+.oc.sel{border-color:var(--accent);background:var(--ag)}
+.oc.locked{opacity:.4;pointer-events:none}
+.oi{width:32px;height:32px;border-radius:8px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:background .25s}
+.oc.sel .oi{background:var(--ag)}
+.ot{flex:1;min-width:0}
+.on{font-size:12px;font-weight:600;margin-bottom:1px;line-height:1.3}
+.od{font-size:10px;color:var(--text2);line-height:1.3}
+.orad{margin-left:auto;width:14px;height:14px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .25s;position:relative}
+.oc.sel .orad{border-color:var(--accent);background:var(--accent)}
+.oc.sel .orad::after{content:'';position:absolute;inset:2.5px;border-radius:50%;background:#fff}
+.oc.compact{padding:9px 10px}
+.oc.compact .oi{width:28px;height:28px;font-size:14px}
+.alert{background:var(--ag);border:1px solid var(--accent);border-radius:9px;padding:9px 13px;font-size:12px;color:var(--accent);display:none;opacity:.85}
+.alert.v{display:block}
+
+/* ── GOAL STEP ───────────────────────────────────────────────  */
+.g-rec{background:rgba(46,196,182,.07);border:1px solid rgba(46,196,182,.25);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+.g-rec-lbl{font-size:10px;color:var(--success);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.g-rec-txt{font-size:12px;color:var(--text2);line-height:1.5}
+.seclbl{font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;margin-top:4px}
+
+/* ── RESULTS HERO ────────────────────────────────────────────  */
+.r-hero{padding:13px 16px 0;max-width:640px;width:100%;margin:0 auto}
+.r-card-hero{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:15px;padding:16px;position:relative;overflow:hidden}
+.r-card-hero::before{content:'';position:absolute;right:-14px;top:-14px;width:96px;height:96px;background:var(--ag);border-radius:50%;filter:blur(28px);pointer-events:none}
+.r-name{font-size:11px;color:var(--text2);margin-bottom:1px}
+.r-title{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;margin-bottom:10px}
+.r-stats{display:flex;gap:14px;flex-wrap:wrap}
+.rs{display:flex;flex-direction:column;gap:1px}
+.rs-v{font-size:15px;font-weight:700;color:var(--accent)}
+.rs-l{font-size:9px;color:var(--text2)}
+
+/* ── TABS ────────────────────────────────────────────────────  */
+.tabs{padding:10px 16px 0;max-width:640px;width:100%;margin:0 auto}
+.tab-nav{display:flex;gap:2px;background:var(--card);border-radius:10px;padding:3px;border:1px solid var(--border)}
+.tb{flex:1;padding:7px 3px;border-radius:7px;border:none;background:transparent;color:var(--text2);font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;cursor:pointer;transition:all .22s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.tb.act{background:var(--accent);color:#fff}
+.tc{display:none}
+.tc.act{display:block;animation:fi .2s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+
+/* ── RESULT CARDS ────────────────────────────────────────────  */
+.rb{padding:10px 16px 60px;max-width:640px;width:100%;margin:0 auto}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:8px;animation:pop .3s ease backwards}
+@keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.rct{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text2);margin-bottom:10px}
+.bv{font-family:'Bebas Neue',cursive;font-size:46px;letter-spacing:2px;line-height:1;color:var(--accent)}
+.bu{font-size:14px;color:var(--text2)}
+
+/* ── BADGES & UI ─────────────────────────────────────────────  */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;margin-top:5px}
+.bg{background:rgba(46,196,182,.13);color:var(--success)}
+.by{background:rgba(255,159,28,.13);color:var(--warn)}
+.br{background:rgba(230,57,70,.13);color:var(--accent)}
+.bb{background:rgba(72,149,239,.13);color:var(--info)}
+.bp{background:rgba(155,114,255,.13);color:var(--purple)}
+
+.mbar{margin-top:10px}
+.bar-lbls{display:flex;justify-content:space-between;margin-bottom:4px;font-size:9px;color:var(--text2)}
+.bar-trk{height:6px;background:var(--card2);border-radius:3px;position:relative}
+.bar-fill{height:100%;border-radius:3px}
+.bar-mrk{position:absolute;top:50%;transform:translate(-50%,-50%);width:13px;height:13px;border-radius:50%;background:var(--bg);border:2.5px solid var(--accent);box-shadow:0 0 0 3px var(--ag);z-index:2;transition:left .9s cubic-bezier(.4,0,.2,1)}
+.bar-ideal{position:absolute;top:-3px;width:2px;height:12px;background:var(--success);border-radius:1px}
+.bar-il{position:absolute;top:-15px;transform:translateX(-50%);font-size:8px;color:var(--success);white-space:nowrap}
+
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.si{background:var(--card2);border-radius:10px;padding:10px}
+.sv{font-size:18px;font-weight:700;margin-bottom:2px}
+.sl{font-size:10px;color:var(--text2)}
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.mi{background:var(--card2);border-radius:10px;padding:10px 7px;text-align:center}
+.mv{font-size:17px;font-weight:700;margin-bottom:1px}
+.mu{font-size:9px;color:var(--text2);margin-bottom:2px}
+.ml{font-size:10px;font-weight:600}
+.mp{color:var(--accent)}.mc{color:var(--warn)}.mf{color:var(--info)}
+
+.bti{margin-bottom:10px}
+.btih{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.btin{font-size:13px;font-weight:600}
+.btip{font-size:14px;font-weight:700}
+.btib{height:6px;background:var(--card2);border-radius:3px;overflow:hidden}
+.btif{height:100%;border-radius:3px;transition:width 1.1s cubic-bezier(.4,0,.2,1)}
+
+.ffmi-scale{display:flex;gap:2px;margin-top:8px;border-radius:3px;overflow:hidden;height:6px}
+.ffmi-seg{height:100%}
+
+.ib{background:var(--card2);border-radius:9px;padding:9px 11px;font-size:11px;color:var(--text2);display:flex;gap:7px;align-items:flex-start;margin-top:7px;line-height:1.5}
+
+.water-d{display:flex;align-items:center;gap:12px;padding:3px 0}
+.water-v{font-family:'Bebas Neue',cursive;font-size:36px;color:var(--info);letter-spacing:2px;line-height:1}
+.water-u{font-size:13px;color:var(--text2)}
+
+.del-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:11px;padding:2px 5px;border-radius:5px}
+.del-btn:hover{color:var(--accent)}
+.mlist-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)}
+.mlist-row:last-child{border-bottom:none}
+.mlist-lbl{color:var(--text2);font-size:12px}
+.mlist-val{font-weight:600;font-size:12px}
+
+.ratio-row{margin-bottom:12px}
+.ratio-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.ratio-name{font-size:13px;font-weight:600}
+.ratio-val{font-size:15px;font-weight:700;color:var(--accent)}
+.ratio-trk{height:6px;background:var(--card2);border-radius:3px;position:relative}
+.ratio-fill{height:100%;border-radius:3px;background:var(--accent);transition:width .9s ease}
+.ratio-ideal{position:absolute;top:-3px;width:2px;height:12px;background:var(--success);border-radius:1px}
+.ratio-lbl{display:flex;justify-content:space-between;margin-top:2px;font-size:9px;color:var(--text3)}
+
+/* ── PROGRESS TABLE (NEW) ────────────────────────────────────  */
+.ptable-wrapper { overflow-x: auto; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border); }
+.ptable { width: 100%; min-width: 400px; border-collapse: collapse; font-size: 11px; background: var(--card2); }
+.ptable th, .ptable td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
+.ptable th { background: var(--card); color: var(--text2); font-weight: 600; font-size: 10px; text-transform: uppercase; }
+.ptable td:first-child { text-align: left; font-weight: 600; color: var(--text); background: var(--card); position: sticky; left: 0; }
+.ptable tr:last-child td { border-bottom: none; }
+.diff { font-size: 9px; margin-left: 4px; font-weight: 700; display: inline-block; }
+.diff-up { color: var(--success); }
+.diff-down { color: var(--accent); }
+.diff-neutral { color: var(--text3); }
+
+/* ── MODAL ───────────────────────────────────────────────────  */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); padding: 16px; }
+.modal-overlay.active { display: flex; animation: fi .2s ease; }
+.modal-content { background: var(--card); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 400px; padding: 20px; max-height: 90vh; overflow-y: auto; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.modal-title { font-family: 'Bebas Neue', cursive; font-size: 24px; letter-spacing: 1px; color: var(--accent); }
+.modal-close { background: none; border: none; color: var(--text2); font-size: 24px; cursor: pointer; }
+
+/* ── THEME DOTS IN SETTINGS ──────────────────────────────────  */
+.tdots{display:flex;gap:7px;flex-wrap:wrap;margin-top: 8px;}
+.tdot{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:all .2s;position:relative}
+.tdot.act,.tdot:hover{border-color:var(--text);}
+.tdot.act::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:white;font-weight:700}
+
+@media(max-width:380px){.frow,.gender-grid{grid-template-columns:1fr}.splash-title{font-size:52px}.tb{font-size:9px}.r-stats{gap:10px}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="logo" onclick="goHome()">
+    <svg width="30" height="30" viewBox="0 0 80 80" fill="none">
+      <path d="M18 22 L36 10 L58 14 L74 28 L70 48 L78 64 L60 56 L52 72 L36 76 L20 66 L10 50 L14 34 Z" fill="var(--accent)"/>
+      <path d="M74 28 L92 38 L82 52 L70 44 Z" fill="var(--accent)"/>
+      <path d="M24 28 L40 18 L56 22 L66 36 L62 50 L50 60 L36 64 L24 56 L18 44 Z" fill="rgba(0,0,0,0.14)"/>
+      <circle cx="58" cy="27" r="8" fill="rgba(0,0,0,0.3)"/>
+      <circle cx="58" cy="27" r="5.5" fill="#FAFAFA"/>
+      <circle cx="59" cy="27" r="3" fill="#0A0A0B"/>
+      <circle cx="61" cy="25" r="1" fill="rgba(255,255,255,0.8)"/>
+      <path d="M10 50 L2 43 L7 60 Z" fill="var(--accent)" opacity=".65"/>
+      <path d="M14 34 L4 29 L8 45 Z" fill="var(--accent)" opacity=".4"/>
+    </svg>
+    <span class="logo-txt">RAVEN<span>FIT</span></span>
+  </div>
+</header>
+
+<main class="main">
+
+<div class="screen active" id="splash">
+  <div class="s-bg"></div>
+  <div class="splash-icon">
+    <svg viewBox="0 0 80 80" fill="none">
+      <path d="M18 22 L36 10 L58 14 L74 28 L70 48 L78 64 L60 56 L52 72 L36 76 L20 66 L10 50 L14 34 Z" fill="var(--accent)"/>
+      <path d="M74 28 L92 38 L82 52 L70 44 Z" fill="var(--accent)"/>
+      <path d="M24 28 L40 18 L56 22 L66 36 L62 50 L50 60 L36 64 L24 56 L18 44 Z" fill="rgba(0,0,0,0.14)"/>
+      <circle cx="58" cy="27" r="8" fill="rgba(0,0,0,0.3)"/>
+      <circle cx="58" cy="27" r="5.5" fill="#FAFAFA"/>
+      <circle cx="59" cy="27" r="3" fill="#0A0A0B"/>
+      <circle cx="61" cy="25" r="1" fill="rgba(255,255,255,0.8)"/>
+      <path d="M10 50 L2 43 L7 60 Z" fill="var(--accent)" opacity=".65"/>
+    </svg>
+  </div>
+  <h1 class="splash-title">RAVEN<span>FIT</span></h1>
+  <div class="splash-tag">HESAPLAR BİZDEN</div>
+  <div class="splash-sub">Sen sadece antrenmanına odaklan</div>
+  <div class="pills">
+    <div class="pill"><div class="pill-dot"></div>Navy Yağ Formülü</div>
+    <div class="pill"><div class="pill-dot"></div>FFMI Endeksi</div>
+    <div class="pill"><div class="pill-dot"></div>Katch-McArdle</div>
+    <div class="pill"><div class="pill-dot"></div>Vücut Tipi Testi</div>
+    <div class="pill"><div class="pill-dot"></div>Haftalık Takip</div>
+  </div>
+  <button class="btn btn-p btn-lg" type="button" onclick="startWizard()" ontouchend="startWizardFromTouch(event)">Analize Başla <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  <div id="splash-cont" style="display:none;margin-top:11px">
+    <button class="btn btn-s" onclick="showResults()">📊 Önceki Sonuçlarım</button>
+  </div>
+</div>
+
+<div class="screen" id="wizard">
+  <div class="wiz-prog">
+    <div class="prog-steps">
+      <div class="ps act" id="ps0"></div><div class="ps" id="ps1"></div><div class="ps" id="ps2"></div><div class="ps" id="ps3"></div><div class="ps" id="ps4"></div>
+    </div>
+    <div class="prog-lbl" id="prog-lbl">Adım 1 / 5</div>
+  </div>
+  <div class="wiz-body">
+
+    <div class="step active" id="s0">
+      <div class="step-hdr"><h2>KİŞİSEL BİLGİLER</h2><p>Seni tanıyalım</p></div>
+      <div class="fg"><label class="fl">İsim (isteğe bağlı)</label><input class="fi" id="i-name" type="text" placeholder="Adın"></div>
+      <div class="fg"><label class="fl">Cinsiyet *</label>
+        <div class="gender-grid">
+          <div class="gbtn" id="gm" onclick="selGender('male')"><div class="gi">♂</div><div class="gl">Erkek</div></div>
+          <div class="gbtn" id="gf" onclick="selGender('female')"><div class="gi">♀</div><div class="gl">Kadın</div></div>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Yaş *</label><div class="iw"><input class="fi" id="i-age" type="number" placeholder="25" min="14" max="80"><span class="iu">yaş</span></div></div>
+        <div class="fg"><label class="fl">Boy *</label><div class="iw"><input class="fi" id="i-ht" type="number" placeholder="175" min="140" max="220"><span class="iu">cm</span></div></div>
+      </div>
+      <div class="fg"><label class="fl">Kilo *</label><div class="iw"><input class="fi" id="i-wt" type="number" placeholder="75" min="30" max="300" step=".1"><span class="iu">kg</span></div></div>
+      <div class="alert" id="al0">⚠️ Lütfen cinsiyet dahil tüm zorunlu (*) alanları doldurun.</div>
+    </div>
+
+    <div class="step" id="s1">
+      <div class="step-hdr"><h2>VÜCUT ÖLÇÜLERİ</h2><p>Doğru noktadan ölçmek sonucu etkiler</p></div>
+      <div class="fg">
+        <label class="fl">Boyun Çevresi *</label>
+        <div class="iw"><input class="fi" id="i-nk" type="number" placeholder="37" min="20" max="70" step=".5"><span class="iu">cm</span></div>
+        <span class="fhint">📍 Adem elmasının hemen altından ölçün</span>
+      </div>
+      <div class="fg">
+        <label class="fl">Bel Çevresi *</label>
+        <div class="iw"><input class="fi" id="i-wst" type="number" placeholder="80" min="40" max="200" step=".5"><span class="iu">cm</span></div>
+        <span class="fhint" id="wst-hint">📍 Göbek deliği hizasından ölçün (erkekler)</span>
+      </div>
+      <div class="fg" id="grp-spe">
+        <label class="fl">Omuz Çevresi *</label>
+        <div class="iw"><input class="fi" id="i-spe" type="number" placeholder="110" min="50" max="200" step=".5"><span class="iu">cm</span></div>
+        <span class="fhint">📍 Omuzların en geniş noktasından ölçün</span>
+      </div>
+      <div class="fg" id="grp-hip" style="display:none">
+        <label class="fl">Kalça Çevresi *</label>
+        <div class="iw"><input class="fi" id="i-hip" type="number" placeholder="95" min="50" max="200" step=".5"><span class="iu">cm</span></div>
+        <span class="fhint">📍 Kalçanın en geniş noktasından ölçün</span>
+      </div>
+      <div class="alert" id="al1">⚠️ Lütfen tüm ölçüleri eksiksiz girin.</div>
+    </div>
+
+    <div class="step" id="s2">
+      <div class="step-hdr"><h2>AKTİVİTE ANKETİ</h2><p>Günlük hayatını ve alışkanlıklarını anlat</p></div>
+      <div class="fg"><label class="fl">İş hayatın nasıl?</label>
+        <div class="opts" id="o-job">
+          <div class="oc" data-g="job" data-v="0" onclick="selOpt(this,'job')"><div class="oi">💻</div><div class="ot"><div class="on">Masa Başı</div><div class="od">Çoğunlukla oturarak</div></div><div class="orad"></div></div>
+          <div class="oc" data-g="job" data-v="1" onclick="selOpt(this,'job')"><div class="oi">🚶</div><div class="ot"><div class="on">Hafif Hareketli</div><div class="od">Ara sıra yürüme var</div></div><div class="orad"></div></div>
+          <div class="oc" data-g="job" data-v="2" onclick="selOpt(this,'job')"><div class="oi">🏃</div><div class="ot"><div class="on">Aktif / Ayakta</div><div class="od">Çoğunlukla ayaktayım</div></div><div class="orad"></div></div>
+          <div class="oc" data-g="job" data-v="3" onclick="selOpt(this,'job')"><div class="oi">⚒️</div><div class="ot"><div class="on">Ağır Fiziksel İş</div><div class="od">İnşaat, fabrika vb.</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+      <div class="fg"><label class="fl">Haftada kaç gün spor yapıyorsun?</label>
+        <div class="opts3" id="o-sd">
+          <div class="oc" data-g="sd" data-v="0" style="grid-column:1/-1" onclick="selOpt(this,'sd')"><div class="oi">😴</div><div class="ot"><div class="on">Hiç yapmıyorum</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="sd" data-v="1" onclick="selOpt(this,'sd')"><div class="oi">📅</div><div class="ot"><div class="on">1 gün</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="sd" data-v="2" onclick="selOpt(this,'sd')"><div class="oi">📅</div><div class="ot"><div class="on">2 gün</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="sd" data-v="3" onclick="selOpt(this,'sd')"><div class="oi">💪</div><div class="ot"><div class="on">3 gün</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="sd" data-v="4" onclick="selOpt(this,'sd')"><div class="oi">💪</div><div class="ot"><div class="on">4 gün</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="sd" data-v="5" onclick="selOpt(this,'sd')"><div class="oi">🔥</div><div class="ot"><div class="on">5 gün</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="sd" data-v="6" onclick="selOpt(this,'sd')"><div class="oi">🔥</div><div class="ot"><div class="on">6 gün</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+      <div class="fg"><label class="fl">Spor seansın ne kadar sürüyor?</label>
+        <div class="opts2" id="o-sh">
+          <div class="oc locked" data-g="sh" data-v="0" onclick="selOpt(this,'sh')"><div class="oi">🚫</div><div class="ot"><div class="on">Spor yapmıyorum</div></div><div class="orad"></div></div>
+          <div class="oc" data-g="sh" data-v="0.5" onclick="selOpt(this,'sh')"><div class="oi">⏱️</div><div class="ot"><div class="on">~30 dakika</div></div><div class="orad"></div></div>
+          <div class="oc" data-g="sh" data-v="1" onclick="selOpt(this,'sh')"><div class="oi">⏱️</div><div class="ot"><div class="on">45–60 dakika</div></div><div class="orad"></div></div>
+          <div class="oc" data-g="sh" data-v="1.5" onclick="selOpt(this,'sh')"><div class="oi">🔥</div><div class="ot"><div class="on">1 saat+</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+      <div class="fg"><label class="fl">Ek aktivite yapıyor musun?</label>
+        <div class="opts2" id="o-ex">
+          <div class="oc compact" data-g="ex" data-v="0" onclick="selOpt(this,'ex')"><div class="oi">❌</div><div class="ot"><div class="on">Hayır</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="ex" data-v="0.3" onclick="selOpt(this,'ex')"><div class="oi">🚶</div><div class="ot"><div class="on">Kısa yürüyüşler, esneme</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="ex" data-v="0.6" onclick="selOpt(this,'ex')"><div class="oi">🧘</div><div class="ot"><div class="on">Yürüyüş, yoga</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="ex" data-v="1" onclick="selOpt(this,'ex')"><div class="oi">🚴</div><div class="ot"><div class="on">Uzun yürüyüş, bisiklet</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="ex" data-v="1.4" onclick="selOpt(this,'ex')"><div class="oi">🏊</div><div class="ot"><div class="on">Koşu, yüzme</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="ex" data-v="1.8" onclick="selOpt(this,'ex')"><div class="oi">🏃</div><div class="ot"><div class="on">HIIT, spor antrenmanları / ekstra fitness</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+      <div class="alert" id="al2">⚠️ Lütfen tüm soruları cevaplayın.</div>
+    </div>
+
+    <div class="step" id="s3">
+      <div class="step-hdr"><h2>VÜCUT TİPİ TESTİ</h2><p>Somatotip yapını 8 soru ile belirleyelim</p></div>
+
+      <div class="fg"><label class="fl">1. Bir elin baş &amp; orta parmağını diğer el bileğine sardığında...</label>
+        <div class="opts" id="o-bt1">
+          <div class="oc compact" data-g="bt1" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt1')"><div class="oi">🤏</div><div class="ot"><div class="on">Parmaklar üst üste geldi</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt1" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt1')"><div class="oi">👌</div><div class="ot"><div class="on">Parmaklar uç uca geldi</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt1" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt1')"><div class="oi">✋</div><div class="ot"><div class="on">Parmaklar birbirine ulaşmadı</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+
+      <div class="fg"><label class="fl">2. Aynaya baktığında ilk hangisi dikkat çekiyor?</label>
+        <div class="opts3" id="o-bt2">
+          <div class="oc compact" data-g="bt2" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt2')"><div class="oi">🦴</div><div class="ot"><div class="on">Kemiklerim</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt2" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt2')"><div class="oi">💧</div><div class="ot"><div class="on">Yağlarım</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt2" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt2')"><div class="oi">💪</div><div class="ot"><div class="on">Kaslarım</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+
+      <div class="fg"><label class="fl">3. Vücudunuzu nasıl tanımlarsınız?</label>
+        <div class="opts3" id="o-bt3">
+          <div class="oc compact" data-g="bt3" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt3')"><div class="oi">🍐</div><div class="ot"><div class="on">Armut gibi</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt3" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt3')"><div class="oi">📏</div><div class="ot"><div class="on">Kalem gibi</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt3" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt3')"><div class="oi">⏳</div><div class="ot"><div class="on">Kum saati gibi</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+
+      <div class="fg"><label class="fl">4. 16 yaş civarında vücudunuz hangisine yakındı?</label>
+        <div class="opts3" id="o-bt4">
+          <div class="oc compact" data-g="bt4" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt4')"><div class="oi">🦾</div><div class="ot"><div class="on">Güçlü ve diri</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt4" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt4')"><div class="oi">📏</div><div class="ot"><div class="on">İnce ve uzun</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt4" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt4')"><div class="oi">🫁</div><div class="ot"><div class="on">Tıknaz ve yumuşak</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+
+      <div class="fg"><label class="fl">5. Kilo alma ve verme geçmişini düşündüğünde...</label>
+        <div class="opts" id="o-bt5">
+          <div class="oc compact" data-g="bt5" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt5')"><div class="oi">📈</div><div class="ot"><div class="on">Kütle kazanmakta zorlanıyorum</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt5" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt5')"><div class="oi">📉</div><div class="ot"><div class="on">Kilo kaybetmekte zorlanıyorum</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt5" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt5')"><div class="oi">⚖️</div><div class="ot"><div class="on">Pek fazla zorlanmıyorum</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+
+      <div class="fg"><label class="fl">6. Spora birkaç hafta ara verdiğinde...</label>
+        <div class="opts3" id="o-bt6">
+          <div class="oc compact" data-g="bt6" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt6')"><div class="oi">⬆️</div><div class="ot"><div class="on">Kilo alıyorum</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt6" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt6')"><div class="oi">⬇️</div><div class="ot"><div class="on">Kilo kaybediyorum</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt6" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt6')"><div class="oi">➡️</div><div class="ot"><div class="on">Pek değişmiyor</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+
+      <div class="fg"><label class="fl">7. Slim fit giysi denediğinde...</label>
+        <div class="opts3" id="o-bt7">
+          <div class="oc compact" data-g="bt7" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt7')"><div class="oi">✅</div><div class="ot"><div class="on">Rahatça içine girebiliyorum</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt7" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt7')"><div class="oi">❌</div><div class="ot"><div class="on">Slim fit sevmiyorum</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt7" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt7')"><div class="oi">😅</div><div class="ot"><div class="on">Zorlasam giyebiliyorum</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+
+      <div class="fg"><label class="fl">8. Seni en iyi tarif eden hangisi?</label>
+        <div class="opts" id="o-bt8">
+          <div class="oc compact" data-g="bt8" data-ec="0" data-me="0" data-en="1" onclick="selBT(this,'bt8')"><div class="oi">💧</div><div class="ot"><div class="on">"Su içsem yarıyor"</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt8" data-ec="0" data-me="1" data-en="0" onclick="selBT(this,'bt8')"><div class="oi">⚖️</div><div class="ot"><div class="on">"Veririm de alırım da"</div></div><div class="orad"></div></div>
+          <div class="oc compact" data-g="bt8" data-ec="1" data-me="0" data-en="0" onclick="selBT(this,'bt8')"><div class="oi">😤</div><div class="ot"><div class="on">"Yiyorum ama kilo alamıyorum"</div></div><div class="orad"></div></div>
+        </div>
+      </div>
+      <div class="alert" id="al3">⚠️ Lütfen tüm 8 soruyu cevaplayın.</div>
+    </div>
+
+    <div class="step" id="s4">
+      <div class="step-hdr"><h2>HEDEFİNİ BELİRLE</h2><p>Spor türü ve kalori hedefinle makrolarını özelleştir</p></div>
+      <div class="g-rec"><div class="g-rec-lbl">🎯 RavenFit Önerisi</div><div class="g-rec-txt" id="g-rec-txt">Hesaplanıyor...</div></div>
+
+      <div class="seclbl">Spor Türün</div>
+      <div class="opts3" id="o-st">
+        <div class="oc compact" data-g="st" data-v="bb" onclick="selOpt(this,'st')"><div class="oi">🏋️</div><div class="ot"><div class="on">Vücut Geliştirme</div><div class="od">Ağırlık odaklı</div></div><div class="orad"></div></div>
+        <div class="oc compact" data-g="st" data-v="cardio" onclick="selOpt(this,'st')"><div class="oi">🏃</div><div class="ot"><div class="on">Kardiyo</div><div class="od">Kondisyon odaklı</div></div><div class="orad"></div></div>
+        <div class="oc compact" data-g="st" data-v="hybrid" onclick="selOpt(this,'st')"><div class="oi">⚡</div><div class="ot"><div class="on">Hibrit</div><div class="od">Her ikisi de</div></div><div class="orad"></div></div>
+      </div>
+
+      <div class="seclbl" style="margin-top:8px">Kalori Hedefin</div>
+      <div class="opts" id="o-gl">
+        <div class="oc" data-g="gl" data-v="yag" onclick="selOpt(this,'gl')"><div class="oi">🔥</div><div class="ot"><div class="on">Yağ Kaybetme</div><div class="od">TDEE − 350 kcal | Kalori açığı</div></div><div class="orad"></div></div>
+        <div class="oc" data-g="gl" data-v="idame" onclick="selOpt(this,'gl')"><div class="oi">⚖️</div><div class="ot"><div class="on">İdare-i Maslahat</div><div class="od">TDEE ± 0 kcal | Vücut koruma</div></div><div class="orad"></div></div>
+        <div class="oc" data-g="gl" data-v="kutle" onclick="selOpt(this,'gl')"><div class="oi">💪</div><div class="ot"><div class="on">Kütle Kazanma</div><div class="od">TDEE + 350 kcal | Kalori fazlası</div></div><div class="orad"></div></div>
+      </div>
+      <div class="alert" id="al4">⚠️ Lütfen spor türü ve kalori hedefinizi seçin.</div>
+    </div>
+
+  </div><div class="wiz-nav">
+    <button class="btn btn-s" id="btn-back" onclick="prevStep()" style="display:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Geri</button>
+    <button class="btn btn-p btn-full" id="btn-next" onclick="nextStep()">Devam Et <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+</div>
+
+<div class="screen" id="results">
+  <div class="r-hero">
+    <div class="r-card-hero">
+      <div class="r-name" id="r-name">Analiz Tamamlandı</div>
+      <div class="r-title">SONUÇLARIN HAZIR</div>
+      <div class="r-stats">
+        <div class="rs"><div class="rs-v" id="r-bf">—</div><div class="rs-l">Yağ Oranı</div></div>
+        <div class="rs"><div class="rs-v" id="r-lm">—</div><div class="rs-l">Yağsız Kütle</div></div>
+        <div class="rs"><div class="rs-v" id="r-ffmi">—</div><div class="rs-l">FFMI</div></div>
+        <div class="rs"><div class="rs-v" id="r-cal">—</div><div class="rs-l">Günlük Kalori</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tab-nav">
+      <button class="tb act" onclick="switchTab('vc',this)">🧬 Vücudum</button>
+      <button class="tb" onclick="switchTab('bs',this)">🍽️ Beslenme</button>
+      <button class="tb" onclick="switchTab('ol',this)">📏 Ölçülerim</button>
+      <button class="tb" onclick="switchTab('il',this)">📈 İlerleme</button>
+    </div>
+  </div>
+  <div class="rb">
+
+    <div class="tc act" id="tc-vc">
+      <div class="rc">
+        <div class="rct">🔥 Vücut Yağ Oranı — Navy Formülü</div>
+        <div style="display:flex;align-items:flex-end;gap:5px"><div class="bv" id="bf-v">—</div><div class="bu">%</div></div>
+        <div id="bf-badge"></div>
+        <div class="mbar">
+          <div class="bar-lbls"><span id="bf-lo"></span><span id="bf-hi"></span></div>
+          <div class="bar-trk">
+            <div class="bar-fill" style="background:linear-gradient(90deg,#4895EF,#2EC4B6,#FF9F1C,#E63946);width:100%"></div>
+            <div class="bar-mrk" id="bf-mrk" style="left:0%"></div>
+            <div class="bar-ideal" id="bf-ideal"><div class="bar-il" id="bf-il">İdeal</div></div>
+          </div>
+        </div>
+        <div class="sg">
+          <div class="si"><div class="sv" id="lm-v">—</div><div class="sl">Yağsız Kütle (kg)</div></div>
+          <div class="si"><div class="sv" id="fm-v">—</div><div class="sl">Yağ Kütlesi (kg)</div></div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rct">📊 FFMI Endeksi</div>
+        <div style="display:flex;align-items:flex-end;gap:5px"><div class="bv" id="ffmi-v">—</div></div>
+        <div id="ffmi-badge"></div>
+        <div class="ffmi-scale">
+          <div class="ffmi-seg" style="background:#4895EF;flex:4"></div>
+          <div class="ffmi-seg" style="background:#2EC4B6;flex:2"></div>
+          <div class="ffmi-seg" style="background:#9B72FF;flex:3"></div>
+          <div class="ffmi-seg" style="background:#E63946;flex:2"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text2);margin-top:3px">
+          <span id="ffmi-lo-lbl">Ort.(&lt;18)</span><span>Atletik(18-21)</span><span>Kaslı(21-25)</span><span>Elit(25+)</span>
+        </div>
+        <div class="mbar"><div class="bar-trk"><div class="bar-mrk" id="ffmi-mrk" style="left:0%"></div></div></div>
+        <div class="ib"><span>ℹ️</span><span id="ffmi-info">—</span></div>
+      </div>
+      <div class="rc">
+        <div class="rct">⚖️ Vücut Kitle Endeksi (VKİ)</div>
+        <div style="display:flex;align-items:flex-end;gap:5px"><div class="bv" id="bmi-v">—</div></div>
+        <div id="bmi-badge"></div>
+        <div class="mbar">
+          <div class="bar-lbls"><span>Zayıf (&lt;18.5)</span><span>Normal (18.5–25)</span><span>Obez (30+)</span></div>
+          <div class="bar-trk"><div class="bar-mrk" id="bmi-mrk" style="left:0%"></div></div>
+        </div>
+        <div class="ib"><span>ℹ️</span><span id="bmi-info">—</span></div>
+      </div>
+      <div class="rc">
+        <div class="rct">🧬 Vücut Tipi Analizi & Vücut Profili</div>
+        <div id="bt-res"></div>
+        <div id="bp-res" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border);"></div>
+      </div>
+    </div>
+
+    <div class="tc" id="tc-bs">
+      <div class="rc">
+        <div class="rct">🎯 Günlük Kalori Hedefi</div>
+        <div style="display:flex;align-items:flex-end;gap:5px"><div class="bv" id="cal-v">—</div><div class="bu">kcal</div></div>
+        <div id="goal-badge"></div>
+        <div class="ib" style="margin-top:9px"><span>🔥</span><span>TDEE: <strong id="tdee-info">—</strong> kcal &nbsp;|&nbsp; BMR (K-McA): <strong id="bmr-info">—</strong> kcal</span></div>
+        <div class="ib"><span>🏃</span><span id="act-lbl">—</span></div>
+        <div class="ib" id="workout-advice" style="display:none;border-color:rgba(255,159,28,.3);background:rgba(255,159,28,.07)"></div>
+      </div>
+      <div class="rc">
+        <div class="rct">🥗 Makro Dağılımı</div>
+        <div class="mg">
+          <div class="mi"><div class="mv mp" id="mp-v">—</div><div class="mu">gram/gün</div><div class="ml mp">Protein</div></div>
+          <div class="mi"><div class="mv mc" id="mc-v">—</div><div class="mu">gram/gün</div><div class="ml mc">Karbonhidrat</div></div>
+          <div class="mi"><div class="mv mf" id="mf-v">—</div><div class="mu">gram/gün</div><div class="ml mf">Yağ</div></div>
+        </div>
+        <div class="mg" style="margin-top:5px">
+          <div class="mi"><div class="mv mp" style="font-size:13px" id="mp-c">—</div><div class="mu">kcal</div></div>
+          <div class="mi"><div class="mv mc" style="font-size:13px" id="mc-c">—</div><div class="mu">kcal</div></div>
+          <div class="mi"><div class="mv mf" style="font-size:13px" id="mf-c">—</div><div class="mu">kcal</div></div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rct">💧 Günlük Su İhtiyacı</div>
+        <div class="water-d">
+          <div style="font-size:34px">💧</div>
+          <div><div class="water-v" id="water-v">—<span class="water-u"> lt</span></div>
+          <div style="font-size:11px;color:var(--text2);margin-top:3px" id="water-cups">—</div></div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rct">🥩 Günlük Protein İhtiyacı</div>
+        <div style="display:flex;align-items:flex-end;gap:5px"><div class="bv" id="prot-v">—</div><div class="bu">g/gün</div></div>
+        <div class="ib"><span>💡</span><span id="prot-info">—</span></div>
+      </div>
+    </div>
+
+    <div class="tc" id="tc-ol">
+      <div class="rc">
+        <div class="rct">📐 Oran Analizi</div>
+        <div id="ratio-content"></div>
+      </div>
+      <div class="rc">
+        <div class="rct">⚖️ İdeal Kilo Aralığı (BMI 18.5–24.9)</div>
+        <div style="display:flex;align-items:flex-end;gap:5px;margin-bottom:4px">
+          <span style="font-size:13px;color:var(--text2)">Alt:</span><div style="font-family:'Bebas Neue';font-size:30px;color:var(--success);line-height:1" id="iw-lo-v">—</div>
+          <span style="font-size:13px;color:var(--text2);margin-left:10px">Üst:</span><div style="font-family:'Bebas Neue';font-size:30px;color:var(--warn);line-height:1" id="iw-hi-v">—</div>
+          <span style="font-size:13px;color:var(--text2)">kg</span>
+        </div>
+        <div id="iw-diff" style="font-size:13px;color:var(--text2);margin-bottom:6px"></div>
+        <div class="mbar">
+          <div class="bar-lbls"><span id="iw-lo-lbl">—</span><span>Şu anki kilonuz</span><span id="iw-hi-lbl">—</span></div>
+          <div class="bar-trk"><div class="bar-mrk" id="iw-mrk" style="left:50%"></div></div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rct">📋 Başlangıç / Ana Ölçülerim</div>
+        <div id="mlist"></div>
+      </div>
+    </div>
+
+    <div class="tc" id="tc-il">
+      <div class="rc">
+        <div class="rct">📅 Haftalık Takip & 3 Haftalık Rapor</div>
+        <p style="color:var(--text2);font-size:12px;margin-bottom:11px">Her hafta tüm ölçülerini girerek detaylı gelişimini takip et.</p>
+        <button class="btn btn-p btn-full" onclick="openMeasurementModal()">📏 Yeni Ölçü Gir</button>
+        
+        <div id="progress-table-container" style="margin-top:15px; display:none;">
+          </div>
+      </div>
+      
+      <div class="rc">
+        <div class="rct">📈 Geçmiş Kayıtlar (Özet)</div>
+        <div id="h-list"></div>
+      </div>
+      
+      <div class="rc">
+        <div class="rct">⚙️ Ayarlar & Tema</div>
+        <div style="margin-bottom: 15px;">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:5px;">Görünüm Teması</div>
+          <div class="tdots">
+            <div class="tdot" data-t="dark"    style="background:#E63946" onclick="setTheme('dark')"></div>
+            <div class="tdot" data-t="crimson" style="background:#FF3022" onclick="setTheme('crimson')"></div>
+            <div class="tdot" data-t="violet"  style="background:#9B72FF" onclick="setTheme('violet')"></div>
+            <div class="tdot" data-t="forest"  style="background:#4ADE80" onclick="setTheme('forest')"></div>
+            <div class="tdot" data-t="rose"    style="background:#F472B6" onclick="setTheme('rose')"></div>
+            <div class="tdot" data-t="light"   style="background:#F2EFE8;border:2px solid #CDC9C1" onclick="setTheme('light')"></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px">
+          <button class="btn btn-s btn-full" onclick="startWizard()">✏️ Bilgilerimi Güncelle</button>
+          <button class="btn btn-s btn-full" style="color:var(--accent);border-color:var(--ag)" onclick="resetAll()">🗑️ Tüm Verileri Sıfırla</button>
+        </div>
+      </div>
+    </div>
+
+  </div></div><div class="modal-overlay" id="measureModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">Haftalık Ölçümler</div>
+      <button class="modal-close" onclick="closeMeasurementModal()">✕</button>
+    </div>
+    <div style="color:var(--text2);font-size:11px;margin-bottom:12px;">Yeni ölçülerini girdiğinde ana profilindeki kalori, makro, vücut tipi ve yağ oranları otomatik güncellenecektir.</div>
+    
+    <div class="fg" style="margin-bottom:8px"><label class="fl">Vücut Ağırlığı (kg)</label><input class="fi" id="m-wt" type="number" inputmode="decimal" step="0.1"></div>
+    <div class="frow" style="margin-bottom:8px">
+      <div class="fg"><label class="fl">Boyun (cm)</label><input class="fi" id="m-nk" type="number" inputmode="decimal" step="0.5"></div>
+      <div class="fg"><label class="fl">Bel (cm)</label><input class="fi" id="m-wst" type="number" inputmode="decimal" step="0.5"></div>
+    </div>
+    <div class="frow" style="margin-bottom:8px">
+      <div class="fg" id="modal-shoulder-grp"><label class="fl">Omuz (cm)</label><input class="fi" id="m-sh" type="number" inputmode="decimal" step="0.5"></div>
+      <div class="fg"><label class="fl">Göğüs (cm)</label><input class="fi" id="m-ch" type="number" inputmode="decimal" step="0.5"></div>
+    </div>
+    <div class="frow" style="margin-bottom:8px">
+      <div class="fg"><label class="fl">Kol (cm)</label><input class="fi" id="m-arm" type="number" inputmode="decimal" step="0.5"></div>
+      <div class="fg"><label class="fl">Ön Kol (cm)</label><input class="fi" id="m-farm" type="number" inputmode="decimal" step="0.5"></div>
+    </div>
+    <div class="frow" style="margin-bottom:15px">
+      <div class="fg"><label class="fl">Kalça (cm)</label><input class="fi" id="m-hip" type="number" inputmode="decimal" step="0.5"></div>
+      <div class="fg"><label class="fl">Bacak (cm)</label><input class="fi" id="m-leg" type="number" inputmode="decimal" step="0.5"></div>
+    </div>
+    <div class="fg" style="margin-bottom:15px"><label class="fl">Kalf (cm)</label><input class="fi" id="m-calf" type="number" inputmode="decimal" step="0.5"></div>
+    
+    <button class="btn btn-p btn-full" onclick="saveWeeklyMeasurements()">💾 Kaydet & Raporu Güncelle</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+/* ── STATE ────────────────────────────────────────────── */
+var step=0, U={}, R={}, A={}, BT={}, selST=null, selGL=null;
+
+/* ── INIT ─────────────────────────────────────────────── */
+window.addEventListener('load',function(){
+  var th=localStorage.getItem('rf_theme')||'dark';
+  applyTheme(th);
+  try{
+    var raw=localStorage.getItem('rf_data');
+    if(raw){var d=JSON.parse(raw);U=d.U||{};R=d.R||{};A=d.A||{};BT=d.BT||{};selST=d.selST||null;selGL=d.selGL||null;
+      if(Object.keys(R).length)document.getElementById('splash-cont').style.display='block';}
+  }catch(e){}
+});
+
+function saveData(){localStorage.setItem('rf_data',JSON.stringify({U:U,R:R,A:A,BT:BT,selST:selST,selGL:selGL}));}
+
+/* ── THEME ────────────────────────────────────────────── */
+function setTheme(t){
+  applyTheme(t);
+  localStorage.setItem('rf_theme',t);
+}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.querySelectorAll('.tdot').forEach(function(d){d.classList.toggle('act',d.dataset.t===t);});
+}
+
+/* ── SCREENS ──────────────────────────────────────────── */
+function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function goHome(){showScreen('splash');}
+function showResults(){showScreen('results');renderAll();}
+function startWizard(){step=0;selST=null;selGL=null;showScreen('wizard');updWizStep();updGenderUI();restoreWiz();}
+function startWizardFromTouch(e){if(e)e.preventDefault();startWizard();}
+
+function restoreWiz(){
+  if(!U.age)return;
+  sv('i-name',U.name||'');if(U.gender)selGender(U.gender);sv('i-age',U.age);sv('i-ht',U.height);sv('i-wt',U.weight);
+  sv('i-nk',U.neck);sv('i-wst',U.waist);sv('i-spe',U.shoulder||'');sv('i-hip',U.hip||'');
+  Object.keys(A).forEach(function(g){var el=document.querySelector('[data-g="'+g+'"][data-v="'+A[g]+'"]');if(el)markSel(g,el);});
+  if(A.sd!==undefined){
+    var shEls=document.querySelectorAll('[data-g="sh"]');
+    var shZ=document.querySelector('[data-g="sh"][data-v="0"]');
+    if(A.sd===0){
+      shEls.forEach(function(e){e.classList.remove('sel');e.classList.add('locked');});
+      if(shZ){shZ.classList.add('sel');shZ.classList.remove('locked');}
+    } else {
+      shEls.forEach(function(e){
+        if(e.dataset.v==='0'){e.classList.add('locked');e.classList.remove('sel');}
+        else{e.classList.remove('locked');}
+      });
+    }
+  }
+  if(A.st)selST=A.st;
+  if(A.gl)selGL=A.gl;
+  Object.keys(BT).forEach(function(g){var q=BT[g];var el=document.querySelector('[data-g="'+g+'"][data-ec="'+q.ec+'"][data-me="'+q.me+'"][data-en="'+q.en+'"]');if(el)markSelBT(g,el);});
+}
+function sv(id,v){var el=document.getElementById(id);if(el&&v!=null&&v!==undefined&&v!=='')el.value=v;}
+
+/* ── WIZARD NAV ───────────────────────────────────────── */
+function prevStep(){if(step>0){step--;updWizStep();}}
+function nextStep(){
+  if(!validate(step))return;
+  if(step===4){
+    if(!selST||!selGL){document.getElementById('al4').classList.add('v');return;}
+    A.st=selST;A.gl=selGL;calcAll();saveData();showResults();return;
+  }
+  step++;updWizStep();
+  if(step===4){collectPartial();calcAll();renderGoalStep();}
+}
+function updWizStep(){
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('s'+step).classList.add('active');
+  for(var i=0;i<5;i++){var ps=document.getElementById('ps'+i);ps.className='ps';if(i<step)ps.classList.add('done');else if(i===step)ps.classList.add('act');}
+  document.getElementById('prog-lbl').textContent='Adım '+(step+1)+' / 5';
+  document.getElementById('btn-back').style.display=step>0?'flex':'none';
+  document.getElementById('btn-next').innerHTML=step===4
+    ?'🚀 Analizi Tamamla'
+    :'Devam Et <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+}
+
+/* ── VALIDATION ───────────────────────────────────────── */
+function validate(s){
+  document.querySelectorAll('.alert').forEach(function(a){a.classList.remove('v');});
+  if(s===0){
+    var age=gv('i-age'),ht=gv('i-ht'),wt=gv('i-wt');
+    if(!U.gender||!age||!ht||!wt){document.getElementById('al0').classList.add('v');return false;}
+    U.name=document.getElementById('i-name').value;U.age=+age;U.height=+ht;U.weight=+wt;return true;
+  }
+  if(s===1){
+    var nk=gv('i-nk'),wst=gv('i-wst');
+    if(!nk||!wst){document.getElementById('al1').classList.add('v');return false;}
+    if(U.gender==='male'&&!gv('i-spe')){document.getElementById('al1').classList.add('v');return false;}
+    if(U.gender==='female'&&!gv('i-hip')){document.getElementById('al1').classList.add('v');return false;}
+    U.neck=+nk;U.waist=+wst;
+    if(U.gender==='male')U.shoulder=+gv('i-spe');
+    else U.hip=+gv('i-hip');
+    return true;
+  }
+  if(s===2){
+    if(A.job===undefined||A.sd===undefined||A.sh===undefined||A.ex===undefined){document.getElementById('al2').classList.add('v');return false;}
+    return true;
+  }
+  if(s===3){
+    for(var i=1;i<=8;i++){if(!BT['bt'+i]){document.getElementById('al3').classList.add('v');return false;}}
+    return true;
+  }
+  return true;
+}
+function gv(id){var el=document.getElementById(id);return el?el.value.trim():'';}
+
+/* ── UI HELPERS ───────────────────────────────────────── */
+function selGender(g){
+  U.gender=g;
+  document.getElementById('gm').classList.toggle('sel',g==='male');
+  document.getElementById('gf').classList.toggle('sel',g==='female');
+  updGenderUI();
+}
+function updGenderUI(){
+  if(!U.gender)return;
+  var male=U.gender==='male';
+  document.getElementById('wst-hint').textContent=male?'📍 Göbek deliği hizasından ölçün':'📍 Belin en ince noktasından ölçün';
+  document.getElementById('grp-spe').style.display=male?'flex':'none';
+  document.getElementById('grp-hip').style.display=male?'none':'flex';
+}
+
+function selOpt(el,grp){
+  markSel(grp,el);
+  A[grp]=parseFloat(el.dataset.v);
+  if(grp==='sd'){
+    var shEls=document.querySelectorAll('[data-g="sh"]');
+    var shZ=document.querySelector('[data-g="sh"][data-v="0"]');
+    if(A.sd===0){
+      shEls.forEach(function(e){e.classList.remove('sel');e.classList.add('locked');});
+      if(shZ){shZ.classList.add('sel');shZ.classList.remove('locked');}
+      A.sh=0;
+    } else {
+      shEls.forEach(function(e){
+        if(e.dataset.v==='0'){e.classList.add('locked');e.classList.remove('sel');}
+        else{e.classList.remove('locked');}
+      });
+      if(A.sh===0){delete A.sh;}
+    }
+  }
+  if(grp==='st')selST=el.dataset.v;
+  if(grp==='gl'){selGL=el.dataset.v;if(R.recGoal)renderGoalAdvice(selGL);}
+}
+function markSel(grp,el){
+  document.querySelectorAll('[data-g="'+grp+'"]').forEach(function(e){e.classList.remove('sel');});
+  el.classList.add('sel');
+}
+
+function selBT(el,grp){
+  markSelBT(grp,el);
+  BT[grp]={ec:+el.dataset.ec,me:+el.dataset.me,en:+el.dataset.en};
+}
+function markSelBT(grp,el){
+  document.querySelectorAll('[data-g="'+grp+'"]').forEach(function(e){e.classList.remove('sel');});
+  el.classList.add('sel');
+}
+
+function collectPartial(){
+  U.name=document.getElementById('i-name').value;
+  U.age=+gv('i-age');U.height=+gv('i-ht');U.weight=+gv('i-wt');
+  U.neck=+gv('i-nk');U.waist=+gv('i-wst');
+  if(U.gender==='male')U.shoulder=+gv('i-spe');
+  else U.hip=+gv('i-hip');
+}
+
+/* ── CALCULATIONS ─────────────────────────────────────── */
+function calcBF(){
+  var h=U.height,nk=U.neck,wst=U.waist,hip=U.hip;
+  var bf;
+  if(U.gender==='male'){
+    bf=495/(1.0324-0.19077*Math.log10(wst-nk)+0.15456*Math.log10(h))-450;
+  } else {
+    bf=495/(1.29579-0.35004*Math.log10(wst+hip-nk)+0.22100*Math.log10(h))-450;
+  }
+  return Math.max(2,Math.round(bf*100)/100);
+}
+function calcFFMI(bf){
+  var hm=U.height/100,ffm=U.weight*(1-bf/100),ffmi=ffm/(hm*hm);
+  var norm=ffmi+6.1*(1.8-hm);
+  return{ffmi:Math.round(ffmi*100)/100,norm:Math.round(norm*100)/100,ffm:Math.round(ffm*100)/100};
+}
+function calcBMR(lm){return Math.round(370+21.6*lm);}
+function calcAct(){
+  // A.sd is now actual day count (0–6). Scale to 0–2 range for scoring.
+  var sdScore = Math.min((A.sd||0) * 0.35, 2.1);
+  var sc = (A.job||0) + sdScore + (A.sh||0) + (A.ex||0);
+  if(sc<=1)  return{m:1.2,  lbl:'Sedanter — Hareketsiz yaşam'};
+  if(sc<=2.5)return{m:1.375,lbl:'Az Aktif — Hafif egzersiz'};
+  if(sc<=4.5)return{m:1.55, lbl:'Orta Aktif — Düzenli egzersiz'};
+  if(sc<=6.5)return{m:1.725,lbl:'Çok Aktif — Yoğun egzersiz'};
+  return{m:1.9,lbl:'Aşırı Aktif — Spor odaklı yaşam'};
+}
+function goalAdj(g){return{yag:-350,idame:0,kutle:350}[g]||0;}
+function calcMacros(cals,gl,st,lm){
+  var prM={bb:{yag:2.4,idame:2.2,kutle:2.0},cardio:{yag:2.0,idame:1.8,kutle:1.8},hybrid:{yag:2.2,idame:2.0,kutle:1.9}};
+  var fatM={bb:.25,cardio:.20,hybrid:.22};
+  var pr=(prM[st]&&prM[st][gl])||2.0;
+  var fr=fatM[st]||.25;
+  var pg=Math.round(lm*pr),fg=Math.round(cals*fr/9),pc=pg*4,fc=Math.round(fg*9),cc=Math.max(0,cals-pc-fc);
+  return{pg:pg,fg:fg,cg:Math.round(cc/4),pc:pc,fc:fc,cc:Math.round(cc)};
+}
+function calcBT(){
+  var ec=0,me=0,en=0;
+  Object.values(BT).forEach(function(q){ec+=q.ec;me+=q.me;en+=q.en;});
+  var t=ec+me+en||1;
+  return{ecto:Math.round(ec/t*10000)/100,meso:Math.round(me/t*10000)/100,endo:Math.round(en/t*10000)/100};
+}
+function calcIdealRange(h){
+  var hm=h/100,h2=hm*hm;
+  return{lo:Math.round(18.5*h2*10)/10,hi:Math.round(24.9*h2*10)/10};
+}
+function recGoal(){
+  var bf=R.bf,bmi=R.bmi,male=U.gender==='male';
+  if(male){if(bf>20||bmi>27)return'yag';if(bf>14||bmi>23)return'idame';return'kutle';}
+  else{if(bf>30||bmi>27)return'yag';if(bf>24||bmi>23)return'idame';return'kutle';}
+}
+
+/* Vücut Profili Algoritması - cinsiyet bazlı ve daha dengeli sürüm */
+function determineBodyProfile(bf, ffmi, bmi) {
+  var male = U.gender === 'male';
+  var whtr = U.height ? (U.waist / U.height) : 0; // waist-to-height ratio
+  var swr = male && U.waist ? (U.shoulder / U.waist) : 0; // shoulder-to-waist ratio
+  var whr = !male && U.hip ? (U.waist / U.hip) : 0; // waist-to-hip ratio
+
+  if (male) {
+    // Erkek eşikleri
+    if (bf >= 30 || bmi >= 30.5) {
+      return {n:"Obese (Obez)", d:"Ciddi yüksek yağ oranı. Öncelik yağ kaybı ve günlük hareketi artırmak olmalı.", c:"var(--accent)"};
+    }
+    if (bf >= 25 || bmi >= 27.5) {
+      return {n:"Overweight (Kilolu)", d:"Yağ oranı yüksek. Hedefler bölümünde 'Yağ Kaybetme' seçimi daha uygun olur.", c:"var(--accent)"};
+    }
+    if (bf < 10 && ffmi < 17) {
+      return {n:"Skinny (Zayıf)", d:"Kas ve kilo düşük. Hedefler bölümünde 'Kütle Kazanma' seçmelisin.", c:"var(--info)"};
+    }
+    if (bf >= 18 && ffmi < 18.5) {
+      return {n:"Skinny-fat", d:"Kas kütlen düşük ama yağ oranın beklenenden yüksek. Öncelik yağ yakarken kası korumak olmalı. Hedefler bölümünde 'Yağ Kaybetme' ya da 'İdare-i Maslahat' seçmelisin.", c:"var(--warn)"};
+    }
+    if (bf <= 15 && ffmi >= 20.5 && whtr <= 0.50 && swr >= 1.55) {
+      return {n:"Athletic (Atletik)", d:"Belirgin kas kütlesi ve düşük yağ oranıyla atletik bir yapıdasın. Hedefler bölümünde 'İdare-i Maslahat' veya hafif hacim seçebilirsin.", c:"var(--success)"};
+    }
+    if (ffmi >= 23 && bf < 18) {
+      return {n:"Muscular (Kaslı)", d:"Yüksek kas kütlesine sahipsin. Definasyonla çizgileri daha belirgin hale getirebilirsin.", c:"var(--purple)"};
+    }
+    if (ffmi >= 19 && bf >= 16 && bf < 24) {
+      return {n:"Fit", d:"Dengeli kas ve yağ oranıyla fit bir yapın var. Hedefler bölümünde 'İdare-i Maslahat' en dengeli seçenek olur.", c:"var(--success)"};
+    }
+    if (bf <= 16 && ffmi >= 18.5) {
+      return {n:"Lean (Yağsız/Fit)", d:"Düşük yağ ve orta kas seviyesi. Temiz ve fit görünüm. Hedefler bölümünde 'İdare-i Maslahat' ya da kontrollü hacim seçebilirsin.", c:"var(--info)"};
+    }
+    if (ffmi >= 20 && bf >= 18) {
+      return {n:"Bulky (Hacimli)", d:"Kas kütlen yüksek ama biraz yağ taşıyorsun. Bir cut dönemi ile çizgilenme artar.", c:"var(--warn)"};
+    }
+    return {n:"Fit", d:"Dengeli bir kompozisyon. Hedefler bölümünde 'İdare-i Maslahat' ile koruma ya da hafif gelişim seçebilirsin.", c:"var(--success)"};
+  }
+
+  // Kadın eşikleri
+  if (bf >= 38 || bmi >= 33) {
+    return {n:"Obese (Obez)", d:"Ciddi yüksek yağ oranı. Öncelik yağ kaybı ve sürdürülebilir hareket olmalı.", c:"var(--accent)"};
+  }
+  if (bf >= 30 || bmi >= 28.5) {
+    return {n:"Overweight (Kilolu)", d:"Yağ oranı yüksek. Hedefler bölümünde 'Yağ Kaybetme' seçimi daha doğru olur.", c:"var(--accent)"};
+  }
+  if (bf < 18 && ffmi < 14.5) {
+    return {n:"Skinny (Zayıf)", d:"Kas ve kilo düşük. Hedefler bölümünde 'Kütle Kazanma' senin için daha uygun.", c:"var(--info)"};
+  }
+  if (bf >= 24 && ffmi < 16) {
+    return {n:"Skinny-fat", d:"Kilo normal görünebilir ama kas düşük, yağ oranı beklenenden yüksek. Hedefler bölümünde 'Yağ Kaybetme' ya da 'İdare-i Maslahat' seçmelisin.", c:"var(--warn)"};
+  }
+  if (bf <= 26 && ffmi >= 17.8 && whtr <= 0.46 && whr <= 0.75) {
+    return {n:"Athletic (Atletik)", d:"Belirgin kas ve düşük yağ oranıyla atletik bir yapın var. Hedefler bölümünde 'İdare-i Maslahat' en güvenli seçenek olur.", c:"var(--success)"};
+  }
+  if (ffmi >= 19 && bf < 27) {
+    return {n:"Muscular (Kaslı)", d:"Kas kütlen çok güçlü. İdame ya da kontrollü bir definasyon ile görünüm daha da netleşir.", c:"var(--purple)"};
+  }
+  if (bf <= 24 && ffmi >= 15.8 && whtr <= 0.47 && whr <= 0.74) {
+    return {n:"Lean (Yağsız/Fit)", d:"Düşük yağ ve orta kas seviyesiyle fit görünüyorsun. Hedefler bölümünde 'İdare-i Maslahat' iyi bir seçenek olur.", c:"var(--info)"};
+  }
+  if (bf <= 30 && ffmi >= 16.2 && whtr <= 0.49 && whr <= 0.76) {
+    return {n:"Fit", d:"Dengeli kas + düşük/orta yağ oranı. Hedefler bölümünde 'İdare-i Maslahat' seçimi en mantıklı seçenek olur.", c:"var(--success)"};
+  }
+  if (ffmi >= 17 && bf >= 27) {
+    return {n:"Bulky (Hacimli)", d:"Kas kütlesi iyi ama biraz yağ taşınıyor. Küçük bir yağ kaybı dönemi ile daha keskin görünüm elde edebilirsin.", c:"var(--warn)"};
+  }
+  return {n:"Fit", d:"Dengeli bir kompozisyon. Hedefler bölümünde 'İdare-i Maslahat' ile koruma/gelişim iyi bir seçim olur.", c:"var(--success)"};
+}
+
+/* Akıllı Egzersiz Önerisi */
+function getSmartWorkoutAdvice(goalOverride) {
+  if (A.sd === undefined) return "";
+  var days = A.sd;   // 0–6 actual day count
+  var goal = goalOverride || selGL || R.recGoal;
+  if (!goal) return "";
+  var msg = "";
+
+  if (goal === 'yag') {
+    if (days === 0)        msg = "Yağ yakmak için egzersiz şart. Haftada en az 3 gün antrenman yapmalısın.";
+    else if (days === 1)   msg = "Haftada 1 gün yağ kaybı için yeterli değil. Minimum 3 güne çıkmalısın, yoksa sonuç alamazsın.";
+    else if (days === 2)   msg = "İyi bir başlangıç, ama yağ kaybı için haftada 3–4 gün idealdir.";
+    else if (days <= 4)    msg = "Yağ kaybı için optimal antrenman sıklığındasın. Devam et!";
+    else                   msg = "5+ gün fazla bile olabilir. Overtraining ve toparlanmaya dikkat et; dinlenme de antrenmanın bir parçası.";
+  } else if (goal === 'kutle') {
+    if (days === 0)        msg = "Açık konuşmak gerekirse; hiç antrenman yapmadan kas kazanamazsın. Hemen başlamalısın.";
+    else if (days <= 2)    msg = "Kas gelişimi (hipertrofi) için minimum 3 gün şarttır. Şu an yetersiz kalıyorsun.";
+    else if (days <= 4)    msg = "İdeal hipertrofi aralığındasın. Prog. overload ve yeterli uyku ile gelişim garantili!";
+    else                   msg = "Yoğun bir hacim dönemi. Eklemlerini dinlendirmeyi ve toparlanmayı ihmal etme.";
+  } else if (goal === 'idame') {
+    if (days <= 1)         msg = "Kas kütleni korumak için haftada 1–2 gün yeterli olabilir. Yine de hareketi artırmanı öneririz.";
+    else if (days <= 3)    msg = "Mevcut formu korumak için iyi bir sıklık.";
+    else                   msg = "Harika bir aktivite seviyesin. Formunu geliştirmeyi de düşünebilirsin.";
+  }
+  return msg;
+}
+
+function calcAll(){
+  R.bf=calcBF();
+  var fd=calcFFMI(R.bf);R.ffmi=fd.ffmi;R.norm_ffmi=fd.norm;R.lm=fd.ffm;R.fm=Math.round((U.weight-R.lm)*100)/100;
+  R.bmi=Math.round(U.weight/Math.pow(U.height/100,2)*10)/10;
+  R.bmr=calcBMR(R.lm);
+  var am=calcAct();R.actMult=am.m;R.actLbl=am.lbl;R.tdee=Math.round(R.bmr*R.actMult);
+  R.bt=calcBT();
+  R.iw=calcIdealRange(U.height);
+  R.water=Math.round(U.weight*35)/1000;
+  R.minProt=Math.round(R.lm*1.6);R.maxProt=Math.round(R.lm*2.4);
+  R.recGoal=recGoal();
+  var gl=selGL||R.recGoal,st=selST||'hybrid';
+  R.goalCal=R.tdee+goalAdj(gl);
+  R.macros=calcMacros(R.goalCal,gl,st,R.lm);
+  if(U.gender==='male')R.swr=Math.round(U.shoulder/U.waist*100)/100;
+  else R.whr=Math.round(U.waist/U.hip*100)/100;
+}
+
+/* ── GOAL STEP ────────────────────────────────────────── */
+function renderGoalStep(){
+  var rTexts={
+    yag:'Yağ oranın ideal değerlerin üzerinde. Kalori açığı ve protein ağırlıklı bir strateji öneriyoruz.',
+    idame:'Vücut kompozisyonun iyi konumda. İdame ile kas/yağ oranını koru ve geliştir.',
+    kutle:'Yağ oranın düşük, kas kazanıma hazırsın. Kalori fazlasıyla maksimum gelişim sağlayabilirsin.'
+  };
+  
+  renderGoalAdvice(selGL || R.recGoal);
+
+  document.querySelectorAll('[data-g="gl"]').forEach(function(el){
+    var ex=el.querySelector('.rec-badge');if(ex)ex.remove();
+    if(el.dataset.v===R.recGoal){
+      var b=document.createElement('span');b.className='rec-badge';
+      b.style.cssText='font-size:9px;color:var(--success);font-weight:700;margin-left:4px';
+      b.textContent='⭐ Önerilen';
+      var on=el.querySelector('.on');if(on)on.appendChild(b);
+    }
+  });
+}
+function renderGoalAdvice(goal) {
+  var rTexts = {
+    yag:   'Yağ oranın ideal değerlerin üzerinde. Kalori açığı ve protein ağırlıklı bir strateji öneriyoruz.',
+    idame: 'Vücut kompozisyonun iyi konumda. İdame ile kas/yağ oranını koru ve geliştir.',
+    kutle: 'Yağ oranın düşük, kas kazanıma hazırsın. Kalori fazlasıyla maksimum gelişim sağlayabilirsin.'
+  };
+  var smartAdvice = getSmartWorkoutAdvice(goal);
+  var adviceHtml = smartAdvice
+    ? '<br><br><strong style="color:var(--text)">📌 Antrenman Tavsiyesi:</strong> <span style="color:var(--warn)">' + smartAdvice + '</span>'
+    : '';
+  document.getElementById('g-rec-txt').innerHTML =
+    '<strong>Hedef Analizi:</strong> ' + (rTexts[goal] || '') + adviceHtml;
+}
+
+/* ── TABS ─────────────────────────────────────────────── */
+function switchTab(id,btn){
+  document.querySelectorAll('.tc').forEach(function(t){t.classList.remove('act');});
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('act');});
+  document.getElementById('tc-'+id).classList.add('act');btn.classList.add('act');
+}
+
+/* ── RENDER ALL ───────────────────────────────────────── */
+function renderAll(){
+  if(!R.bf)return;
+  document.getElementById('r-name').textContent=U.name?'Merhaba, '+U.name+'!':'Analiz Tamamlandı!';
+  document.getElementById('r-bf').textContent=R.bf.toFixed(2)+'%';
+  document.getElementById('r-lm').textContent=R.lm.toFixed(2)+' kg';
+  document.getElementById('r-ffmi').textContent=R.ffmi.toFixed(2);
+  document.getElementById('r-cal').textContent=R.goalCal+' kcal';
+  renderVucudum();renderBeslenme();renderOlculerim();renderIlerleme();
+}
+
+/* ── TAB: VÜCUDUM ─────────────────────────────────────── */
+function renderVucudum(){
+  var male=U.gender==='male',bf=R.bf;
+  document.getElementById('bf-v').textContent=bf.toFixed(2);
+  document.getElementById('lm-v').textContent=R.lm.toFixed(2)+' kg';
+  document.getElementById('fm-v').textContent=R.fm.toFixed(2)+' kg';
+
+  var lo=male?4:12,hi=male?38:48,ideal=male?15:22;
+  var pct=clamp((bf-lo)/(hi-lo)*100,4,96),idPct=(ideal-lo)/(hi-lo)*100;
+  document.getElementById('bf-lo').textContent='Düşük ('+lo+'%)';
+  document.getElementById('bf-hi').textContent='Yüksek ('+hi+'%)';
+  setTimeout(function(){
+    document.getElementById('bf-mrk').style.left=pct+'%';
+    document.getElementById('bf-ideal').style.left=idPct+'%';
+  },200);
+
+  var bfCat,bfCls;
+  if(male){if(bf<6){bfCat='Çok Düşük ⚠️';bfCls='bb';}else if(bf<14){bfCat='Atletik 🏆';bfCls='bg';}else if(bf<21){bfCat='Fit ✅';bfCls='bg';}else if(bf<25){bfCat='Normal';bfCls='by';}else{bfCat='Fazla Yağlı ⚠️';bfCls='br';}}
+  else{if(bf<14){bfCat='Çok Düşük ⚠️';bfCls='bb';}else if(bf<21){bfCat='Atletik 🏆';bfCls='bg';}else if(bf<28){bfCat='Fit ✅';bfCls='bg';}else if(bf<32){bfCat='Normal';bfCls='by';}else{bfCat='Fazla Yağlı ⚠️';bfCls='br';}}
+  document.getElementById('bf-badge').innerHTML='<div class="badge '+bfCls+'">● '+bfCat+'</div>';
+
+  var ffmi=R.ffmi;
+  document.getElementById('ffmi-v').textContent=ffmi.toFixed(2);
+  var ffmiLo=male?14:10,ffmiHi=male?30:26;
+  var ffmiPct=clamp((ffmi-ffmiLo)/(ffmiHi-ffmiLo)*100,4,96);
+  setTimeout(function(){document.getElementById('ffmi-mrk').style.left=ffmiPct+'%';},250);
+  var ffmiCat,ffmiCls,ffmiTxt;
+  if(male){
+    if(ffmi<18){ffmiCat='Ortalama';ffmiCls='bb';ffmiTxt='Kas kütlesi ortalama. Düzenli antrenman ve doğru beslenmeyle geliştirebilirsin.';}
+    else if(ffmi<20){ffmiCat='İyi';ffmiCls='bg';ffmiTxt='Ortalamanın üzerinde kas kütlesi. İyi bir gelişim sürecindeydin.';}
+    else if(ffmi<22){ffmiCat='Atletik 💪';ffmiCls='bg';ffmiTxt='Atletik kas kütlesi seviyesi. Güçlü ve dengeli bir fiziğe sahipsin.';}
+    else if(ffmi<25){ffmiCat='Kaslı 🏆';ffmiCls='bp';ffmiTxt='İleri düzey kas gelişimi. Doğal sınırların üst kısmındasın!';}
+    else{ffmiCat='Elit 🔥';ffmiCls='br';ffmiTxt='Bu FFMI değerine doğal yollarla ulaşmak çok nadir. Tebrikler!';}
+    document.getElementById('ffmi-lo-lbl').textContent='Ort.(<18)';
+  } else {
+    if(ffmi<14){ffmiCat='Ortalamanın Altı';ffmiCls='bb';ffmiTxt='Yağsız kütlen gelişime açık. Antrenman ve beslenmeyle ilerleyebilirsin.';}
+    else if(ffmi<17){ffmiCat='Ortalama';ffmiCls='bg';ffmiTxt='Kadınlar için ortalama yağsız kütle seviyesi.';}
+    else if(ffmi<20){ffmiCat='Atletik 💪';ffmiCls='bg';ffmiTxt='Kadınlar için atletik kas kütlesi. Harika bir seviye!';}
+    else if(ffmi<22){ffmiCat='Güçlü 🏆';ffmiCls='bp';ffmiTxt='Üst düzey kas gelişimi. Güçlü fiziğin var!';}
+    else{ffmiCat='Elit 🔥';ffmiCls='br';ffmiTxt='Bu FFMI değerine doğal yollarla ulaşmak kadınlar için oldukça nadir.';}
+    document.getElementById('ffmi-lo-lbl').textContent='Ort.(<14)';
+  }
+  document.getElementById('ffmi-badge').innerHTML='<div class="badge '+ffmiCls+'" style="margin-top:6px">● '+ffmiCat+'</div>';
+  document.getElementById('ffmi-info').textContent=ffmiTxt;
+
+  var bmi=R.bmi;
+  document.getElementById('bmi-v').textContent=bmi.toFixed(1);
+  var bmiPct=clamp((bmi-14)/(42-14)*100,4,96);
+  setTimeout(function(){document.getElementById('bmi-mrk').style.left=bmiPct+'%';},300);
+  var bmiCat,bmiCls,bmiTxt;
+  if(bmi<18.5){bmiCat='Zayıf';bmiCls='bb';bmiTxt='VKİ normalin altında. Kalori artışı ve protein hedeflenmeli.';}
+  else if(bmi<25){bmiCat='Normal ✅';bmiCls='bg';bmiTxt='VKİ sağlıklı aralıkta. Devam et!';}
+  else if(bmi<30){bmiCat='Fazla Kilolu';bmiCls='by';bmiTxt='VKİ normalin üzerinde. Aktivite ve beslenme düzenine dikkat et.';}
+  else{bmiCat='Obez ⚠️';bmiCls='br';bmiTxt='VKİ obez sınırında. Bir profesyonele danışmanı öneririz.';}
+  document.getElementById('bmi-badge').innerHTML='<div class="badge '+bmiCls+'" style="margin-top:6px">● '+bmiCat+'</div>';
+  document.getElementById('bmi-info').textContent=bmiTxt;
+
+  var bt=R.bt,dom=bt.ecto>=bt.meso&&bt.ecto>=bt.endo?'Ektomorf':bt.meso>=bt.endo?'Mezomorf':'Endomorf';
+  var descs={Ektomorf:'İnce yapılı, hızlı metabolizma. Kilo almak zor ama fit kalmak kolay. Protein ve kalori alımına dikkat et.',Mezomorf:'Atletik yapı, dengeli metabolizma. Kas geliştirmek ve yağ yakmak görece kolay.',Endomorf:'Geniş yapı, yavaş metabolizma. Yağ depolamaya eğilim. Kardio ve kalori kontrolü ön planda olmalı.'};
+  var dcols={Ektomorf:'var(--info)',Mezomorf:'var(--success)',Endomorf:'var(--warn)'};
+  document.getElementById('bt-res').innerHTML=
+    '<div style="margin-bottom:12px"><div style="font-size:11px;color:var(--text2);margin-bottom:2px">Baskın vücut tipin</div>'+
+    '<div style="font-size:22px;font-weight:700;color:'+dcols[dom]+';margin-bottom:4px">'+dom+'</div>'+
+    '<div style="font-size:12px;color:var(--text2)">'+descs[dom]+'</div></div>'+
+    mkBTB('Ektomorf',bt.ecto,'var(--info)')+mkBTB('Mezomorf',bt.meso,'var(--success)')+mkBTB('Endomorf',bt.endo,'var(--warn)');
+  setTimeout(function(){document.querySelectorAll('.btif').forEach(function(b){b.style.width=b.dataset.pct+'%';});},200);
+
+  /* YENİ: Vücut Profili Algoritması Render */
+  var bp = determineBodyProfile(bf, ffmi, bmi);
+  document.getElementById('bp-res').innerHTML = 
+    '<div style="font-size:11px;color:var(--text2);margin-bottom:2px">Algoritmik Vücut Profilin</div>'+
+    '<div style="font-size:20px;font-weight:700;color:'+bp.c+';margin-bottom:4px">'+bp.n+'</div>'+
+    '<div style="font-size:12px;color:var(--text2)">'+bp.d+'</div>';
+}
+function mkBTB(name,pct,col){
+  return'<div class="bti"><div class="btih"><div class="btin">'+name+'</div><div class="btip" style="color:'+col+'">'+pct.toFixed(1)+'%</div></div>'+
+    '<div class="btib"><div class="btif" data-pct="'+pct+'" style="background:'+col+';width:0%"></div></div></div>';
+}
+
+/* ── TAB: BESLENME ────────────────────────────────────── */
+function renderBeslenme(){
+  var gl=selGL||R.recGoal,st=selST||'hybrid';
+  var gN={yag:'Yağ Kaybetme',idame:'İdare-i Maslahat',kutle:'Kütle Kazanma'};
+  var gC={yag:'br',idame:'by',kutle:'bb'};
+  var stN={bb:'Vücut Geliştirme',cardio:'Kardiyo',hybrid:'Hibrit'};
+  document.getElementById('cal-v').textContent=R.goalCal;
+  document.getElementById('goal-badge').innerHTML=
+    '<div class="badge '+(gC[gl]||'bb')+'">● '+(gN[gl]||gl)+'</div>'+
+    '<div class="badge bb" style="margin-left:5px">🏃 '+(stN[st]||st)+'</div>';
+  document.getElementById('tdee-info').textContent=R.tdee;
+  document.getElementById('bmr-info').textContent=R.bmr;
+  document.getElementById('act-lbl').textContent=R.actLbl;
+  var m=R.macros;
+  document.getElementById('mp-v').textContent=m.pg;document.getElementById('mc-v').textContent=m.cg;document.getElementById('mf-v').textContent=m.fg;
+  document.getElementById('mp-c').textContent=m.pc+' kcal';document.getElementById('mc-c').textContent=m.cc+' kcal';document.getElementById('mf-c').textContent=m.fc+' kcal';
+  document.getElementById('water-v').innerHTML=R.water.toFixed(1)+'<span class="water-u"> lt</span>';
+  document.getElementById('water-cups').textContent='≈ '+Math.round(R.water/0.25)+' bardak su';
+  document.getElementById('prot-v').textContent=R.minProt;
+  document.getElementById('prot-info').textContent='Yağsız kütlene ('+R.lm.toFixed(2)+' kg) göre minimum '+R.minProt+'g – maksimum '+R.maxProt+'g/gün protein hedeflemelisin.';
+  // Antrenman tavsiyesi
+  var advice = getSmartWorkoutAdvice();
+  var advEl = document.getElementById('workout-advice');
+  if (advEl) {
+    if (advice) {
+      advEl.innerHTML = '<span>💡</span><span>' + advice + '</span>';
+      advEl.style.display = 'flex';
+    } else {
+      advEl.style.display = 'none';
+    }
+  }
+}
+
+/* ── TAB: ÖLÇÜLERİM ──────────────────────────────────── */
+function renderOlculerim(){
+  var male=U.gender==='male';
+  var ratioHTML='';
+  if(male){
+    var swr=R.swr,lo=1.3,hi=2.0,ideal=1.618;
+    var pct=clamp((swr-lo)/(hi-lo)*100,4,96),idPct=(ideal-lo)/(hi-lo)*100;
+    var cat=swr>=1.5&&swr<=1.75?{t:'İdeal ✅',c:'bg'}:swr<1.5?{t:'Geliştirilmeli',c:'by'}:{t:'Çok Geniş',c:'bb'};
+    ratioHTML='<div class="ratio-row"><div class="ratio-head"><div class="ratio-name">Omuz / Bel Oranı</div><div class="ratio-val">'+swr+'</div></div>'+
+      '<div class="ratio-trk"><div class="ratio-fill" data-pct="'+pct+'" style="width:0%"></div>'+
+      '<div class="ratio-ideal" style="left:'+idPct+'%"><div class="bar-il">İdeal (1.6)</div></div></div>'+
+      '<div class="ratio-lbl"><span>1.3</span><span>1.6 İdeal</span><span>2.0+</span></div>'+
+      '<div class="badge '+cat.c+'" style="margin-top:6px">● '+cat.t+' — Hedef ≈ 1.6</div></div>';
+  } else {
+    var whr=R.whr,lo=0.6,hi=1.0,ideal=0.7;
+    var pct=clamp((whr-lo)/(hi-lo)*100,4,96),idPct=(ideal-lo)/(hi-lo)*100;
+    var cat=whr<=0.75?{t:'İdeal ✅',c:'bg'}:whr<=0.85?{t:'Normal',c:'by'}:{t:'Yüksek ⚠️',c:'br'};
+    ratioHTML='<div class="ratio-row"><div class="ratio-head"><div class="ratio-name">Bel / Kalça Oranı</div><div class="ratio-val">'+whr+'</div></div>'+
+      '<div class="ratio-trk"><div class="ratio-fill" data-pct="'+pct+'" style="width:0%"></div>'+
+      '<div class="ratio-ideal" style="left:'+idPct+'%"><div class="bar-il">İdeal (0.7)</div></div></div>'+
+      '<div class="ratio-lbl"><span>0.6</span><span>0.7 İdeal</span><span>1.0+</span></div>'+
+      '<div class="badge '+cat.c+'" style="margin-top:6px">● '+cat.t+' — İdeal ≤ 0.75</div></div>';
+  }
+  document.getElementById('ratio-content').innerHTML=ratioHTML;
+  setTimeout(function(){document.querySelectorAll('.ratio-fill').forEach(function(f){f.style.width=f.dataset.pct+'%';});},200);
+
+  var iw=R.iw;
+  document.getElementById('iw-lo-v').textContent=iw.lo;
+  document.getElementById('iw-hi-v').textContent=iw.hi;
+  document.getElementById('iw-lo-lbl').textContent='Min: '+iw.lo+' kg';
+  document.getElementById('iw-hi-lbl').textContent='Maks: '+iw.hi+' kg';
+  var diff=Math.round((U.weight-iw.hi)*10)/10;
+  var diffLo=Math.round((U.weight-iw.lo)*10)/10;
+  var diffTxt;
+  if(U.weight>=iw.lo&&U.weight<=iw.hi){diffTxt='✅ Kilonuz ideal aralık içinde!';}
+  else if(U.weight>iw.hi){diffTxt='⬇️ İdeal üst sınırın '+diff+' kg üzeridesiniz';}
+  else{diffTxt='⬆️ İdeal alt sınırın '+Math.abs(diffLo)+' kg altındasınız';}
+  document.getElementById('iw-diff').textContent=diffTxt;
+  var range=iw.hi-iw.lo;
+  var iwPct=clamp((U.weight-iw.lo)/range*100,4,96);
+  setTimeout(function(){document.getElementById('iw-mrk').style.left=iwPct+'%';},250);
+
+  var rows=[['Boy',U.height+' cm'],['Kilo',U.weight+' kg'],['Boyun',U.neck+' cm'],['Bel',U.waist+' cm'],
+    male?['Omuz',(U.shoulder||0)+' cm']:['Kalça',(U.hip||0)+' cm'],['Yaş',U.age+' yaş'],
+    ['VKİ',R.bmi],['Yağ Oranı',R.bf.toFixed(2)+'%'],['Yağsız Kütle',R.lm.toFixed(2)+' kg'],['FFMI',R.ffmi.toFixed(2)]];
+  document.getElementById('mlist').innerHTML=rows.map(function(r){return'<div class="mlist-row"><div class="mlist-lbl">'+r[0]+'</div><div class="mlist-val">'+r[1]+'</div></div>';}).join('');
+}
+
+/* ── YENİ MODAL & HAFTALIK KAYIT İŞLEMLERİ ─────────────── */
+function openMeasurementModal() {
+  document.getElementById('m-wt').value = U.weight || '';
+  document.getElementById('m-nk').value = U.neck || '';
+  document.getElementById('m-wst').value = U.waist || '';
+  document.getElementById('m-sh').value = U.shoulder || '';
+  document.getElementById('m-ch').value = U.chest || '';
+  document.getElementById('m-arm').value = U.arm || '';
+  document.getElementById('m-farm').value = U.forearm || '';
+  document.getElementById('m-hip').value = U.hip || '';
+  document.getElementById('m-leg').value = U.leg || '';
+  document.getElementById('m-calf').value = U.calf || '';
+  document.getElementById('measureModal').classList.add('active');
+}
+function closeMeasurementModal() {
+  document.getElementById('measureModal').classList.remove('active');
+}
+function saveWeeklyMeasurements() {
+  U.weight  = parseFloat(document.getElementById('m-wt').value)   || U.weight;
+  U.neck    = parseFloat(document.getElementById('m-nk').value)   || U.neck;
+  U.waist   = parseFloat(document.getElementById('m-wst').value)  || U.waist;
+  U.shoulder = parseFloat(document.getElementById('m-sh').value)  || U.shoulder;
+  U.chest   = parseFloat(document.getElementById('m-ch').value)    || U.chest;
+  U.arm     = parseFloat(document.getElementById('m-arm').value)   || U.arm;
+  U.forearm = parseFloat(document.getElementById('m-farm').value)  || U.forearm;
+  U.hip     = parseFloat(document.getElementById('m-hip').value)   || U.hip;
+  U.leg     = parseFloat(document.getElementById('m-leg').value)   || U.leg;
+  U.calf    = parseFloat(document.getElementById('m-calf').value)  || U.calf;
+
+  // Ana R hesaplamalarını yeni U değerleriyle tekrar yap
+  calcAll();
+  saveData();
+
+  // History nesnesini oluştur
+  var now = new Date();
+  var entry = {
+    date: now.toLocaleDateString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric'}),
+    timestamp: now.getTime(),
+    weight: U.weight, neck: U.neck, waist: U.waist, shoulder: U.shoulder, chest: U.chest,
+    arm: U.arm, forearm: U.forearm, hip: U.hip, leg: U.leg, calf: U.calf,
+    bf: R.bf.toFixed(2), lm: R.lm.toFixed(2), ffmi: R.ffmi.toFixed(2), bmi: R.bmi,
+    ratio: (U.gender === 'male' ? R.swr : R.whr)
+  };
+
+  var entries = getEntries();
+  entries.push(entry);
+  localStorage.setItem('rf_entries', JSON.stringify(entries));
+  
+  closeMeasurementModal();
+  renderAll();
+  alert('✅ Haftalık ölçümler başarıyla kaydedildi! Verilerin güncellendi.');
+}
+
+/* ── TAB: İLERLEME (3 Haftalık Tablo ve Liste) ────────── */
+function renderIlerleme(){
+  var entries=getEntries();
+  var elList=document.getElementById('h-list');
+  var tblCont=document.getElementById('progress-table-container');
+
+  if(!entries.length){
+    elList.innerHTML='<div class="h-empty">📊 Henüz kayıt yok.<br>İlk ölçünü kaydet ve takibe başla!</div>';
+    tblCont.style.display='none';
+    return;
+  }
+  
+  // Eski tip liste görünümü
+  elList.innerHTML=entries.slice().reverse().map(function(e,i){
+    return'<div class="hi"><div><div class="hi-date">📅 '+e.date+'</div><div class="hi-d">'+e.weight+' kg &nbsp;|&nbsp; '+e.bf+'% yağ</div></div>'+
+    '<div class="hi-stats"><div class="hi-stat"><div class="hi-sv" style="color:var(--accent)">'+e.bf+'%</div><div class="hi-sl">Yağ</div></div>'+
+    '<div class="hi-stat"><div class="hi-sv" style="color:var(--success)">'+e.lm+'</div><div class="hi-sl">Yağsız</div></div>'+
+    '<div class="hi-stat"><div class="hi-sv" style="color:var(--info)">'+e.ffmi+'</div><div class="hi-sl">FFMI</div></div>'+
+    '<button class="del-btn" onclick="deleteEntry('+(entries.length-1-i)+')">✕</button></div></div>';
+  }).join('');
+
+  // 3 haftalık tablo
+  tblCont.style.display = 'block';
+  var last3 = entries.slice(-3);
+  var w1 = last3.length >= 3 ? last3[last3.length-3] : null;
+  var w2 = last3.length >= 2 ? last3[last3.length-2] : null;
+  var w3 = last3.length >= 1 ? last3[last3.length-1] : null;
+  var male = U.gender==='male';
+
+  function mkRow(lbl, key, lowerBetter) {
+    var v1 = (w1 && w1[key] != null) ? parseFloat(w1[key]) : null;
+    var v2 = (w2 && w2[key] != null) ? parseFloat(w2[key]) : null;
+    var v3 = (w3 && w3[key] != null) ? parseFloat(w3[key]) : null;
+    var d1 = v1 != null ? v1 : '-';
+    var d2 = v2 != null ? v2 : '-';
+    var d3 = v3 != null ? v3 : '-';
+    var diffHtml = '';
+    if (v2 != null && v3 != null) {
+      var diff = Math.round((v3 - v2) * 10) / 10;
+      if (diff > 0)      diffHtml = '<span class="diff ' + (lowerBetter ? 'diff-down' : 'diff-up')   + '">↑' + diff + '</span>';
+      else if (diff < 0) diffHtml = '<span class="diff ' + (lowerBetter ? 'diff-up'   : 'diff-down') + '">↓' + Math.abs(diff) + '</span>';
+      else               diffHtml = '<span class="diff diff-neutral">—</span>';
+    }
+    return '<tr><td>' + lbl + '</td><td>' + d1 + '</td><td>' + d2 + '</td><td>' + d3 + diffHtml + '</td></tr>';
+  }
+
+  var rName = male ? 'Omuz/Bel' : 'Kalça/Bel';
+  var isYag = selGL === 'yag';
+  
+  tblCont.innerHTML =
+    '<div class="ptable-wrapper">' +
+    '<table class="ptable"><thead><tr>' +
+    '<th>Ölçü</th><th>2 Hafta Önce</th><th>1 Hafta Önce</th><th>Bu Hafta</th>' +
+    '</tr></thead><tbody>' +
+    mkRow('Ağırlık (kg)',   'weight',   isYag) +
+    mkRow('Yağ Oranı (%)',  'bf',       true)  +
+    mkRow('Yağsız Kütle',   'lm',       false) +
+    mkRow('FFMI',           'ffmi',     false) +
+    mkRow('VKİ',            'bmi',      isYag) +
+    mkRow(rName + ' Oranı', 'ratio',    false) +
+    mkRow('Boyun (cm)',      'neck',    false) +
+    mkRow('Omuz (cm)',       'shoulder',false) +
+    mkRow('Göğüs (cm)',      'chest',   false) +
+    mkRow('Kol (cm)',        'arm',     false) +
+    mkRow('Ön Kol (cm)',     'forearm', false) +
+    mkRow('Bel (cm)',        'waist',   true)  +
+    mkRow('Kalça (cm)',      'hip',     isYag) +
+    mkRow('Bacak (cm)',      'leg',     false) +
+    mkRow('Kalf (cm)',       'calf',    false) +
+    '</tbody></table></div>';
+}
+
+function getEntries(){try{return JSON.parse(localStorage.getItem('rf_entries')||'[]');}catch(e){return[];}}
+function deleteEntry(i){var entries=getEntries();entries.splice(i,1);localStorage.setItem('rf_entries',JSON.stringify(entries));renderIlerleme();}
+function resetAll(){if(!confirm('Tüm veriler silinecek. Emin misin?'))return;localStorage.removeItem('rf_data');localStorage.removeItem('rf_entries');U={};R={};A={};BT={};selST=null;selGL=null;document.getElementById('splash-cont').style.display='none';goHome();}
+
+/* ── UTILS ────────────────────────────────────────────── */
+function clamp(v,lo,hi){return Math.min(hi,Math.max(lo,v));}
+</script>
+</body>
+</html>
