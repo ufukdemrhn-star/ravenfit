@@ -259,24 +259,20 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 
 @media(max-width:380px){.frow,.gender-grid{grid-template-columns:1fr}.splash-title{font-size:52px}.tb{font-size:9px}.r-stats{gap:10px}}
 </style>
+
+<link rel="icon" href="favicon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
 </head>
 <body>
 
 <header class="hdr">
   <div class="logo" onclick="goHome()">
-    <svg width="30" height="30" viewBox="0 0 80 80" fill="none">
-      <path d="M18 22 L36 10 L58 14 L74 28 L70 48 L78 64 L60 56 L52 72 L36 76 L20 66 L10 50 L14 34 Z" fill="var(--accent)"/>
-      <path d="M74 28 L92 38 L82 52 L70 44 Z" fill="var(--accent)"/>
-      <path d="M24 28 L40 18 L56 22 L66 36 L62 50 L50 60 L36 64 L24 56 L18 44 Z" fill="rgba(0,0,0,0.14)"/>
-      <circle cx="58" cy="27" r="8" fill="rgba(0,0,0,0.3)"/>
-      <circle cx="58" cy="27" r="5.5" fill="#FAFAFA"/>
-      <circle cx="59" cy="27" r="3" fill="#0A0A0B"/>
-      <circle cx="61" cy="25" r="1" fill="rgba(255,255,255,0.8)"/>
-      <path d="M10 50 L2 43 L7 60 Z" fill="var(--accent)" opacity=".65"/>
-      <path d="M14 34 L4 29 L8 45 Z" fill="var(--accent)" opacity=".4"/>
-    </svg>
-    <span class="logo-txt">RAVEN<span>FIT</span></span>
-  </div>
+  <img src="logo.png" width="30">
+  <span class="logo-txt">RAVEN<span>FIT</span></span>
+</div>
 </header>
 
 <main class="main">
@@ -284,19 +280,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 <div class="screen active" id="splash">
   <div class="s-bg"></div>
   <div class="splash-icon">
-    <svg viewBox="0 0 80 80" fill="none">
-      <path d="M18 22 L36 10 L58 14 L74 28 L70 48 L78 64 L60 56 L52 72 L36 76 L20 66 L10 50 L14 34 Z" fill="var(--accent)"/>
-      <path d="M74 28 L92 38 L82 52 L70 44 Z" fill="var(--accent)"/>
-      <path d="M24 28 L40 18 L56 22 L66 36 L62 50 L50 60 L36 64 L24 56 L18 44 Z" fill="rgba(0,0,0,0.14)"/>
-      <circle cx="58" cy="27" r="8" fill="rgba(0,0,0,0.3)"/>
-      <circle cx="58" cy="27" r="5.5" fill="#FAFAFA"/>
-      <circle cx="59" cy="27" r="3" fill="#0A0A0B"/>
-      <circle cx="61" cy="25" r="1" fill="rgba(255,255,255,0.8)"/>
-      <path d="M10 50 L2 43 L7 60 Z" fill="var(--accent)" opacity=".65"/>
-    </svg>
-  </div>
+  <img src="logo.png" width="90">
+</div
   <h1 class="splash-title">RAVEN<span>FIT</span></h1>
-  <div class="splash-tag">HESAPLAR BİZDEN</div>
+  <div class="splash-tag">Versiyon 0.3.2(beta)</div>
   <div class="splash-sub">Sen sadece antrenmanına odaklan</div>
   <div class="pills">
     <div class="pill"><div class="pill-dot"></div>Navy Yağ Formülü</div>
