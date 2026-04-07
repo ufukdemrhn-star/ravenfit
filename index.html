@@ -67,15 +67,23 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 #splash{align-items:center;justify-content:center;text-align:center;padding:30px 22px;position:relative;overflow:hidden}
 #splash .splash-title,#splash .splash-sub,#splash .pills,#splash .btn,#splash-cont{position:relative;z-index:3}
 .s-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 100%,var(--ag),transparent 70%);pointer-events:none}
-.splash-icon{width:90px;height:90px;margin:0 auto 20px;animation:float 3.5s ease-in-out infinite;filter:drop-shadow(0 6px 22px var(--ag))}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.splash-title{font-family:'Bebas Neue',cursive;font-size:clamp(52px,13vw,88px);letter-spacing:7px;line-height:1;margin-bottom:3px}
-.splash-title span{color:var(--accent)}
-.splash-tag{font-size:10px;color:var(--text2);letter-spacing:3px;text-transform:uppercase;margin-bottom:3px}
-.splash-sub{font-size:13px;color:var(--text2);margin-bottom:34px;font-style:italic}
+/* Arka plan silüeti */
+.s-silhouette{position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);width:min(420px,90vw);opacity:.045;pointer-events:none;z-index:1;filter:blur(1px)}
+.splash-icon{width:120px;height:120px;margin:0 auto 18px;position:relative;z-index:3;filter:drop-shadow(0 8px 28px var(--ag))}
+/* Splash animasyonları */
+.splash-icon{animation:splashLogoIn .7s cubic-bezier(.22,1,.36,1) both, float 3.5s ease-in-out 0.7s infinite}
+@keyframes splashLogoIn{from{opacity:0;transform:translateY(-36px) scale(.85)}to{opacity:1;transform:translateY(0) scale(1)}}
+.splash-title{font-family:'Bebas Neue',cursive;font-size:clamp(52px,13vw,88px);letter-spacing:7px;line-height:1;margin-bottom:3px;animation:splashFadeUp .6s .2s cubic-bezier(.22,1,.36,1) both}
+.splash-tag{font-size:10px;color:var(--text2);letter-spacing:3px;text-transform:uppercase;margin-bottom:3px;animation:splashFadeUp .5s .35s both}
+.splash-sub{font-size:13px;color:var(--text2);margin-bottom:34px;font-style:italic;animation:splashFadeUp .5s .45s both}
+@keyframes splashFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:34px;max-width:420px}
-.pill{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:5px 11px;font-size:11px;color:var(--text2);display:flex;align-items:center;gap:5px}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:5px 11px;font-size:11px;color:var(--text2);display:flex;align-items:center;gap:5px;opacity:0;animation:splashFadeUp .4s both}
+.pill:nth-child(1){animation-delay:.5s}.pill:nth-child(2){animation-delay:.58s}.pill:nth-child(3){animation-delay:.66s}.pill:nth-child(4){animation-delay:.74s}.pill:nth-child(5){animation-delay:.82s}
 .pill-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0}
+#splash .btn{animation:splashFadeUp .5s .9s both}
+#splash-cont{animation:splashFadeUp .4s 1.05s both}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 
 /* ── BUTTONS ─────────────────────────────────────────────────  */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:13px 24px;border-radius:11px;border:none;cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;transition:all .25s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;z-index:2}
@@ -235,12 +243,21 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .ratio-ideal{position:absolute;top:-3px;width:2px;height:12px;background:var(--success);border-radius:1px}
 .ratio-lbl{display:flex;justify-content:space-between;margin-top:2px;font-size:9px;color:var(--text3)}
 
-/* ── PROGRESS TABLE (NEW) ────────────────────────────────────  */
+/* ── ACCORDION ───────────────────────────────────────────────  */
+.acc-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:2px 0 10px;user-select:none;-webkit-tap-highlight-color:transparent}
+.acc-header .rct{margin-bottom:0;padding-bottom:0}
+.acc-arrow{width:18px;height:18px;flex-shrink:0;color:var(--text2);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.acc-arrow.open{transform:rotate(180deg)}
+.acc-body{overflow:hidden;max-height:0;transition:max-height .38s cubic-bezier(.4,0,.2,1);will-change:max-height}
+.acc-body.open{max-height:2000px}
+/* ── SAYFA SAYISI ANİMASYONU ─────────────────────────────────  */
+.anim-num{display:inline-block;transition:opacity .15s}
 .ptable-wrapper { overflow-x: auto; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border); }
-.ptable { width: 100%; min-width: 400px; border-collapse: collapse; font-size: 11px; background: var(--card2); }
-.ptable th, .ptable td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
+.ptable { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 11px; background: var(--card2); }
+.ptable th, .ptable td { padding: 9px 7px; text-align: center; border-bottom: 1px solid var(--border); }
 .ptable th { background: var(--card); color: var(--text2); font-weight: 600; font-size: 10px; text-transform: uppercase; }
-.ptable td:first-child { text-align: left; font-weight: 600; color: var(--text); background: var(--card); position: sticky; left: 0; }
+.ptable th:first-child,.ptable td:first-child { text-align: left; font-weight: 600; color: var(--text); background: var(--card); position: sticky; left: 0; }
+.ptable th:nth-child(2),.ptable td:nth-child(2){background:rgba(var(--accent-rgb,230,57,70),.05)}
 .ptable tr:last-child td { border-bottom: none; }
 .diff { font-size: 9px; margin-left: 4px; font-weight: 700; display: inline-block; }
 .diff-up { color: var(--success); }
@@ -278,11 +295,18 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .chart-svg{width:100%;height:130px;display:block;overflow:visible}
 .chart-empty{text-align:center;color:var(--text3);font-size:12px;padding:20px 0}
 
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:62px;background:var(--hbg);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-top:1px solid var(--border);display:none;align-items:center;justify-content:space-around;z-index:300;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:62px;background:var(--hbg);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-top:1px solid var(--border);display:none;align-items:stretch;justify-content:space-around;z-index:300;padding-bottom:env(safe-area-inset-bottom,0px)}
 .bottom-nav.visible{display:flex}
-.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:var(--text2);font-family:'Outfit',sans-serif;font-size:9px;font-weight:500;cursor:pointer;padding:8px 4px;transition:color .2s;-webkit-tap-highlight-color:transparent}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;color:var(--text3);font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;letter-spacing:.3px;cursor:pointer;padding:8px 4px 6px;transition:color .22s;-webkit-tap-highlight-color:transparent;position:relative;text-transform:uppercase}
+.bnav-btn svg{width:22px;height:22px;transition:transform .22s}
 .bnav-btn.active{color:var(--accent)}
-.bnav-ico{font-size:20px;line-height:1}
+.bnav-btn.active svg{transform:translateY(-1px)}
+/* Aktif sekme üst çizgisi */
+.bnav-btn::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%) scaleX(0);width:32px;height:2.5px;background:var(--accent);border-radius:0 0 3px 3px;transition:transform .25s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px var(--ag)}
+.bnav-btn.active::before{transform:translateX(-50%) scaleX(1)}
+/* Aktif sekme hafif arka plan parlaması */
+.bnav-btn.active::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,var(--ag) 0%,transparent 100%);pointer-events:none;border-radius:0}
+.bnav-ico{display:none}/* eski emoji ikonları gizle */
 .main-section{display:none}
 .main-section.active{display:block;animation:fi .2s ease}
 .wip-card{background:var(--card2);border:1px dashed var(--border);border-radius:14px;padding:32px 24px;text-align:center;margin-bottom:8px}
@@ -411,10 +435,11 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 
 <div class="screen active" id="splash">
   <div class="s-bg"></div>
+  <img src="logo.png" class="s-silhouette" aria-hidden="true">
   <div class="splash-icon">
-  <img src="logo.png" width="90">
+  <img src="logo.png" width="120">
 </div>
-  <h1 class="splash-title">RAVEN<span>FIT</span></h1>
+  <h1 class="splash-title">RAVEN<span style="color:var(--accent)">FIT</span></h1>
   <div class="splash-tag">Versiyon 0.5.4(beta)</div>
   <div class="splash-sub">Sen sadece antrenmanına odaklan</div>
   <div class="pills">
@@ -625,11 +650,13 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
         <div class="fg"><label class="fl">Boyun (cm)</label><div class="iw"><input class="fi" id="s5-nk" type="number" inputmode="decimal" step="0.5"><span class="iu">cm</span></div></div>
         <div class="fg"><label class="fl">Bel (cm)</label><div class="iw"><input class="fi" id="s5-wst" type="number" inputmode="decimal" step="0.5"><span class="iu">cm</span></div></div>
       </div>
-      <div class="fg" id="s5-grp-spe" style="display:none">
-        <label class="fl">Omuz Çevresi (cm)</label><div class="iw"><input class="fi" id="s5-spe" type="number" inputmode="decimal" step="0.5"><span class="iu">cm</span></div>
-      </div>
-      <div class="fg" id="s5-grp-hip" style="display:none">
-        <label class="fl">Kalça Çevresi (cm)</label><div class="iw"><input class="fi" id="s5-hip" type="number" inputmode="decimal" step="0.5"><span class="iu">cm</span></div>
+      <div class="frow">
+        <div class="fg" id="s5-grp-spe">
+          <label class="fl" id="s5-lbl-spe">Omuz (cm)</label><div class="iw"><input class="fi" id="s5-spe" type="number" inputmode="decimal" step="0.5"><span class="iu">cm</span></div>
+        </div>
+        <div class="fg" id="s5-grp-hip">
+          <label class="fl" id="s5-lbl-hip">Kalça (cm)</label><div class="iw"><input class="fi" id="s5-hip" type="number" inputmode="decimal" step="0.5"><span class="iu">cm</span></div>
+        </div>
       </div>
       <div class="frow">
         <div class="fg"><label class="fl">Göğüs (cm)</label><input class="fi" id="s5-ch" type="number" inputmode="decimal" step="0.5"></div>
@@ -961,10 +988,33 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 </div>
 
 <nav class="bottom-nav" id="bottom-nav">
-  <button class="bnav-btn" id="bnav-vucudum" onclick="switchMain('vucudum')"><span class="bnav-ico">🧬</span><span>Vücudum</span></button>
-  <button class="bnav-btn" id="bnav-beslenme" onclick="switchMain('beslenme')"><span class="bnav-ico">🍽️</span><span>Beslenme</span></button>
-  <button class="bnav-btn" id="bnav-antrenman" onclick="switchMain('antrenman')"><span class="bnav-ico">🏋️</span><span>Antrenman</span></button>
-  <button class="bnav-btn" id="bnav-profil" onclick="switchMain('profil')"><span class="bnav-ico">👤</span><span>Profil</span></button>
+  <button class="bnav-btn active" id="bnav-vucudum" onclick="switchMain('vucudum')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2C9.5 2 7.5 4 7.5 6.5c0 2 1.2 3.7 3 4.4V22h3V10.9c1.8-.7 3-2.4 3-4.4C16.5 4 14.5 2 12 2z"/>
+      <path d="M9 14H7a2 2 0 0 0-2 2v2h14v-2a2 2 0 0 0-2-2h-2"/>
+    </svg>
+    Vücudum
+  </button>
+  <button class="bnav-btn" id="bnav-beslenme" onclick="switchMain('beslenme')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 3h18v4H3z"/><path d="M5 7v11a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"/>
+      <path d="M10 12h4"/><path d="M10 16h4"/>
+    </svg>
+    Beslenme
+  </button>
+  <button class="bnav-btn" id="bnav-antrenman" onclick="switchMain('antrenman')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4v16M18 4v16M6 12h12M3 7h3M18 7h3M3 17h3M18 17h3"/>
+    </svg>
+    Antrenman
+  </button>
+  <button class="bnav-btn" id="bnav-profil" onclick="switchMain('profil')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+    </svg>
+    Profil
+  </button>
 </nav>
 
 </main>
@@ -1131,7 +1181,14 @@ function updGenderUI(){
   document.getElementById('grp-spe').style.display=male?'flex':'none';
   document.getElementById('grp-hip').style.display=male?'none':'flex';
 }
-function updS5GenderUI(){if(!U.gender)return;var male=U.gender==='male';var spe=document.getElementById('s5-grp-spe');var hip=document.getElementById('s5-grp-hip');if(spe)spe.style.display=male?'flex':'none';if(hip)hip.style.display=male?'none':'flex';}
+function updS5GenderUI(){
+  /* Her iki alan da her zaman görünür — cinsiyete göre ek bilgi etiketi değişir */
+  var male=U.gender==='male';
+  var lSpe=document.getElementById('s5-lbl-spe');
+  var lHip=document.getElementById('s5-lbl-hip');
+  if(lSpe)lSpe.textContent=male?'Omuz (cm)':'Omuz (cm) — opsiyonel';
+  if(lHip)lHip.textContent=male?'Kalça (cm) — opsiyonel':'Kalça (cm)';
+}
 
 function selOpt(el,grp){
   markSel(grp,el);
@@ -1460,11 +1517,13 @@ function switchTab(id,btn){
 function renderAll(){
   if(!R.bf)return;
   document.getElementById('r-name').textContent=U.name?'Merhaba, '+U.name+'!':'Analiz Tamamlandı!';
-  document.getElementById('r-bf').textContent=R.bf.toFixed(2)+'%';
   document.getElementById('r-lm').textContent=R.lm.toFixed(2)+' kg';
+  /* Sayısal değerler animasyonla gelecek */
+  document.getElementById('r-bf').textContent=R.bf.toFixed(2)+'%';
   document.getElementById('r-ffmi').textContent=R.ffmi.toFixed(2);
   document.getElementById('r-cal').textContent=R.goalCal+' kcal';
   renderVucudum();renderBeslenme();renderOlculerim();renderIlerleme();renderProfilMlist();
+  setTimeout(animateResults,120);
 }
 
 /* ── TAB: VÜCUDUM ─────────────────────────────────────── */
@@ -1780,29 +1839,29 @@ function renderIlerleme(){
     '<button class="del-btn" onclick="deleteEntry('+realIdx+')">✕</button></div></div>';
   }).join('');
 
-  // 3 haftalık tablo
+  // 4 haftalık tablo — en yeni solda
   tblCont.style.display = 'block';
-  var last3 = entries.slice(-3);
-  var w1 = last3.length >= 3 ? last3[last3.length-3] : null;
-  var w2 = last3.length >= 2 ? last3[last3.length-2] : null;
-  var w3 = last3.length >= 1 ? last3[last3.length-1] : null;
+  var last4 = entries.slice(-4);
+  // w0=son, w1=1 hafta önce, w2=2 hafta önce, w3=3 hafta önce
+  var w0 = last4.length >= 1 ? last4[last4.length-1] : null;
+  var w1 = last4.length >= 2 ? last4[last4.length-2] : null;
+  var w2 = last4.length >= 3 ? last4[last4.length-3] : null;
+  var w3 = last4.length >= 4 ? last4[last4.length-4] : null;
   var male = U.gender==='male';
 
   function mkRow(lbl, key, lowerBetter) {
-    var v1 = (w1 && w1[key] != null) ? parseFloat(w1[key]) : null;
-    var v2 = (w2 && w2[key] != null) ? parseFloat(w2[key]) : null;
-    var v3 = (w3 && w3[key] != null) ? parseFloat(w3[key]) : null;
-    var d1 = v1 != null ? v1 : '-';
-    var d2 = v2 != null ? v2 : '-';
-    var d3 = v3 != null ? v3 : '-';
-    var diffHtml = '';
-    if (v2 != null && v3 != null) {
-      var diff = Math.round((v3 - v2) * 10) / 10;
-      if (diff > 0)      diffHtml = '<span class="diff ' + (lowerBetter ? 'diff-down' : 'diff-up')   + '">↑' + diff + '</span>';
-      else if (diff < 0) diffHtml = '<span class="diff ' + (lowerBetter ? 'diff-up'   : 'diff-down') + '">↓' + Math.abs(diff) + '</span>';
-      else               diffHtml = '<span class="diff diff-neutral">—</span>';
+    function fmt(e){ return e&&e[key]!=null?parseFloat(e[key]):null; }
+    var v0=fmt(w0),v1=fmt(w1),v2=fmt(w2),v3=fmt(w3);
+    // diff = son ölçüm vs 1 hafta önce
+    var diffHtml='';
+    if(v0!=null&&v1!=null){
+      var diff=Math.round((v0-v1)*10)/10;
+      if(diff>0)     diffHtml='<span class="diff '+(lowerBetter?'diff-down':'diff-up')+'">↑'+diff+'</span>';
+      else if(diff<0)diffHtml='<span class="diff '+(lowerBetter?'diff-up':'diff-down')+'">↓'+Math.abs(diff)+'</span>';
+      else           diffHtml='<span class="diff diff-neutral">—</span>';
     }
-    return '<tr><td>' + lbl + '</td><td>' + d1 + '</td><td>' + d2 + '</td><td>' + d3 + diffHtml + '</td></tr>';
+    function d(v){return v!=null?v:'-';}
+    return'<tr><td>'+lbl+'</td><td style="font-weight:700;color:var(--text)">'+d(v0)+(diffHtml)+'</td><td>'+d(v1)+'</td><td>'+d(v2)+'</td><td>'+d(v3)+'</td></tr>';
   }
 
   var rName = male ? 'Omuz/Bel' : 'Kalça/Bel';
@@ -1811,7 +1870,7 @@ function renderIlerleme(){
   tblCont.innerHTML =
     '<div class="ptable-wrapper">' +
     '<table class="ptable"><thead><tr>' +
-    '<th>Ölçü</th><th>2 Hafta Önce</th><th>1 Hafta Önce</th><th>Bu Hafta</th>' +
+    '<th>Ölçü</th><th>Son Ölçüm</th><th>1 Hafta Önce</th><th>2 Hafta Önce</th><th>3 Hafta Önce</th>' +
     '</tr></thead><tbody>' +
     mkRow('Ağırlık (kg)',   'weight',   isYag) +
     mkRow('Yağ Oranı (%)',  'bf',       true)  +
@@ -2003,7 +2062,7 @@ function renderDietAdvice(){
   var bp=determineBodyProfile(R.bf,R.ffmi,R.bmi);
   var tips=[];
   var gNames={yag:'Yağ Kaybetme',idame:'İdare-i Maslahat',kutle:'Kütle Kazanma'};
-  tips.push('<strong>🎯 Hedef:</strong> '+( gNames[gl]||gl)+' — Günlük '+R.goalCal+' kcal hedefin var. TDEE: '+R.tdee+' kcal.');
+  tips.push('<strong>🎯 Hedef:</strong> '+(gNames[gl]||gl)+' — Günlük '+R.goalCal+' kcal hedefin var. TDEE: '+R.tdee+' kcal.');
   tips.push('<strong>🥩 Protein:</strong> Günlük en az '+R.minProt+'g protein hedefle (yağsız kütle: '+R.lm.toFixed(1)+' kg). Öğünlere eşit dağıt.');
   if(gl==='yag')tips.push('<strong>🔥 Karbonhidrat:</strong> Antrenman günlerinde karbonhidratı artır, dinlenme günlerinde azalt. İşlenmiş şekerlerden kaçın.');
   else if(gl==='kutle')tips.push('<strong>💪 Karbonhidrat:</strong> Enerji için yeterli karbonhidrat al. Antrenman öncesi ve sonrası önemli.');
@@ -2013,14 +2072,21 @@ function renderDietAdvice(){
   else tips.push('<strong>✅ Kilo:</strong> İdeal kilo aralığındasın ('+R.iw.lo+'-'+R.iw.hi+' kg). Harika!');
   tips.push('<strong>🧬 Profil ('+bp.n+'):</strong> '+getDietTipByProfile(bp.n));
   tips.push('<strong>💧 Su:</strong> Günlük en az '+R.water.toFixed(1)+' lt su iç. Antrenman günlerinde +0.5 lt ekle.');
-  el.innerHTML='<div class="rct">🥗 Kişisel Diyet Önerileri</div>'+tips.map(function(t){return'<div class="diet-tip">'+t+'</div>';}).join('');
+  el.innerHTML=
+    '<div class="acc-header" onclick="toggleAcc(this)">'+'<div class="rct" style="margin-bottom:0">🥗 Kişisel Diyet Önerileri</div>'+
+    '<svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>'+
+    '<div class="acc-body"><div style="padding-top:6px">'+tips.map(function(t){return'<div class="diet-tip">'+t+'</div>';}).join('')+'</div></div>';
 }
 function renderHiddenCalCalc(){
   var el=document.getElementById('hidden-cal-card');if(!el)return;
   var rows=HIDDEN_CALS.map(function(item,i){
     return'<div class="hcal-row"><div class="hcal-name">'+item.name+'</div><div class="hcal-kcal">'+item.kcal+' kcal</div><input class="hcal-input" type="number" id="hcal-'+i+'" min="0" max="10" value="0" oninput="calcHiddenCals()"></div>';
   }).join('');
-  el.innerHTML='<div class="rct">🥤 Gizli Kilo Aldıranları Hesaplayın!</div><div style="font-size:11px;color:var(--text2);margin-bottom:8px">Günde kaç adet tüketiyorsun?</div>'+rows+'<div class="hcal-result" id="hcal-result"><div style="font-size:11px;color:var(--text2)">Yıllık Tahmini Kilo Alımı</div><div class="hcal-result-big">0.0 kg</div></div>';
+  el.innerHTML=
+    '<div class="acc-header" onclick="toggleAcc(this)"><div class="rct" style="margin-bottom:0">🥤 Gizli Kilo Aldıranları</div>'+
+    '<svg class="acc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>'+
+    '<div class="acc-body"><div style="padding-top:6px"><div style="font-size:11px;color:var(--text2);margin-bottom:8px">Günde kaç adet tüketiyorsun?</div>'+rows+
+    '<div class="hcal-result" id="hcal-result"><div style="font-size:11px;color:var(--text2)">Yıllık Tahmini Kilo Alımı</div><div class="hcal-result-big">0.0 kg</div></div></div></div>';
 }
 function calcHiddenCals(){
   var total=0;
@@ -2130,6 +2196,46 @@ function resetWaterToday(){
 
 /* ── UTILS ────────────────────────────────────────────── */
 function clamp(v,lo,hi){return Math.min(hi,Math.max(lo,v));}
+
+/* Accordion toggle */
+function toggleAcc(header){
+  var body=header.nextElementSibling;
+  var arrow=header.querySelector('.acc-arrow');
+  if(!body)return;
+  var isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  if(arrow)arrow.classList.toggle('open',!isOpen);
+}
+
+/* Sayı animasyonu — değer sıfırdan hedef değere sayarak gelir */
+function animateNum(el,from,to,duration,decimals,suffix){
+  if(!el)return;
+  decimals=decimals||0;suffix=suffix||'';
+  var start=null,range=to-from;
+  function step(ts){
+    if(!start)start=ts;
+    var progress=Math.min((ts-start)/duration,1);
+    var ease=1-Math.pow(1-progress,3);/* easeOutCubic */
+    el.textContent=(from+range*ease).toFixed(decimals)+suffix;
+    if(progress<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function animateResults(){
+  if(!R.bf)return;
+  var bfEl=document.getElementById('bf-v');
+  var ffmiEl=document.getElementById('ffmi-v');
+  var bmiEl=document.getElementById('bmi-v');
+  var calEl=document.getElementById('cal-v');
+  var rBfEl=document.getElementById('r-bf');
+  var rCalEl=document.getElementById('r-cal');
+  animateNum(bfEl,0,R.bf,1200,2);
+  animateNum(ffmiEl,0,R.ffmi,1200,2);
+  animateNum(bmiEl,0,R.bmi,1000,1);
+  animateNum(calEl,0,R.goalCal,1000,0);
+  if(rBfEl)animateNum(rBfEl,0,R.bf,1000,2,'%');
+  if(rCalEl)animateNum(rCalEl,0,R.goalCal,1000,0,' kcal');
+}
 
 /* ══════════════════════════════════════════════════════
    🔥 FİREBASE ENTEGRASYONU
