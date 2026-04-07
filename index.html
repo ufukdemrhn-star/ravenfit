@@ -243,7 +243,26 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .ratio-ideal{position:absolute;top:-3px;width:2px;height:12px;background:var(--success);border-radius:1px}
 .ratio-lbl{display:flex;justify-content:space-between;margin-top:2px;font-size:9px;color:var(--text3)}
 
-/* ── ACCORDION ───────────────────────────────────────────────  */
+/* ── AVATAR ──────────────────────────────────────────────────  */
+.avatar-wrap{position:relative;flex-shrink:0}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',cursive;font-size:24px;letter-spacing:1px;color:#fff;cursor:pointer;border:2.5px solid var(--border);overflow:hidden;transition:border-color .2s;box-shadow:0 2px 12px var(--ag)}
+.avatar:hover{border-color:var(--accent)}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar-cam{position:absolute;bottom:0;right:0;width:18px;height:18px;background:var(--card2);border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer}
+/* ── SETTINGS DRAWER ──────────────────────────────────────────  */
+.settings-drawer{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);border-radius:20px 20px 0 0;z-index:600;transform:translateY(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);padding:0 0 env(safe-area-inset-bottom,0px);max-height:85vh;overflow-y:auto}
+.settings-drawer.open{transform:translateY(0)}
+.settings-drawer-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 8px}
+.settings-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:599;pointer-events:none;transition:background .3s}
+.settings-drawer-overlay.open{background:rgba(0,0,0,0.6);pointer-events:all}
+.sdw-item{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;transition:background .15s;color:var(--text);font-size:14px;font-weight:500;border:none;background:none;width:100%;text-align:left;font-family:'Outfit',sans-serif}
+.sdw-item:hover{background:var(--card2)}
+.sdw-item svg{width:20px;height:20px;flex-shrink:0;color:var(--text2)}
+.sdw-item.danger{color:var(--accent)}
+.sdw-item.danger svg{color:var(--accent)}
+.sdw-sep{height:1px;background:var(--border);margin:4px 0}
+.sdw-theme-row{padding:14px 20px}
+.sdw-theme-lbl{font-size:11px;color:var(--text2);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 .acc-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:2px 0 10px;user-select:none;-webkit-tap-highlight-color:transparent}
 .acc-header .rct{margin-bottom:0;padding-bottom:0}
 .acc-arrow{width:18px;height:18px;flex-shrink:0;color:var(--text2);transition:transform .3s cubic-bezier(.4,0,.2,1)}
@@ -348,12 +367,14 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .hcal-result{background:var(--ag);border-radius:10px;padding:12px;text-align:center;margin-top:10px}
 .hcal-result-big{font-family:'Bebas Neue',cursive;font-size:28px;color:var(--accent);letter-spacing:2px}
 
-.supp-result{padding:12px 0;border-bottom:1px solid var(--border)}
+.supp-result{padding:12px 0 12px 10px;border-bottom:1px solid var(--border);position:relative}
 .supp-result:last-child{border-bottom:none}
-.supp-result-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.supp-result-ico{font-size:22px}
+.supp-result-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:4px}
+.supp-result-ico{font-size:22px;flex-shrink:0}
 .supp-result-name{font-size:14px;font-weight:700}
-.supp-result-why{font-size:11px;color:var(--text2);line-height:1.4;margin-top:2px}
+.supp-result-why{font-size:11px;color:var(--text3);line-height:1.4;margin-top:2px}
+/* progress dots aktif rengi */
+.supp-ps.act{background:var(--accent);opacity:.5}
 .supp-progress{display:flex;gap:3px;margin-bottom:12px}
 .supp-ps{flex:1;height:3px;background:var(--border);border-radius:2px}
 .supp-ps.done{background:var(--accent)}
@@ -440,8 +461,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
   <img src="logo.png" width="120">
 </div>
   <h1 class="splash-title">RAVEN<span style="color:var(--accent)">FIT</span></h1>
-  <div class="splash-tag">Versiyon 0.2.6.1(beta)</div>
-  <div class="splash-sub">Awareness brings control; action brings freedom</div>
+  <div class="splash-tag">Versiyon 0.5.4(beta)</div>
+  <div class="splash-sub">Sen sadece antrenmanına odaklan</div>
   <div class="pills">
     <div class="pill"><div class="pill-dot"></div>Navy Yağ Formülü</div>
     <div class="pill"><div class="pill-dot"></div>FFMI Endeksi</div>
@@ -872,18 +893,31 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
   <div class="main-section" id="ms-profil">
     <div class="r-hero">
       <div class="r-card-hero">
-        <div class="r-name" id="r-name">Analiz Tamamlandı</div>
-        <div class="r-title">SONUÇLARIN HAZIR</div>
-        <div class="r-stats">
-          <div class="rs"><div class="rs-v" id="r-bf">—</div><div class="rs-l">Yağ Oranı</div></div>
-          <div class="rs"><div class="rs-v" id="r-lm">—</div><div class="rs-l">Yağsız Kütle</div></div>
-          <div class="rs"><div class="rs-v" id="r-ffmi">—</div><div class="rs-l">FFMI</div></div>
-          <div class="rs"><div class="rs-v" id="r-cal">—</div><div class="rs-l">Günlük Kalori</div></div>
+        <!-- Avatar sağda -->
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+          <div style="flex:1;min-width:0">
+            <div class="r-name" id="r-name">Analiz Tamamlandı</div>
+            <div class="r-title">SONUÇLARIN HAZIR</div>
+            <div class="r-stats">
+              <div class="rs"><div class="rs-v" id="r-bf">—</div><div class="rs-l">Yağ Oranı</div></div>
+              <div class="rs"><div class="rs-v" id="r-lm">—</div><div class="rs-l">Yağsız Kütle</div></div>
+              <div class="rs"><div class="rs-v" id="r-ffmi">—</div><div class="rs-l">FFMI</div></div>
+              <div class="rs"><div class="rs-v" id="r-cal">—</div><div class="rs-l">Günlük Kalori</div></div>
+            </div>
+          </div>
+          <div class="avatar-wrap">
+            <div class="avatar" id="profile-avatar" onclick="triggerAvatarUpload()">
+              <span id="avatar-initials">?</span>
+              <img id="avatar-img" src="" style="display:none">
+            </div>
+            <div class="avatar-cam" onclick="triggerAvatarUpload()" title="Fotoğraf değiştir">📷</div>
+            <input type="file" id="avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarUpload(this)">
+          </div>
         </div>
       </div>
     </div>
     <div class="rb">
-      <!-- Hesap bilgisi -->
+      <!-- Hesap bilgisi + Ayarlar butonu -->
       <div class="rc">
         <div class="rct">👤 Hesabım</div>
         <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0">
@@ -891,35 +925,57 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
             <div style="font-size:11px;color:var(--text2);margin-bottom:2px">Giriş yapılan hesap</div>
             <div id="user-email-display" style="font-size:14px;font-weight:600;color:var(--text)">—</div>
           </div>
-          <button onclick="doLogout()" style="background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:8px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer">🚪 Çıkış</button>
-        </div>
-      </div>
-      <div class="rc">
-        <div class="rct">📋 Başlangıç Ölçülerim</div>
-        <div id="mlist-profil"></div>
-      </div>
-<div class="rc">
-        <div class="rct">⚙️ Ayarlar & Tema</div>
-        <div style="margin-bottom: 15px;">
-          <div style="font-size:12px;color:var(--text2);margin-bottom:5px;">Görünüm Teması</div>
-          <div class="tdots">
-            <div class="tdot" data-t="dark"    style="background:#E63946" onclick="setTheme('dark')"></div>
-            <div class="tdot" data-t="crimson" style="background:#C0392B" onclick="setTheme('crimson')"></div>
-            <div class="tdot" data-t="violet"  style="background:#9B72FF" onclick="setTheme('violet')"></div>
-            <div class="tdot" data-t="forest"  style="background:#22A857" onclick="setTheme('forest')"></div>
-            <div class="tdot" data-t="rose"    style="background:#F472B6" onclick="setTheme('rose')"></div>
-            <div class="tdot" data-t="light"   style="background:#E8E4DC;border:2px solid #C4BFB6" onclick="setTheme('light')"></div>
+          <div style="display:flex;gap:8px">
+            <button onclick="openSettingsDrawer()" style="background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:8px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer">⚙️ Ayarlar</button>
+            <button onclick="doLogout()" style="background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:8px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer">🚪 Çıkış</button>
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px">
-          <button class="btn btn-s btn-full" onclick="startWizard()">✏️ Bilgilerimi Güncelle</button>
-          <button class="btn btn-s btn-full" onclick="exportData()">📤 Verileri Dışa Aktar</button>
-          <button class="btn btn-s btn-full" onclick="importData()">📥 Verileri İçe Aktar</button>
-          <button class="btn btn-s btn-full" style="color:var(--accent);border-color:var(--ag)" onclick="resetAll()">🗑️ Tüm Verileri Sıfırla</button>
-        </div>
       </div>
-    
+      <!-- Vücut Gelişimim -->
+      <div class="rc">
+        <div class="rct">📊 Vücut Gelişimim</div>
+        <div id="mlist-profil"></div>
+      </div>
     </div>
+  </div>
+
+  <!-- Settings Drawer overlay -->
+  <div class="settings-drawer-overlay" id="sdw-overlay" onclick="closeSettingsDrawer()"></div>
+  <!-- Settings Drawer -->
+  <div class="settings-drawer" id="settings-drawer">
+    <div class="settings-drawer-handle"></div>
+    <div style="padding:4px 20px 10px;font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:2px;color:var(--text)">AYARLAR</div>
+    <!-- Tema -->
+    <div class="sdw-theme-row">
+      <div class="sdw-theme-lbl">🎨 Görünüm Teması</div>
+      <div class="tdots">
+        <div class="tdot" data-t="dark"    style="background:#E63946" onclick="setTheme('dark')" title="Dark"></div>
+        <div class="tdot" data-t="crimson" style="background:#C0392B" onclick="setTheme('crimson')" title="Crimson"></div>
+        <div class="tdot" data-t="violet"  style="background:#9B72FF" onclick="setTheme('violet')" title="Violet"></div>
+        <div class="tdot" data-t="forest"  style="background:#22A857" onclick="setTheme('forest')" title="Forest"></div>
+        <div class="tdot" data-t="rose"    style="background:#F472B6" onclick="setTheme('rose')" title="Rose"></div>
+        <div class="tdot" data-t="light"   style="background:#E8E4DC;border:2px solid #C4BFB6" onclick="setTheme('light')" title="Light"></div>
+      </div>
+    </div>
+    <div class="sdw-sep"></div>
+    <button class="sdw-item" onclick="startWizard();closeSettingsDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Bilgilerimi Güncelle
+    </button>
+    <button class="sdw-item" onclick="exportData();closeSettingsDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Verileri Dışa Aktar
+    </button>
+    <button class="sdw-item" onclick="importData();closeSettingsDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Verileri İçe Aktar
+    </button>
+    <div class="sdw-sep"></div>
+    <button class="sdw-item danger" onclick="resetAll();closeSettingsDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+      Tüm Verileri Sıfırla
+    </button>
+    <div style="height:20px"></div>
   </div>
 
 </div><!-- Toast -->
@@ -973,14 +1029,16 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 
 <!-- Supplement Modal -->
 <div class="modal-overlay" id="supp-modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <div class="modal-title">Supplement Analizi</div>
-      <button class="modal-close" onclick="closeSuppModal()">✕</button>
+  <div class="modal-content" style="display:flex;flex-direction:column;padding:0;max-height:92vh">
+    <div style="padding:16px 20px 12px;border-bottom:1px solid var(--border);flex-shrink:0">
+      <div class="modal-header" style="margin-bottom:8px">
+        <div class="modal-title">💊 Supplement Analizi</div>
+        <button class="modal-close" onclick="closeSuppModal()">✕</button>
+      </div>
+      <div id="supp-progress" class="supp-progress" style="margin-bottom:0"></div>
     </div>
-    <div id="supp-progress" class="supp-progress"></div>
-    <div id="supp-body"></div>
-    <div class="supp-nav" id="supp-nav">
+    <div id="supp-body" style="flex:1;overflow-y:auto;padding:16px 20px"></div>
+    <div class="supp-nav" id="supp-nav" style="padding:12px 20px;border-top:1px solid var(--border);flex-shrink:0;background:var(--card)">
       <button class="btn btn-s" id="supp-back" onclick="suppBack()" style="display:none">← Geri</button>
       <button class="btn btn-p btn-full" id="supp-next" onclick="suppNext()">Devam →</button>
     </div>
@@ -1914,11 +1972,110 @@ function resetAll(){
 function renderProfilMlist(){
   if(!R.bf)return;
   var male=U.gender==='male';
-  var rows=[['Boy',(U.height||'—')+' cm'],['Kilo',(U.weight||'—')+' kg'],['Boyun',(U.neck||'—')+' cm'],['Bel',(U.waist||'—')+' cm'],
-    male?['Omuz',(U.shoulder||'—')+' cm']:['Kalça',(U.hip||'—')+' cm'],
-    ['Yaş',(U.age||'—')+' yaş'],['VKİ',R.bmi],['Yağ Oranı',R.bf.toFixed(2)+'%'],['Yağsız Kütle',R.lm.toFixed(2)+' kg'],['FFMI',R.ffmi.toFixed(2)]];
+  var entries=getEntries();
+  var first=entries.length>0?entries[0]:null;
+  var last=entries.length>0?entries[entries.length-1]:null;
+
+  function diffBadge(cur,prev,lowerBetter){
+    if(cur==null||prev==null)return'';
+    var d=Math.round((parseFloat(cur)-parseFloat(prev))*10)/10;
+    if(d===0)return'<span style="font-size:10px;color:var(--text3)"> —</span>';
+    var good=(lowerBetter&&d<0)||(!lowerBetter&&d>0);
+    var col=good?'var(--success)':'var(--accent)';
+    return'<span style="font-size:10px;color:'+col+';font-weight:700"> '+(d>0?'↑':'↓')+Math.abs(d)+'</span>';
+  }
+
+  var fields=[
+    {l:'Kilo (kg)',   k:'weight', cur:U.weight,  lb:false},
+    {l:'Yağ Oranı %',k:'bf',     cur:R.bf.toFixed(2), lb:true},
+    {l:'Yağsız Kütle',k:'lm',    cur:R.lm.toFixed(2), lb:false},
+    {l:'FFMI',        k:'ffmi',   cur:R.ffmi.toFixed(2),lb:false},
+    {l:'Boyun (cm)',  k:'neck',   cur:U.neck,    lb:false},
+    {l:'Bel (cm)',    k:'waist',  cur:U.waist,   lb:true},
+    male?{l:'Omuz (cm)',k:'shoulder',cur:U.shoulder,lb:false}
+        :{l:'Kalça (cm)',k:'hip',    cur:U.hip,     lb:false},
+    {l:'Göğüs (cm)', k:'chest',  cur:U.chest,   lb:false},
+    {l:'Kol (cm)',   k:'arm',    cur:U.arm,     lb:false},
+  ];
+
+  var html='';
+
+  /* Başlangıç vs Şu An karşılaştırması */
+  if(first&&entries.length>1){
+    html+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:12px;border:1px solid var(--border);border-radius:10px;overflow:hidden">'+
+      '<div style="background:var(--card2);padding:7px 8px;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--text2);letter-spacing:.5px">Ölçü</div>'+
+      '<div style="background:var(--card2);padding:7px 8px;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--text2);letter-spacing:.5px;text-align:center">Başlangıç</div>'+
+      '<div style="background:var(--card2);padding:7px 8px;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--accent);letter-spacing:.5px;text-align:center">Şu An</div>';
+    fields.forEach(function(f){
+      var fv=first[f.k]!=null?parseFloat(first[f.k]):null;
+      var cv=f.cur!=null?parseFloat(f.cur):null;
+      if(fv==null&&cv==null)return;
+      html+='<div style="padding:8px;font-size:11px;color:var(--text2);border-top:1px solid var(--border)">'+f.l+'</div>'+
+        '<div style="padding:8px;font-size:12px;font-weight:600;text-align:center;border-top:1px solid var(--border)">'+(fv!=null?fv:'—')+'</div>'+
+        '<div style="padding:8px;font-size:12px;font-weight:700;color:var(--accent);text-align:center;border-top:1px solid var(--border)">'+(cv!=null?cv:'—')+diffBadge(cv,fv,f.lb)+'</div>';
+    });
+    html+='</div>';
+    /* Son ölçüm tarihi */
+    html+='<div style="font-size:10px;color:var(--text3);text-align:center;margin-bottom:4px">'+
+      '📅 Başlangıç: '+first.date+' &nbsp;·&nbsp; Son güncelleme: '+last.date+'</div>';
+  } else {
+    /* Sadece mevcut veriler */
+    html+='<div style="font-size:12px;color:var(--text2);margin-bottom:8px">İlk ölçüm kaydedildikten sonra başlangıç ile karşılaştırma burada görünür.</div>';
+    fields.forEach(function(f){
+      if(f.cur==null)return;
+      html+='<div class="mlist-row"><div class="mlist-lbl">'+f.l+'</div><div class="mlist-val">'+f.cur+'</div></div>';
+    });
+  }
+
   var el=document.getElementById('mlist-profil');
-  if(el)el.innerHTML=rows.map(function(r){return'<div class="mlist-row"><div class="mlist-lbl">'+r[0]+'</div><div class="mlist-val">'+r[1]+'</div></div>';}).join('');
+  if(el)el.innerHTML=html;
+}
+
+/* ── AVATAR ─────────────────────────────────────────────── */
+function triggerAvatarUpload(){
+  document.getElementById('avatar-file-input').click();
+}
+function handleAvatarUpload(inp){
+  var file=inp.files[0];if(!file)return;
+  if(file.size>2*1024*1024){showToast('❌ Fotoğraf 2MB\'dan küçük olmalı.');return;}
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var b64=e.target.result;
+    setAvatar(b64);
+    /* Firebase Storage yerine Firestore'da base64 saklıyoruz */
+    if(_fbUser&&_fbDb){
+      _fbDb.collection('users').doc(_fbUser.uid).set({avatar:b64},{merge:true});
+    }
+    showToast('✅ Profil fotoğrafı güncellendi!');
+  };
+  reader.readAsDataURL(file);
+}
+function setAvatar(b64OrNull){
+  var img=document.getElementById('avatar-img');
+  var ini=document.getElementById('avatar-initials');
+  if(b64OrNull){
+    if(img){img.src=b64OrNull;img.style.display='block';}
+    if(ini)ini.style.display='none';
+  } else {
+    if(img){img.src='';img.style.display='none';}
+    if(ini)ini.style.display='';
+  }
+}
+function setAvatarInitials(nick){
+  var ini=document.getElementById('avatar-initials');
+  if(!ini)return;
+  var letters=(nick||'?').slice(0,2).toUpperCase();
+  ini.textContent=letters;
+}
+
+/* ── SETTINGS DRAWER ─────────────────────────────────────── */
+function openSettingsDrawer(){
+  document.getElementById('settings-drawer').classList.add('open');
+  document.getElementById('sdw-overlay').classList.add('open');
+}
+function closeSettingsDrawer(){
+  document.getElementById('settings-drawer').classList.remove('open');
+  document.getElementById('sdw-overlay').classList.remove('open');
 }
 
 function drawSvgChart(cId,entries,key,label,cssVar){
@@ -1946,50 +2103,234 @@ function drawSvgChart(cId,entries,key,label,cssVar){
 function drawCharts(){var e=getEntries();drawSvgChart('chart-bf',e,'bf','📊 Yağ Oranı (%)','--accent');drawSvgChart('chart-weight',e,'weight','⚖️ Kilo (kg)','--info');drawSvgChart('chart-lm',e,'lm','💪 Yağsız Kütle (kg)','--success');}
 
 /* ── SUPPLEMENT ÖNERİ SİSTEMİ ─────────────────────────── */
-var SUPPS=[
-  {id:'kreatin',name:'Kreatin',emoji:'⚡',desc:'Güç ve performans artışı'},
-  {id:'zma',name:'ZMA',emoji:'🌙',desc:'Çinko, magnezyum, B6 desteği'},
-  {id:'omega3',name:'Omega-3',emoji:'🐟',desc:'Anti-enflamatuar, genel sağlık'},
-  {id:'probiyotik',name:'Probiyotik',emoji:'🦠',desc:'Sindirim ve bağırsak sağlığı'},
-  {id:'protein',name:'Protein Tozu',emoji:'🥛',desc:'Kas gelişimi, beslenme desteği'}
-];
+/* ══════════════════════════════════════════════════════
+   💊 SUPPLEMENT SİSTEMİ v2
+   ══════════════════════════════════════════════════════ */
+var SUPPS={
+  protein:{
+    name:'Protein Tozu', emoji:'🥛', priority:0,
+    dose:'30g (1 ölçek)',
+    desc:'Kas gelişimi ve onarımı için günlük protein hedefini karşılamanın pratik yolu.',
+    note:'⚠️ Protein tozu iyidir ancak diyetinin yetersiz olduğunun da bir işareti. Önce gerçek gıdalarla proteini karşılamaya çalış!',
+    color:'var(--info)'
+  },
+  kreatin:{
+    name:'Kreatin', emoji:'⚡', priority:0,
+    dose:'3–5g/gün (yükleme gerekmez)',
+    desc:'Güç, patlayıcı performans ve kas hacmi için en iyi araştırılmış supplement.',
+    note:'💡 Bütçen kısıtlıysa yalnızca kreatin al — spor yaptığın her gün, geri kalanını sonraya bırak!',
+    color:'var(--warn)'
+  },
+  omega3:{
+    name:'Omega-3', emoji:'🐟', priority:0,
+    dose:'1.200mg EPA+DHA',
+    desc:'Anti-enflamatuar etki, kalp sağlığı ve beyin fonksiyonu için temel yağ asitleri.',
+    note:'Doz EPA ve DHA toplamına göredir. Daha yüksek doz da alınabilir.',
+    color:'var(--success)'
+  },
+  vitD:{
+    name:'D Vitamini', emoji:'☀️', priority:0,
+    dose:'3.000 IU/gün',
+    desc:'Hormon dengesi, bağışıklık ve kas fonksiyonu için kritik. Çoğu insan eksik.',
+    note:'💡 Doz sana yüksek gelebilir — aslında daha da yüksek olabilir. Kan testi yaptırarak seviyeni ölç!',
+    color:'var(--warn)'
+  },
+  kafein:{
+    name:'Kafein', emoji:'☕', priority:0,
+    dose:'200–400mg',
+    desc:'Odaklanma, güç ve performans için kanıtlanmış etki. Antrenman öncesi 30-60dk.',
+    note:'Kafein hapı, kahve veya pre-workout supplementlerinden alınabilir. Öğleden sonra kullanımından kaçın.',
+    color:'var(--accent)'
+  },
+  zma:{
+    name:'ZMA', emoji:'🌙', priority:0,
+    dose:'1 ölçek (üretici dozuna göre)',
+    desc:'Çinko, Magnezyum ve B6 kombinasyonu. Uyku kalitesi ve toparlanma için.',
+    note:'Çinko ya da Magnezyum ayrı ayrı da alınabilir. Yatmadan 30-60dk önce aç karnına.',
+    color:'var(--purple)'
+  },
+  preworkout:{
+    name:'Pre-Workout', emoji:'🚀', priority:0,
+    dose:'1 ölçek (antrenman öncesi)',
+    desc:'Enerji, odak ve pompa için formüle edilmiş kombine supplement.',
+    note:'İçeriğine dikkat et: kafein, beta-alanin, sitrülin içerenleri tercih et. Her antrenman için kullanma, tolerans gelişir.',
+    color:'var(--accent)'
+  },
+  malto:{
+    name:'Maltodekstrin', emoji:'⚗️', priority:0,
+    dose:'50–100g (antrenman etrafı)',
+    desc:'Hızlı sindirilen karbonhidrat. Ağır hacim dönemlerinde kalori artırmak için.',
+    note:'100g\'dan fazla alınacaksa öğünlere böl. Sadece bulk döneminde gerekli.',
+    color:'var(--info)'
+  },
+  melatonin:{
+    name:'Melatonin', emoji:'😴', priority:0,
+    dose:'0.5–3mg (yatmadan 30dk önce)',
+    desc:'Uyku düzeni ve kalitesi için. Jet lag ve vardiyalı çalışmada özellikle etkili.',
+    note:'⚕️ Reçeteli olup olmadığı bölgeye göre değişir. Düşük dozdan başla (0.5mg), gerekirse artır.',
+    color:'var(--purple)'
+  },
+  probiyotik:{
+    name:'Probiyotik', emoji:'🦠', priority:0,
+    dose:'Ürüne göre değişir',
+    desc:'Sindirim sağlığı, bağırsak mikrobiyomu ve bağışıklık sistemi desteği.',
+    note:'⚕️ Doktorunuza danışarak almanızı öneririz. Formüle göre etki farklılaşır.',
+    color:'var(--success)'
+  },
+  relax:{
+    name:'Relax / Adaptogen', emoji:'🌿', priority:0,
+    dose:'Ürüne göre değişir',
+    desc:'Stres yönetimi, kortizol düzenlemesi. Ashwagandha, L-theanine içerenler önerilir.',
+    note:'Uyku için bu ürünü, genel stres için ise adaptogen formülleri tercih et.',
+    color:'var(--success)'
+  },
+  superfoods:{
+    name:'Superfoods / Yeşil Karışım', emoji:'🌱', priority:0,
+    dose:'1 ölçek/gün',
+    desc:'Spirulina, chlorella, yeşil sebze özleri. Mikro besin desteği.',
+    note:'Aromalı karışım ürünleri veya doğrudan spirulina takviyesi öneririz. Denemek ve çeşitlendirmek iyi bir destek.',
+    color:'var(--success)'
+  }
+};
+
+/* 9 soru — daha kapsamlı test */
 var SUPP_QS=[
-  {key:'goal',title:'Hedefin nedir?',opts:[{v:'bulk',l:'💪 Kas Kazanımı'},{v:'cut',l:'🔥 Yağ Yakımı'},{v:'recomp',l:'⚖️ Dengeli Form'},{v:'health',l:'❤️ Genel Sağlık'}]},
-  {key:'sport',title:'Spor türün nedir?',opts:[{v:'bb',l:'🏋️ Vücut Geliştirme'},{v:'cardio',l:'🏃 Kardiyo'},{v:'hybrid',l:'⚡ Hibrit'},{v:'none',l:'🚫 Yapmıyorum'}]},
-  {key:'diet',title:'Beslenme tipin?',opts:[{v:'normal',l:'🍖 Normal'},{v:'veje',l:'🥬 Vejetaryen'},{v:'vegan',l:'🌱 Vegan'},{v:'messy',l:'🍕 Düzensiz'}]},
-  {key:'sleep',title:'Uyku kaliteniz?',opts:[{v:'good',l:'😴 İyi (7-9 saat)'},{v:'mid',l:'😐 Orta (5-7 saat)'},{v:'bad',l:'😵 Kötü (<5 saat)'}]},
-  {key:'budget',title:'Supplement bütçen?',opts:[{v:'low',l:'💰 Düşük (1-2 ürün)'},{v:'mid',l:'💰💰 Orta (2-3 ürün)'},{v:'high',l:'💰💰💰 Yüksek (hepsi olabilir)'}]}
+  {
+    key:'goal',
+    title:'Birincil hedefin nedir?',
+    opts:[
+      {v:'bulk',l:'💪 Kas & Kütle Kazanımı'},
+      {v:'cut',l:'🔥 Yağ Yakımı & Definasyon'},
+      {v:'recomp',l:'⚖️ Rekompoziyon (Dengeli Form)'},
+      {v:'health',l:'❤️ Genel Sağlık & Wellness'},
+      {v:'perf',l:'🏆 Performans & Dayanıklılık'}
+    ]
+  },
+  {
+    key:'sport',
+    title:'Antrenman türün nedir?',
+    opts:[
+      {v:'bb',l:'🏋️ Vücut Geliştirme / Powerlifting'},
+      {v:'cardio',l:'🏃 Kardiyo / Koşu / Bisiklet'},
+      {v:'hybrid',l:'⚡ Hibrit (Ağırlık + Kardiyo)'},
+      {v:'sport',l:'⚽ Takım / Kombat Sporu'},
+      {v:'none',l:'🚶 Aktif ama antrenman yok'}
+    ]
+  },
+  {
+    key:'freq',
+    title:'Haftada kaç gün antrenman yapıyorsun?',
+    opts:[
+      {v:'low',l:'1–2 gün'},
+      {v:'mid',l:'3–4 gün'},
+      {v:'high',l:'5–6 gün'},
+      {v:'elite',l:'Her gün / 2 antrenman/gün'}
+    ]
+  },
+  {
+    key:'diet',
+    title:'Beslenme düzenin nasıl?',
+    opts:[
+      {v:'clean',l:'🥦 Temiz / Bol protein, az işlenmiş'},
+      {v:'normal',l:'🍖 Normal / Karma beslenme'},
+      {v:'messy',l:'🍕 Düzensiz / Hazır yemek ağırlıklı'},
+      {v:'veje',l:'🥬 Vejetaryen'},
+      {v:'vegan',l:'🌱 Vegan'}
+    ]
+  },
+  {
+    key:'protein_intake',
+    title:'Günlük protein alımın nasıl?',
+    opts:[
+      {v:'low',l:'😬 Düşük — '+(R.minProt?'< '+Math.round(R.minProt*0.7):'< 100')+'g'},
+      {v:'mid',l:'😐 Orta — '+(R.minProt?Math.round(R.minProt*0.7)+'-'+R.minProt:'100-150')+'g'},
+      {v:'ok',l:'✅ Yeterli — '+(R.minProt?'>'+R.minProt:'> 150')+'g'},
+      {v:'unknown',l:'🤷 Bilmiyorum / Takip etmiyorum'}
+    ]
+  },
+  {
+    key:'sleep',
+    title:'Uyku kalitenin nasıl?',
+    opts:[
+      {v:'good',l:'😴 İyi — Düzenli 7-9 saat'},
+      {v:'mid',l:'😐 Orta — Sık sık 5-7 saat'},
+      {v:'bad',l:'😵 Kötü — Genellikle <5 saat veya bölünmüş'},
+      {v:'shift',l:'🌙 Vardiyalı / Düzensiz uyku saatleri'}
+    ]
+  },
+  {
+    key:'stress',
+    title:'Günlük stres seviyeni nasıl tanımlarsın?',
+    opts:[
+      {v:'low',l:'😌 Düşük — Genellikle rahat ve stressiz'},
+      {v:'mid',l:'😐 Orta — Ara sıra yoğun dönemler'},
+      {v:'high',l:'😤 Yüksek — Sürekli baskı altındayım'},
+      {v:'burnout',l:'🔥 Çok yüksek — Tükenmişlik hissediyorum'}
+    ]
+  },
+  {
+    key:'sun',
+    title:'Güneş maruziyetin nasıl?',
+    opts:[
+      {v:'good',l:'☀️ İyi — Düzenli dışarıda vakit geçiririm'},
+      {v:'low',l:'🏢 Az — Çoğunlukla iç mekanda çalışıyorum'},
+      {v:'none',l:'🌑 Çok az — Neredeyse hiç güneş görmüyorum'},
+      {v:'covered',l:'🧣 Kapalı giyiniyorum / Kuzey iklim'}
+    ]
+  },
+  {
+    key:'budget',
+    title:'Supplement için aylık bütçen nedir?',
+    opts:[
+      {v:'min',l:'💰 Minimal — Sadece 1 temel ürün'},
+      {v:'low',l:'💰💰 Düşük — 2-3 ürün'},
+      {v:'mid',l:'💰💰💰 Orta — 3-5 ürün'},
+      {v:'high',l:'💎 Yüksek — Kapsamlı stack'}
+    ]
+  }
 ];
+
 function openSuppModal(){
-  _suppStep=0;_suppAnswers={};
+  _suppStep=0;_suppAnswers={};_suppMaxStep=SUPP_QS.length-1;
+  /* Uygulama verilerinden otomatik doldur */
   var gl=selGL||R.recGoal;
   if(gl==='yag')_suppAnswers.goal='cut';
   else if(gl==='kutle')_suppAnswers.goal='bulk';
   else if(gl==='idame')_suppAnswers.goal='recomp';
-  if(selST)_suppAnswers.sport=selST;
+  if(selST==='bb')_suppAnswers.sport='bb';
+  else if(selST==='cardio')_suppAnswers.sport='cardio';
+  else if(selST==='hybrid')_suppAnswers.sport='hybrid';
   document.getElementById('supp-modal').classList.add('active');
   renderSuppStep();
 }
 function closeSuppModal(){document.getElementById('supp-modal').classList.remove('active');}
+
 function renderSuppStep(){
   var q=SUPP_QS[_suppStep];
-  var progHtml='';for(var i=0;i<=_suppMaxStep;i++){progHtml+='<div class="supp-ps'+(i<=_suppStep?' done':'')+'"></div>';}
+  var total=SUPP_QS.length;
+  var progHtml='';
+  for(var i=0;i<total;i++){progHtml+='<div class="supp-ps'+(i<_suppStep?' done':i===_suppStep?' act':'')+'"></div>';}
   document.getElementById('supp-progress').innerHTML=progHtml;
-  var html='<div class="supp-q-title">'+((_suppStep+1)+'/'+SUPP_QS.length+' — '+q.title)+'</div><div class="opts">';
+  var preSelected=_suppAnswers[q.key];
+  var html='<div class="supp-q-title">'+(_suppStep+1)+'/'+total+' — '+q.title+'</div><div class="opts">';
   q.opts.forEach(function(o){
-    var sel=_suppAnswers[q.key]===o.v?' sel':'';
-    html+='<div class="oc'+sel+'" onclick="suppSelectOpt(\''+q.key+'\',\''+o.v+'\',this)"><div class="ot"><div class="on">'+o.l+'</div></div><div class="orad"></div></div>';
+    var sel=preSelected===o.v?' sel':'';
+    html+='<div class="oc compact'+sel+'" onclick="suppSelectOpt(\''+q.key+'\',\''+o.v+'\',this)"><div class="ot"><div class="on">'+o.l+'</div></div><div class="orad"></div></div>';
   });
   html+='</div>';
   document.getElementById('supp-body').innerHTML=html;
   document.getElementById('supp-back').style.display=_suppStep>0?'inline-flex':'none';
-  document.getElementById('supp-next').textContent=_suppStep===_suppMaxStep?'Sonuçları Gör':'Devam →';
+  document.getElementById('supp-next').textContent=_suppStep===_suppMaxStep?'Sonuçları Gör ✓':'Devam →';
 }
+
 function suppSelectOpt(key,val,el){
   _suppAnswers[key]=val;
   el.parentNode.querySelectorAll('.oc').forEach(function(e){e.classList.remove('sel');});
   el.classList.add('sel');
+  /* Son soruysa otomatik ilerleme */
+  if(_suppStep===_suppMaxStep){ setTimeout(renderSuppResults,300); }
 }
+
 function suppNext(){
   var q=SUPP_QS[_suppStep];
   if(!_suppAnswers[q.key]){showToast('Lütfen bir seçenek seç.','warn');return;}
@@ -1997,54 +2338,272 @@ function suppNext(){
   else{renderSuppResults();}
 }
 function suppBack(){if(_suppStep>0){_suppStep--;renderSuppStep();}}
+
 function calcSuppScores(a){
-  var scores={kreatin:10,zma:10,omega3:10,probiyotik:10,protein:10};
-  var reasons={kreatin:[],zma:[],omega3:[],probiyotik:[],protein:[]};
-  if(a.goal==='bulk'){scores.kreatin+=30;reasons.kreatin.push('Kas kazanımı hedefi');scores.protein+=20;reasons.protein.push('Kas kazanımı hedefi');}
-  if(a.goal==='cut'){scores.protein+=15;reasons.protein.push('Yağ yakımında kas koruma');scores.omega3+=10;reasons.omega3.push('Yağ yakımı desteği');}
-  if(a.goal==='recomp'){scores.kreatin+=15;reasons.kreatin.push('Dengeli form hedefi');scores.protein+=10;reasons.protein.push('Vücut rekomposizyonu');}
-  if(a.goal==='health'){scores.omega3+=15;reasons.omega3.push('Genel sağlık hedefi');scores.probiyotik+=15;reasons.probiyotik.push('Genel sağlık hedefi');}
-  if(a.sport==='bb'){scores.kreatin+=25;reasons.kreatin.push('Ağırlık antrenmanı');scores.protein+=15;reasons.protein.push('Ağırlık antrenmanı');scores.zma+=10;reasons.zma.push('Yoğun antrenman');}
-  if(a.sport==='hybrid'){scores.kreatin+=15;reasons.kreatin.push('Hibrit antrenman');}
-  if(a.sport==='cardio'){scores.omega3+=10;reasons.omega3.push('Kardiyo antrenmanı');}
-  if(a.diet==='vegan'){scores.protein+=35;reasons.protein.push('Vegan beslenme');scores.omega3+=30;reasons.omega3.push('Vegan beslenme (balık yok)');}
-  if(a.diet==='veje'){scores.protein+=25;reasons.protein.push('Vejetaryen beslenme');scores.omega3+=20;reasons.omega3.push('Kısıtlı balık tüketimi');}
-  if(a.diet==='messy'){scores.probiyotik+=25;reasons.probiyotik.push('Düzensiz beslenme');scores.omega3+=10;reasons.omega3.push('Beslenme eksikliği');}
-  if(a.sleep==='bad'){scores.zma+=35;reasons.zma.push('Düşük uyku kalitesi');}
-  if(a.sleep==='mid'){scores.zma+=20;reasons.zma.push('Orta uyku kalitesi');}
+  /* Her supplement için başlangıç skoru: 0 */
+  var ids=Object.keys(SUPPS);
+  var scores={};var reasons={};
+  ids.forEach(function(id){scores[id]=0;reasons[id]=[];});
+
+  /* ── HEDEF ─────────────────────────────────────── */
+  if(a.goal==='bulk'){
+    scores.kreatin+=35;reasons.kreatin.push('Kas kazanımı — en kritik supplement');
+    scores.protein+=25;reasons.protein.push('Hacim döneminde protein desteği');
+    scores.malto+=20;reasons.malto.push('Kalori artışı için hızlı karbonhidrat');
+    scores.vitD+=10;reasons.vitD.push('Hormon desteği');
+  }
+  if(a.goal==='cut'){
+    scores.kreatin+=20;reasons.kreatin.push('Cut döneminde kas koruma');
+    scores.protein+=30;reasons.protein.push('Yağ yakımında kas koruma kritik');
+    scores.kafein+=25;reasons.kafein.push('Yağ yakımını ve metabolizmayı hızlandırır');
+    scores.omega3+=15;reasons.omega3.push('Cut döneminde anti-enflamasyon');
+    scores.vitD+=10;reasons.vitD.push('Metabolizma desteği');
+  }
+  if(a.goal==='recomp'){
+    scores.kreatin+=25;reasons.kreatin.push('Rekomp döneminde güç ve kas desteği');
+    scores.protein+=20;reasons.protein.push('Rekomp için yüksek protein şart');
+    scores.omega3+=15;reasons.omega3.push('Genel sağlık ve toparlanma');
+    scores.vitD+=15;reasons.vitD.push('Hormon ve metabolizma dengesi');
+  }
+  if(a.goal==='health'){
+    scores.omega3+=30;reasons.omega3.push('Kalp ve beyin sağlığı temel ihtiyacı');
+    scores.vitD+=30;reasons.vitD.push('Bağışıklık ve genel sağlık için kritik');
+    scores.probiyotik+=25;reasons.probiyotik.push('Bağırsak sağlığı = genel sağlık');
+    scores.superfoods+=20;reasons.superfoods.push('Mikro besin eksikliklerini tamamlar');
+  }
+  if(a.goal==='perf'){
+    scores.kreatin+=30;reasons.kreatin.push('Performans ve patlayıcı güç');
+    scores.kafein+=25;reasons.kafein.push('Performans ve dayanıklılık artışı');
+    scores.malto+=15;reasons.malto.push('Antrenman sırasında enerji');
+    scores.omega3+=15;reasons.omega3.push('Dayanıklılık sporlarında kritik');
+  }
+
+  /* ── SPOR TÜRÜ ─────────────────────────────────── */
+  if(a.sport==='bb'){
+    scores.kreatin+=25;reasons.kreatin.push('Ağırlık antrenmanı için #1 supplement');
+    scores.protein+=15;reasons.protein.push('Hipertrofi için yüksek protein');
+    scores.preworkout+=15;reasons.preworkout.push('Ağırlık antrenmanında performans');
+    scores.zma+=10;reasons.zma.push('Yoğun antrenman sonrası toparlanma');
+  }
+  if(a.sport==='cardio'){
+    scores.omega3+=15;reasons.omega3.push('Kardiyo atletlerde anti-enflamasyon');
+    scores.malto+=10;reasons.malto.push('Uzun kardiyo seanslarında enerji');
+    scores.vitD+=10;reasons.vitD.push('Dış mekanda spor yapanlarda bile eksik olabilir');
+  }
+  if(a.sport==='hybrid'){
+    scores.kreatin+=20;reasons.kreatin.push('Hibrit antrenman performansı');
+    scores.omega3+=10;reasons.omega3.push('Toparlanma desteği');
+    scores.preworkout+=10;reasons.preworkout.push('Ağır antrenman günlerinde');
+  }
+  if(a.sport==='sport'){
+    scores.kreatin+=20;reasons.kreatin.push('Patlayıcı güç ve sprint performansı');
+    scores.kafein+=15;reasons.kafein.push('Odak ve reaksiyon hızı');
+    scores.omega3+=15;reasons.omega3.push('Darbe sporlarında anti-enflamasyon');
+  }
+  if(a.sport==='none'){
+    scores.vitD+=20;reasons.vitD.push('Hareketsiz yaşamda eksiklik riski');
+    scores.superfoods+=15;reasons.superfoods.push('Hareketsiz yaşamda temel destek');
+    scores.omega3+=15;reasons.omega3.push('Sedanter bireylerde genel sağlık');
+  }
+
+  /* ── ANTRENMAN SIKLIĞI ─────────────────────────── */
+  if(a.freq==='high'||a.freq==='elite'){
+    scores.kreatin+=15;reasons.kreatin.push('Yüksek antrenman sıklığı');
+    scores.zma+=15;reasons.zma.push('Toparlanma kapasitesi kritik');
+    scores.omega3+=10;reasons.omega3.push('Yoğun antrenman sonrası iltihap kontrolü');
+  }
+  if(a.freq==='elite'){
+    scores.malto+=15;reasons.malto.push('Günde 2 antrenman — enerji ihtiyacı yüksek');
+    scores.preworkout+=10;reasons.preworkout.push('Yoğun program için');
+  }
+
+  /* ── DİYET ─────────────────────────────────────── */
+  if(a.diet==='vegan'){
+    scores.protein+=35;reasons.protein.push('Vegan beslenmede protein eksikliği riski');
+    scores.omega3+=30;reasons.omega3.push('Vegan beslenmede balık yağı eksikliği');
+    scores.vitD+=20;reasons.vitD.push('Vegan beslenmede D vitamini eksikliği');
+    scores.zma+=15;reasons.zma.push('Çinko bitkisel kaynaklardan iyi emilmez');
+    scores.kreatin+=15;reasons.kreatin.push('Vegan beslenmede kreatin sentezi düşük');
+  }
+  if(a.diet==='veje'){
+    scores.protein+=20;reasons.protein.push('Vejetaryen beslenmede protein desteği');
+    scores.omega3+=20;reasons.omega3.push('Balık tüketimi yok veya az');
+    scores.vitD+=15;reasons.vitD.push('Hayvansal D vitamini kaynağı sınırlı');
+    scores.kreatin+=10;reasons.kreatin.push('Et tüketimi yoksa kreatin sentezi az');
+  }
+  if(a.diet==='messy'){
+    scores.probiyotik+=25;reasons.probiyotik.push('Düzensiz beslenme bağırsak florasını bozar');
+    scores.vitD+=15;reasons.vitD.push('Besin eksikliği riski');
+    scores.omega3+=15;reasons.omega3.push('Düzensiz beslenmede yağ asidi eksikliği');
+    scores.superfoods+=20;reasons.superfoods.push('Mikro besin eksikliklerini tamamlar');
+  }
+  if(a.diet==='clean'){
+    /* Temiz besleniyorsa bazı supplementler daha az kritik */
+    scores.protein-=10; /* Gıdadan alıyor */
+  }
+
+  /* ── PROTEİN ALIMI ─────────────────────────────── */
+  if(a.protein_intake==='low'){
+    scores.protein+=30;reasons.protein.push('Protein alımın yetersiz — acil destek');
+  }
+  if(a.protein_intake==='mid'){
+    scores.protein+=15;reasons.protein.push('Protein alımın hedefe yakın ama destek iyi olur');
+  }
+  if(a.protein_intake==='ok'||a.protein_intake==='unknown'){
+    /* Yeterli protein alıyorsa protein tozu daha az kritik */
+  }
+
+  /* ── UYKU ──────────────────────────────────────── */
+  if(a.sleep==='bad'){
+    scores.zma+=35;reasons.zma.push('Kötü uyku — magnezyum eksikliği olabilir');
+    scores.melatonin+=30;reasons.melatonin.push('Uyku düzeni bozuk');
+    scores.relax+=20;reasons.relax.push('Uyku kalitesini artırmak için');
+    scores.omega3+=10;reasons.omega3.push('Uyku kalitesini destekler');
+  }
+  if(a.sleep==='mid'){
+    scores.zma+=20;reasons.zma.push('Orta uyku — magnezyum desteği faydalı');
+    scores.melatonin+=15;reasons.melatonin.push('Uyku kalitesini iyileştirebilir');
+  }
+  if(a.sleep==='shift'){
+    scores.melatonin+=35;reasons.melatonin.push('Vardiyalı çalışmada uyku düzeni bozuk');
+    scores.zma+=20;reasons.zma.push('Düzensiz uyku toparlanmayı etkiler');
+    scores.relax+=15;reasons.relax.push('Vardiyalı çalışmada stres yönetimi');
+  }
+
+  /* ── STRES ─────────────────────────────────────── */
+  if(a.stress==='high'||a.stress==='burnout'){
+    scores.relax+=30;reasons.relax.push('Yüksek stres — adaptogen ve relax formülü');
+    scores.omega3+=15;reasons.omega3.push('Kortizol düzenlemesinde destek');
+    scores.vitD+=10;reasons.vitD.push('Stres D vitamini tüketimini artırır');
+    scores.zma+=10;reasons.zma.push('Stres magnezyum tüketimini artırır');
+  }
+  if(a.stress==='burnout'){
+    scores.melatonin+=15;reasons.melatonin.push('Tükenmişlikte uyku kritik');
+    scores.superfoods+=15;reasons.superfoods.push('Antioksidan desteği');
+  }
+
+  /* ── GÜNEŞ MARUZIYETI ──────────────────────────── */
+  if(a.sun==='low'){scores.vitD+=20;reasons.vitD.push('Az güneş maruziyeti — D vitamini eksikliği riski');}
+  if(a.sun==='none'||a.sun==='covered'){
+    scores.vitD+=35;reasons.vitD.push('Güneş yok — D vitamini eksikliği neredeyse kesin');
+  }
+  if(a.sun==='good'){scores.vitD-=5; /* Güneşten alıyor olabilir */}
+
+  /* ── YAŞ FAKTÖRÜ ───────────────────────────────── */
   var age=U.age||25;
-  if(age>=30){scores.omega3+=15;reasons.omega3.push('30+ yaş');scores.zma+=10;reasons.zma.push('30+ yaş');}
-  if(age>=35){scores.probiyotik+=15;reasons.probiyotik.push('35+ yaş');}
-  return SUPPS.map(function(s){return{id:s.id,name:s.name,emoji:s.emoji,desc:s.desc,score:scores[s.id],reasons:reasons[s.id]};});
+  if(age>=30){
+    scores.omega3+=10;reasons.omega3.push('30+ yaşta anti-enflamasyon daha önemli');
+    scores.vitD+=10;reasons.vitD.push('30+ yaşta D vitamini emilimi azalır');
+  }
+  if(age>=35){
+    scores.probiyotik+=15;reasons.probiyotik.push('35+ yaşta sindirim sağlığı');
+    scores.kreatin+=5;reasons.kreatin.push('35+ yaşta kas kaybı (sarkopeni) riski');
+    scores.omega3+=5;reasons.omega3.push('35+ yaşta kardiyovasküler sağlık');
+  }
+  if(age>=45){
+    scores.vitD+=15;reasons.vitD.push('45+ yaşta D vitamini emilimi çok azalır');
+    scores.omega3+=10;reasons.omega3.push('45+ yaşta kalp sağlığı kritik');
+  }
+
+  /* ── CİNSİYET FAKTÖRÜ ──────────────────────────── */
+  if(U.gender==='female'){
+    scores.vitD+=10;reasons.vitD.push('Kadınlarda D vitamini eksikliği daha yaygın');
+    scores.omega3+=5;reasons.omega3.push('Hormonal denge desteği');
+    scores.zma+=5;reasons.zma.push('Magnezyum kadınlarda önemli');
+  }
+
+  /* ── VÜCUT PROFİLİ ─────────────────────────────── */
+  if(R.bf){
+    var bp=determineBodyProfile(R.bf,R.ffmi,R.bmi);
+    if(bp.n.includes('Skinny')){
+      scores.kreatin+=10;reasons.kreatin.push('Düşük kas kütlesi — kreatin destekler');
+      scores.malto+=15;reasons.malto.push('Kalori artışı için');
+    }
+    if(bp.n.includes('Skinny-fat')){
+      scores.kreatin+=15;reasons.kreatin.push('Skinny-fat profilinde kas inşası');
+      scores.vitD+=10;reasons.vitD.push('Vücut kompozisyonu iyileştirme');
+    }
+    if(bp.n.includes('Obez')||bp.n.includes('Kilolu')){
+      scores.omega3+=15;reasons.omega3.push('Yüksek yağ oranında anti-enflamasyon');
+      scores.vitD+=15;reasons.vitD.push('Obezitede D vitamini emilimi bozulur');
+      scores.probiyotik+=10;reasons.probiyotik.push('Metabolizma desteği');
+    }
+  }
+
+  /* Negatife düşmesin */
+  ids.forEach(function(id){if(scores[id]<0)scores[id]=0;});
+
+  return ids.map(function(id){
+    return Object.assign({},SUPPS[id],{id:id,score:scores[id],reasons:reasons[id]});
+  });
 }
+
 function renderSuppResults(){
   var results=calcSuppScores(_suppAnswers);
   results.sort(function(a,b){return b.score-a.score;});
-  var maxShow={low:2,mid:3,high:5}[_suppAnswers.budget]||3;
-  var shown=results.slice(0,maxShow);
-  var html='<div style="font-size:13px;font-weight:700;margin-bottom:10px">📋 Profiline göre '+shown.length+' supplement önerisi:</div>';
+
+  /* Bütçeye göre gösterilecek sayı */
+  var maxShow={min:1,low:2,mid:4,high:7}[_suppAnswers.budget]||3;
+
+  /* Sadece skoru 0'dan büyük olanları göster */
+  var shown=results.filter(function(s){return s.score>0;}).slice(0,maxShow);
+
+  var html='<div style="font-size:13px;font-weight:700;margin-bottom:4px">📋 '+shown.length+' supplement önerisi</div>'+
+    '<div style="font-size:11px;color:var(--text2);margin-bottom:12px">Bütçe ve profiline göre optimize edildi.</div>';
+
   shown.forEach(function(s,i){
-    var pCls=s.score>=50?'bg':s.score>=30?'by':'bb';
-    var pLbl=s.score>=50?'Yüksek Öncelik':s.score>=30?'Orta Öncelik':'Düşük Öncelik';
-    html+='<div class="supp-result"><div class="supp-result-head"><span class="supp-result-ico">'+s.emoji+'</span><span class="supp-result-name">'+s.name+'</span><span class="badge '+pCls+'" style="margin:0 0 0 auto">'+pLbl+'</span></div><div style="font-size:11px;color:var(--text3);margin-bottom:3px">'+s.desc+'</div><div class="supp-result-why"><strong>Neden:</strong> '+(s.reasons.length?s.reasons.join(', '):'Genel sağlık desteği')+'</div></div>';
+    var priority=i===0?'🥇 En Öncelikli':i===1?'🥈 İkinci Öncelik':i===2?'🥉 Üçüncü Öncelik':'Destekleyici';
+    var pCls=i===0?'bg':i<=2?'by':'bb';
+    html+='<div class="supp-result" style="border-left:3px solid '+s.color+'">';
+    html+='<div class="supp-result-head"><span class="supp-result-ico">'+s.emoji+'</span>';
+    html+='<div><span class="supp-result-name">'+s.name+'</span>';
+    html+='<div style="font-size:10px;color:var(--text3);margin-top:1px">💊 '+s.dose+'</div></div>';
+    html+='<span class="badge '+pCls+'" style="margin:0 0 0 auto;white-space:nowrap">'+priority+'</span></div>';
+    html+='<div style="font-size:11px;color:var(--text2);margin:6px 0 4px">'+s.desc+'</div>';
+    if(s.note)html+='<div style="font-size:10px;background:var(--card2);border-radius:7px;padding:6px 8px;color:var(--text2);margin-bottom:6px;line-height:1.4">'+s.note+'</div>';
+    if(s.reasons&&s.reasons.length){
+      html+='<div style="font-size:10px;color:var(--text3)">📊 <strong style="color:var(--text2)">Neden:</strong> '+s.reasons.slice(0,3).join(' · ')+'</div>';
+    }
+    html+='</div>';
   });
-  html+='<div style="margin-top:14px"><button class="btn btn-s btn-full" onclick="resetSuppSurvey()">🔄 Tekrar Analiz Et</button></div>';
+
+  html+='<div style="margin-top:14px;display:flex;gap:8px">'+
+    '<button class="btn btn-s btn-full" onclick="resetSuppSurvey()">🔄 Tekrar Analiz Et</button>'+
+    '</div>';
+
   document.getElementById('supp-body').innerHTML=html;
-  document.getElementById('supp-nav').style.display='none';
+  /* Nav gizle, progress temizle, scroll başa al */
+  var nav=document.getElementById('supp-nav');
+  if(nav)nav.style.display='none';
   document.getElementById('supp-progress').innerHTML='';
+  var body=document.getElementById('supp-body');
+  if(body)body.scrollTop=0;
+
+  /* Inline özet */
   var inlineEl=document.getElementById('supp-inline-result');
-  if(inlineEl){var shortHtml='<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)"><div style="font-size:11px;color:var(--text2);margin-bottom:6px">Son analiz sonuçların:</div>';
-    shown.forEach(function(s){shortHtml+='<div style="font-size:12px;margin-bottom:3px">'+s.emoji+' <strong>'+s.name+'</strong> <span style="color:var(--text3);font-size:10px">('+s.reasons[0]+')</span></div>';});
-    shortHtml+='</div>';inlineEl.innerHTML=shortHtml;}
+  if(inlineEl){
+    var short='<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">'+
+      '<div style="font-size:11px;color:var(--text2);margin-bottom:6px">✅ Son analiz sonuçların:</div>';
+    shown.slice(0,4).forEach(function(s){
+      short+='<div style="font-size:12px;margin-bottom:4px;display:flex;align-items:center;gap:5px">'+s.emoji+' <strong>'+s.name+'</strong> <span style="color:var(--text3);font-size:10px">'+s.dose+'</span></div>';
+    });
+    short+='</div>';
+    inlineEl.innerHTML=short;
+  }
 }
+
 function resetSuppSurvey(){
-  _suppStep=0;_suppAnswers={};
+  _suppStep=0;_suppAnswers={};_suppMaxStep=SUPP_QS.length-1;
   var gl=selGL||R.recGoal;
   if(gl==='yag')_suppAnswers.goal='cut';
   else if(gl==='kutle')_suppAnswers.goal='bulk';
   else if(gl==='idame')_suppAnswers.goal='recomp';
   if(selST)_suppAnswers.sport=selST;
-  document.getElementById('supp-nav').style.display='flex';
+  var nav=document.getElementById('supp-nav');
+  if(nav){nav.style.display='flex';nav.style.removeProperty('display');}
+  /* Scroll body to top */
+  var body=document.getElementById('supp-body');
+  if(body)body.scrollTop=0;
   renderSuppStep();
 }
 
@@ -2352,6 +2911,9 @@ function onUserLoggedIn(user){
         var nick=d.nickname||(user.email?user.email.replace('@ravenfit.app',''):'');
         var nickEl=document.getElementById('user-email-display');
         if(nickEl)nickEl.textContent='@'+nick;
+        setAvatarInitials(nick);
+        /* Avatar */
+        if(d.avatar){setAvatar(d.avatar);}else{setAvatar(null);}
         /* Firebase'de veri var mı? */
         if(d.rf_data&&d.rf_data.length>2){
           fbHasData=true;
