@@ -355,16 +355,16 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 </header>
 
 <!-- 🔥 AUTH EKRANI -->
-<div id="auth-screen" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:500;align-items:center;justify-content:center;padding:20px;flex-direction:column">
-  <div style="width:100%;max-width:380px">
+<div id="auth-screen" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:500;align-items:center;justify-content:center;padding:20px;flex-direction:column;overflow-y:auto">
+  <div style="width:100%;max-width:360px;padding:10px 0">
     <!-- Logo -->
-    <div style="text-align:center;margin-bottom:28px">
-      <img src="logo.png" width="72" style="margin-bottom:12px;filter:drop-shadow(0 4px 16px var(--ag))">
-      <div style="font-family:'Bebas Neue',cursive;font-size:32px;letter-spacing:4px;color:var(--text)">RAVEN<span style="color:var(--accent)">FIT</span></div>
+    <div style="text-align:center;margin-bottom:24px">
+      <img src="logo.png" width="68" style="margin-bottom:10px;filter:drop-shadow(0 4px 16px var(--ag))">
+      <div style="font-family:'Bebas Neue',cursive;font-size:30px;letter-spacing:4px;color:var(--text)">RAVEN<span style="color:var(--accent)">FIT</span></div>
       <div style="font-size:11px;color:var(--text2);margin-top:3px;letter-spacing:2px;text-transform:uppercase">Hesabına giriş yap</div>
     </div>
     <!-- Tab seçici -->
-    <div style="display:flex;background:var(--card2);border-radius:10px;padding:3px;margin-bottom:20px;border:1px solid var(--border)">
+    <div style="display:flex;background:var(--card2);border-radius:10px;padding:3px;margin-bottom:18px;border:1px solid var(--border)">
       <button id="auth-tab-login" onclick="showLoginTab()" style="flex:1;padding:9px;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;background:var(--accent);color:#fff">Giriş Yap</button>
       <button id="auth-tab-register" onclick="showRegisterTab()" style="flex:1;padding:9px;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;background:transparent;color:var(--text2)">Kayıt Ol</button>
     </div>
@@ -372,34 +372,34 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
     <div id="auth-form-login">
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;flex-direction:column;gap:5px">
-          <label style="font-size:12px;color:var(--text2);font-weight:500">Email</label>
-          <input id="auth-email" type="email" inputmode="email" placeholder="ornek@email.com" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+          <label style="font-size:12px;color:var(--text2);font-weight:500">Kullanıcı Adı</label>
+          <input id="auth-nick" type="text" inputmode="text" autocomplete="username" placeholder="kullanici_adin" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s;text-transform:lowercase" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
         </div>
         <div style="display:flex;flex-direction:column;gap:5px">
           <label style="font-size:12px;color:var(--text2);font-weight:500">Şifre</label>
-          <input id="auth-pass" type="password" placeholder="Şifren" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')doLogin()">
+          <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Şifren" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')doLogin()">
         </div>
-        <div id="auth-err" style="font-size:12px;color:var(--accent);min-height:16px;text-align:center"></div>
+        <div id="auth-err" style="font-size:12px;color:var(--accent);min-height:16px;text-align:center;line-height:1.4"></div>
         <button id="auth-btn-login" onclick="doLogin()" style="background:var(--accent);color:#fff;border:none;border-radius:11px;padding:14px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;box-shadow:0 4px 16px var(--ag)">Giriş Yap</button>
-        <button onclick="doForgotPass()" style="background:none;border:none;color:var(--text2);font-family:'Outfit',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline;margin-top:2px">Şifremi unuttum</button>
       </div>
     </div>
     <!-- Kayıt formu -->
     <div id="auth-form-register" style="display:none">
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;flex-direction:column;gap:5px">
-          <label style="font-size:12px;color:var(--text2);font-weight:500">Email</label>
-          <input id="auth-email-r" type="email" inputmode="email" placeholder="ornek@email.com" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+          <label style="font-size:12px;color:var(--text2);font-weight:500">Kullanıcı Adı</label>
+          <input id="auth-nick-r" type="text" inputmode="text" autocomplete="username" placeholder="kullanici_adin" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s;text-transform:lowercase" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+          <div style="font-size:10px;color:var(--text3)">Harf, rakam ve _ kullanabilirsin. Min 3 karakter.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:5px">
           <label style="font-size:12px;color:var(--text2);font-weight:500">Şifre</label>
-          <input id="auth-pass-r" type="password" placeholder="En az 6 karakter" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+          <input id="auth-pass-r" type="password" autocomplete="new-password" placeholder="En az 6 karakter" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
         </div>
         <div style="display:flex;flex-direction:column;gap:5px">
           <label style="font-size:12px;color:var(--text2);font-weight:500">Şifre Tekrar</label>
-          <input id="auth-pass2" type="password" placeholder="Şifreni tekrar gir" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')doRegister()">
+          <input id="auth-pass2" type="password" autocomplete="new-password" placeholder="Şifreni tekrar gir" style="background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;outline:none;width:100%;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')doRegister()">
         </div>
-        <div id="auth-err-r" style="font-size:12px;color:var(--accent);min-height:16px;text-align:center"></div>
+        <div id="auth-err-r" style="font-size:12px;color:var(--accent);min-height:16px;text-align:center;line-height:1.4"></div>
         <button id="auth-btn-register" onclick="doRegister()" style="background:var(--accent);color:#fff;border:none;border-radius:11px;padding:14px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;box-shadow:0 4px 16px var(--ag)">Kayıt Ol</button>
       </div>
     </div>
@@ -413,7 +413,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
   <div class="s-bg"></div>
   <div class="splash-icon">
   <img src="logo.png" width="90">
-</div
+</div>
   <h1 class="splash-title">RAVEN<span>FIT</span></h1>
   <div class="splash-tag">Versiyon 0.5.4(beta)</div>
   <div class="splash-sub">Sen sadece antrenmanına odaklan</div>
@@ -886,6 +886,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
         </div>
         <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px">
           <button class="btn btn-s btn-full" onclick="startWizard()">✏️ Bilgilerimi Güncelle</button>
+          <button class="btn btn-s btn-full" onclick="exportData()">📤 Verileri Dışa Aktar</button>
+          <button class="btn btn-s btn-full" onclick="importData()">📥 Verileri İçe Aktar</button>
           <button class="btn btn-s btn-full" style="color:var(--accent);border-color:var(--ag)" onclick="resetAll()">🗑️ Tüm Verileri Sıfırla</button>
         </div>
       </div>
@@ -1015,6 +1017,7 @@ function switchMain(id){
   document.getElementById('ms-'+id).classList.add('active');
   document.getElementById('bnav-'+id).classList.add('active');
   if(id==='profil')renderProfilMlist();
+  if(id==='vucudum')setTimeout(drawCharts,100);
   window.scrollTo(0,0);
 }
 function showResults(){showScreen('results');document.getElementById('bottom-nav').classList.add('visible');switchMain('vucudum');renderAll();}
@@ -2131,9 +2134,10 @@ function clamp(v,lo,hi){return Math.min(hi,Math.max(lo,v));}
 /* ══════════════════════════════════════════════════════
    🔥 FİREBASE ENTEGRASYONU
    ══════════════════════════════════════════════════════ */
+var _fbApp=null,_fbAuth=null,_fbDb=null,_fbUser=null,_fbSyncing=false,_rfConfirmCb=null;
 
-/* ── Firebase Config & Init ───────────────────────────── */
-var _fbApp=null,_fbAuth=null,_fbDb=null,_fbUser=null,_fbSyncing=false;
+/* Nickname → sahte email (Firebase email şartı için) */
+function nickToEmail(nick){ return nick.toLowerCase().replace(/[^a-z0-9_]/g,''+'')+'@ravenfit.app'; }
 
 function initFirebase(){
   if(_fbApp)return;
@@ -2149,22 +2153,13 @@ function initFirebase(){
     _fbApp=firebase.initializeApp(cfg);
     _fbAuth=firebase.auth();
     _fbDb=firebase.firestore();
-    /* Auth state değişince tetiklenir */
     _fbAuth.onAuthStateChanged(function(user){
-      if(user){
-        _fbUser=user;
-        onUserLoggedIn(user);
-      } else {
-        _fbUser=null;
-        onUserLoggedOut();
-      }
+      if(user){ _fbUser=user; onUserLoggedIn(user); }
+      else { _fbUser=null; onUserLoggedOut(); }
     });
-  }catch(e){
-    console.warn('Firebase init error:',e);
-  }
+  }catch(e){ console.warn('Firebase init error:',e); }
 }
 
-/* ── Auth Ekranını Göster/Gizle ───────────────────────── */
 function showAuthScreen(){
   document.getElementById('auth-screen').style.display='flex';
   document.getElementById('app-main').style.display='none';
@@ -2176,11 +2171,13 @@ function hideAuthScreen(){
 
 /* ── Giriş Yap ───────────────────────────────────────── */
 function doLogin(){
-  var email=document.getElementById('auth-email').value.trim();
+  var nick=document.getElementById('auth-nick').value.trim().toLowerCase();
   var pass=document.getElementById('auth-pass').value;
   var errEl=document.getElementById('auth-err');
-  errEl.textContent='';
-  if(!email||!pass){errEl.textContent='Email ve şifre gerekli.';return;}
+  errEl.style.color='var(--accent)';errEl.textContent='';
+  if(!nick||!pass){errEl.textContent='Kullanıcı adı ve şifre gerekli.';return;}
+  if(nick.length<3){errEl.textContent='Kullanıcı adı en az 3 karakter olmalı.';return;}
+  var email=nickToEmail(nick);
   var btn=document.getElementById('auth-btn-login');
   btn.textContent='Giriş yapılıyor...';btn.disabled=true;
   _fbAuth.signInWithEmailAndPassword(email,pass)
@@ -2188,11 +2185,10 @@ function doLogin(){
     .catch(function(e){
       btn.textContent='Giriş Yap';btn.disabled=false;
       var msgs={
-        'auth/user-not-found':'Bu email ile kayıt bulunamadı.',
+        'auth/user-not-found':'Bu kullanıcı adı kayıtlı değil.',
         'auth/wrong-password':'Şifre yanlış.',
-        'auth/invalid-email':'Geçersiz email adresi.',
         'auth/too-many-requests':'Çok fazla deneme. Biraz bekle.',
-        'auth/invalid-credential':'Email veya şifre hatalı.'
+        'auth/invalid-credential':'Kullanıcı adı veya şifre hatalı.'
       };
       errEl.textContent=msgs[e.code]||'Hata: '+e.message;
     });
@@ -2200,37 +2196,34 @@ function doLogin(){
 
 /* ── Kayıt Ol ────────────────────────────────────────── */
 function doRegister(){
-  var email=document.getElementById('auth-email-r').value.trim();
+  var nick=document.getElementById('auth-nick-r').value.trim().toLowerCase();
   var pass=document.getElementById('auth-pass-r').value;
   var pass2=document.getElementById('auth-pass2').value;
   var errEl=document.getElementById('auth-err-r');
-  errEl.textContent='';errEl.style.color='var(--accent)';
-  if(!email||!pass){errEl.textContent='Email ve şifre gerekli.';return;}
+  errEl.style.color='var(--accent)';errEl.textContent='';
+  if(!nick){errEl.textContent='Kullanıcı adı gerekli.';return;}
+  if(nick.length<3){errEl.textContent='Kullanıcı adı en az 3 karakter olmalı.';return;}
+  if(!/^[a-z0-9_]+$/.test(nick)){errEl.textContent='Sadece harf, rakam ve _ kullanabilirsin.';return;}
+  if(!pass){errEl.textContent='Şifre gerekli.';return;}
   if(pass.length<6){errEl.textContent='Şifre en az 6 karakter olmalı.';return;}
   if(pass!==pass2){errEl.textContent='Şifreler eşleşmiyor.';return;}
+  var email=nickToEmail(nick);
   var btn=document.getElementById('auth-btn-register');
   btn.textContent='Kayıt yapılıyor...';btn.disabled=true;
   _fbAuth.createUserWithEmailAndPassword(email,pass)
-    .then(function(){btn.textContent='Kayıt Ol';btn.disabled=false;})
+    .then(function(cred){
+      btn.textContent='Kayıt Ol';btn.disabled=false;
+      /* Kullanıcı adını Firebase'e kaydet */
+      _fbDb.collection('users').doc(cred.user.uid).set({nickname:nick,created:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+    })
     .catch(function(e){
       btn.textContent='Kayıt Ol';btn.disabled=false;
       var msgs={
-        'auth/email-already-in-use':'Bu email zaten kayıtlı.',
-        'auth/invalid-email':'Geçersiz email adresi.',
+        'auth/email-already-in-use':'Bu kullanıcı adı zaten alınmış.',
         'auth/weak-password':'Şifre çok zayıf.'
       };
       errEl.textContent=msgs[e.code]||'Hata: '+e.message;
     });
-}
-
-/* ── Şifremi Unuttum ─────────────────────────────────── */
-function doForgotPass(){
-  var email=document.getElementById('auth-email').value.trim();
-  var errEl=document.getElementById('auth-err');
-  if(!email){errEl.textContent='Lütfen önce email adresini gir.';return;}
-  _fbAuth.sendPasswordResetEmail(email)
-    .then(function(){errEl.style.color='var(--success)';errEl.textContent='Sıfırlama emaili gönderildi!';})
-    .catch(function(e){errEl.style.color='';errEl.textContent='Hata: '+e.message;});
 }
 
 /* ── Çıkış Yap ───────────────────────────────────────── */
@@ -2241,20 +2234,21 @@ function doLogout(){
   },'Çıkış Yap');
 }
 
-/* ── Giriş Sonrası: Veriyi Firebase'den Yükle ─────────── */
+/* ── Giriş Sonrası: Firebase'den Veri Yükle + Eski Veri Migrasyonu ── */
 function onUserLoggedIn(user){
   hideAuthScreen();
-  /* Önce localStorage'daki mevcut veriyi yükle (anlık görünüm) */
-  try{
-    var raw=localStorage.getItem('rf_data');
-    if(raw){var d=JSON.parse(raw);U=d.U||{};R=d.R||{};A=d.A||{};BT=d.BT||{};selST=d.selST||null;selGL=d.selGL||null;}
-  }catch(e){}
-  /* Firebase'den güncel veriyi çek */
   _fbDb.collection('users').doc(user.uid).get()
     .then(function(doc){
+      var fbHasData=false;
       if(doc.exists){
         var d=doc.data();
-        if(d.rf_data){
+        /* Kullanıcı adını göster */
+        var nick=d.nickname||(user.email?user.email.replace('@ravenfit.app',''):'');
+        var nickEl=document.getElementById('user-email-display');
+        if(nickEl)nickEl.textContent='@'+nick;
+        /* Firebase'de veri var mı? */
+        if(d.rf_data&&d.rf_data.length>2){
+          fbHasData=true;
           try{
             var fd=JSON.parse(d.rf_data);
             U=fd.U||{};R=fd.R||{};A=fd.A||{};BT=fd.BT||{};
@@ -2262,73 +2256,127 @@ function onUserLoggedIn(user){
             localStorage.setItem('rf_data',d.rf_data);
           }catch(e){}
         }
-        if(d.rf_entries){
-          try{
-            localStorage.setItem('rf_entries',d.rf_entries);
-          }catch(e){}
+        if(d.rf_entries&&d.rf_entries.length>2){
+          try{ localStorage.setItem('rf_entries',d.rf_entries); }catch(e){}
         }
         if(d.rf_theme){
           localStorage.setItem('rf_theme',d.rf_theme);
           applyTheme(d.rf_theme);
         }
       }
-      /* Profil sayfasında kullanıcı email'ini göster */
-      var emailEl=document.getElementById('user-email-display');
-      if(emailEl)emailEl.textContent=user.email;
-      /* Veri varsa sonuçları göster */
+      /* MİGRASYON: Firebase'de veri yok ama localStorage'da var → yükle */
+      if(!fbHasData){
+        try{
+          var raw=localStorage.getItem('rf_data');
+          if(raw&&raw.length>2){
+            var ld=JSON.parse(raw);
+            U=ld.U||{};R=ld.R||{};A=ld.A||{};BT=ld.BT||{};
+            selST=ld.selST||null;selGL=ld.selGL||null;
+            /* Eski veriyi Firebase'e yükle */
+            saveToFirebase();
+            showToast('📤 Mevcut verilerin buluta aktarıldı!');
+          }
+        }catch(e){}
+      }
       if(Object.keys(R).length){
         document.getElementById('splash-cont').style.display='block';
       }
-      showToast('Hoş geldin! 👋');
+      if(fbHasData) showToast('Hoş geldin! 👋');
     })
     .catch(function(e){
       console.warn('Veri yükleme hatası:',e);
-      if(Object.keys(R).length){
-        document.getElementById('splash-cont').style.display='block';
-      }
+      /* Hata olsa da localStorage'dan yükle */
+      try{
+        var raw=localStorage.getItem('rf_data');
+        if(raw){var d=JSON.parse(raw);U=d.U||{};R=d.R||{};A=d.A||{};BT=d.BT||{};}
+      }catch(ex){}
+      if(Object.keys(R).length) document.getElementById('splash-cont').style.display='block';
     });
 }
 
 /* ── Çıkış Sonrası ────────────────────────────────────── */
 function onUserLoggedOut(){
-  /* Lokal veriyi temizle */
   U={};R={};A={};BT={};selST=null;selGL=null;
   document.getElementById('splash-cont').style.display='none';
   document.getElementById('bottom-nav').classList.remove('visible');
   showAuthScreen();
 }
 
-/* ── Firebase'e Kaydet ────────────────────────────────── */
+/* ── Firebase'e Kaydet (debounced, kilit sorunu giderildi) ── */
+var _fbSaveTimer=null;
 function saveToFirebase(){
-  if(!_fbUser||!_fbDb||_fbSyncing)return;
-  _fbSyncing=true;
-  var dataStr=JSON.stringify({U:U,R:R,A:A,BT:BT,selST:selST,selGL:selGL});
-  var entriesStr=localStorage.getItem('rf_entries')||'[]';
-  var themeStr=localStorage.getItem('rf_theme')||'dark';
-  _fbDb.collection('users').doc(_fbUser.uid).set({
-    rf_data:dataStr,
-    rf_entries:entriesStr,
-    rf_theme:themeStr,
-    updated:firebase.firestore.FieldValue.serverTimestamp()
-  },{merge:true})
-  .then(function(){_fbSyncing=false;})
-  .catch(function(e){_fbSyncing=false;console.warn('Firebase kayıt hatası:',e);});
+  if(!_fbUser||!_fbDb)return;
+  /* Debounce: 800ms içinde birden fazla kayıt gelirse sadece sonuncuyu gönder */
+  clearTimeout(_fbSaveTimer);
+  _fbSaveTimer=setTimeout(function(){
+    var dataStr=JSON.stringify({U:U,R:R,A:A,BT:BT,selST:selST,selGL:selGL});
+    var entriesStr=localStorage.getItem('rf_entries')||'[]';
+    var themeStr=localStorage.getItem('rf_theme')||'dark';
+    _fbDb.collection('users').doc(_fbUser.uid).set({
+      rf_data:dataStr,
+      rf_entries:entriesStr,
+      rf_theme:themeStr,
+      updated:firebase.firestore.FieldValue.serverTimestamp()
+    },{merge:true})
+    .then(function(){/* ok */})
+    .catch(function(e){console.warn('Firebase kayıt hatası:',e);});
+  },800);
 }
 
 /* ── Auth sekme toggle ────────────────────────────────── */
 function showLoginTab(){
-  document.getElementById('auth-tab-login').classList.add('act');
-  document.getElementById('auth-tab-register').classList.remove('act');
+  document.getElementById('auth-tab-login').style.background='var(--accent)';
+  document.getElementById('auth-tab-login').style.color='#fff';
+  document.getElementById('auth-tab-register').style.background='transparent';
+  document.getElementById('auth-tab-register').style.color='var(--text2)';
   document.getElementById('auth-form-login').style.display='block';
   document.getElementById('auth-form-register').style.display='none';
   document.getElementById('auth-err').textContent='';
 }
 function showRegisterTab(){
-  document.getElementById('auth-tab-login').classList.remove('act');
-  document.getElementById('auth-tab-register').classList.add('act');
+  document.getElementById('auth-tab-register').style.background='var(--accent)';
+  document.getElementById('auth-tab-register').style.color='#fff';
+  document.getElementById('auth-tab-login').style.background='transparent';
+  document.getElementById('auth-tab-login').style.color='var(--text2)';
   document.getElementById('auth-form-login').style.display='none';
   document.getElementById('auth-form-register').style.display='block';
-  document.getElementById('auth-err').textContent='';
+  document.getElementById('auth-err-r').textContent='';
+}
+
+/* ── Export / Import ─────────────────────────────────── */
+function exportData(){
+  var data={
+    version:'0.5.4',
+    exported:new Date().toISOString(),
+    rf_data:localStorage.getItem('rf_data')||'{}',
+    rf_entries:localStorage.getItem('rf_entries')||'[]'
+  };
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ravenfit_yedek_'+new Date().toLocaleDateString('tr-TR').replace(/\./g,'-')+'.json';
+  a.click();
+  showToast('✅ Veriler dışa aktarıldı!');
+}
+function importData(){
+  var inp=document.createElement('input');
+  inp.type='file';inp.accept='.json';
+  inp.onchange=function(e){
+    var file=e.target.files[0];if(!file)return;
+    var reader=new FileReader();
+    reader.onload=function(ev){
+      try{
+        var data=JSON.parse(ev.target.result);
+        if(data.rf_data){localStorage.setItem('rf_data',data.rf_data);}
+        if(data.rf_entries){localStorage.setItem('rf_entries',data.rf_entries);}
+        saveToFirebase();
+        showToast('✅ Veriler içe aktarıldı! Sayfa yenileniyor...');
+        setTimeout(function(){location.reload();},1500);
+      }catch(ex){showToast('❌ Dosya okunamadı.');}
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
 }
 </script>
 
@@ -2342,5 +2390,4 @@ initFirebase();
 </script>
 </body>
 </html>
-</body>
 </html>
